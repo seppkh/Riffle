@@ -24,7 +24,8 @@ const Game = () => {
   var [card2, setCard2] = useState({})
   var [card3, setCard3] = useState({})
 
-  var [cards, setCards] = useState({
+  var [cardsState, changeState] = useState({
+    activeObject: null,
     main: [{id: mainCard}],
     objects: [{id: card1}, {id: card2}, {id: card3}]
   });
@@ -133,7 +134,7 @@ const Game = () => {
       }
       guessStatus = true;
 
-      return changeLevel();
+      return; // changeLevel();
     }
 
     // if active and not matching
@@ -146,28 +147,25 @@ const Game = () => {
       
   }
 
-  const changeLevel = () => {
 
-  }
-
-  const checkTime = () => {
-
+  function toggleActive(index) {
+    changeState({...cardsState, activeObject: cardsState.objects[index] });
   }
 
 
   return (
     <div>
-      
+
       <div className='Game mainCard'>
-        {cards.main.map((elements, index) => (
-            <div key={index} className="box boxMain inactive">
+        {cardsState.main.map((elements, index) => (
+            <div key={index} className="box boxMain">
           </div>
         ))}
       </div>
 
       <div className='Game subCards'>
-        {cards.objects.map((elements, index) => (
-          <div key={index} className="box inactive" onClick=''>
+        {cardsState.objects.map((elements, index) => (
+          <div key={index} className="box inactive" onClick={() => {toggleActive(index)}}>
 
           </div>
   
