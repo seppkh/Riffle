@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import createSets from '../utils/createElementSets';
 import shuffle from '../utils/shuffleSubCardOrder';
+import ReactDOM from "react-dom";
+import './Game.css';
+
 
 const Game = () => {
 
@@ -20,6 +23,11 @@ const Game = () => {
   var [card1, setCard1] = useState({})
   var [card2, setCard2] = useState({})
   var [card3, setCard3] = useState({})
+
+  var [cards, setCards] = useState({
+    main: [{id: mainCard}],
+    objects: [{id: card1}, {id: card2}, {id: card3}]
+  });
 
   const ELEMENTS = [
     '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'
@@ -97,7 +105,7 @@ const Game = () => {
     // set gameOver to false
     gameOver = false;
 
-  }, [])
+  }, [level])
 
   const onCardClickHandler = (clicked_card) => {
     // check if clicked card is active
@@ -149,17 +157,35 @@ const Game = () => {
 
   return (
     <div>
-      Tere!
-      <div class="card card-big" id="mainCardArea">
+      
+      <div className='Game mainCard'>
+        {cards.main.map((elements, index) => (
+            <div key={index} className="box boxMain inactive">
+          </div>
+        ))}
+      </div>
+
+      <div className='Game subCards'>
+        {cards.objects.map((elements, index) => (
+          <div key={index} className="box inactive" onClick=''>
+
+          </div>
+  
+        ))}
+      </div>
+
+      <div className="card card-small" id="mainCardArea">
         <h1>mainCard: {mainCard.elements}</h1>
       </div>
-      <div class="card card-small" id="card1Area">
-        <p>card1: {card1.elements}</p>
+
+      <div className="card card-small" id="card1">
+        <p>card1</p>
       </div>
-      <div class="card card-small" id="card2Area">
+
+      <div className="card card-small" id="card2Area">
         <p>card2: {card2.elements}</p>
       </div>
-      <div class="card card-small" id="card3Area">
+      <div className="card card-small" id="card3Area">
         <p>card3: {card3.elements}</p>
       </div>
 

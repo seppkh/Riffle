@@ -1,0 +1,36 @@
+.Game {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row wrap;
+}
+
+.maincard {
+  height: 20vh;
+  margin: 20px;
+}
+.subCards {
+  height: 20vh;
+  margin: 20px;
+}
+
+.box {
+  width: 250px;
+  height: 200px;
+  margin: 10px;
+  transition: background-color .1s ease-in-out;
+}
+
+.boxMain {
+  width: 400px;
+  height: 220px;
+
+}
+
+.inactive {
+  background-color: #9b56b6;
+}
+
+.active {
+  background-color: #3498db;
+}
