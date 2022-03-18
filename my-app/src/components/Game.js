@@ -3,13 +3,14 @@ import createSets from '../utils/createElementSets';
 import shuffle from '../utils/shuffleSubCardOrder';
 import ReactDOM from "react-dom";
 import './Game.css';
+import { render } from 'express/lib/response';
 
 
 const Game = () => {
 
   var [gameOver, setGameOver] = useState(true)
   var [score, setScore] = useState('')
-  var [level, setLeveL] = useState('')
+  var [level, setLeveL] = useState(1)
   var [time, setTime] = useState('')
   var [mainCardElementCount, setMainCardElementCount] = useState('')
   var [cardElementCount, setCardElementCount] = useState('')
@@ -19,10 +20,24 @@ const Game = () => {
 
   var [cardSet, setCardSet] = useState({})
 
-  var [mainCard, setMainCard] = useState({})
-  var [card1, setCard1] = useState({})
-  var [card2, setCard2] = useState({})
-  var [card3, setCard3] = useState({})
+  var [mainCard, setMainCard] = useState({
+    elements: [555, 678]
+  })
+  var [card1, setCard1] = useState({
+    elements: [4320, 4444, 839],
+    isMatch: false,
+    isActive: true
+  })
+  var [card2, setCard2] = useState({
+    elements: [3434],
+    isMatch: false,
+    isActive: true
+  })
+  var [card3, setCard3] = useState({
+    elements: [765],
+    isMatch: false,
+    isActive: true
+  })
 
   var [cardsState, changeState] = useState({
     activeObject: null,
@@ -72,7 +87,7 @@ const Game = () => {
     guessStatus = false;
 
     // read level
-    if (level === '') level = 15;
+    if (level === '') level = 1;
 
     // set number of elements on mainCard
     // set number of elements on subcards
@@ -106,7 +121,7 @@ const Game = () => {
     // set gameOver to false
     gameOver = false;
 
-  }, [level])
+  }, [])
 
   const onCardClickHandler = (clicked_card) => {
     // check if clicked card is active
@@ -151,29 +166,36 @@ const Game = () => {
   function toggleActive(index) {
     changeState({...cardsState, activeObject: cardsState.objects[index] });
   }
+  function toggleActiveStyles(index) {
+    if (cardsState.objects[index] === cardsState.activeObject) {
+      return "box active"
+    } else {
+      return "box inactive"
+    }
+  }
 
 
   return (
     <div>
 
-      <div className='Game mainCard'>
-        {cardsState.main.map((elements, index) => (
-            <div key={index} className="box boxMain">
+      <div className='card mainCard'>
+        {cardsState.main.map((element, index) => (
+          <div key={index} className="box boxMain">
+            <p>mainCard elements: {element.id.elements.join(", ")}</p>
           </div>
         ))}
       </div>
-
-      <div className='Game subCards'>
-        {cardsState.objects.map((elements, index) => (
-          <div key={index} className="box inactive" onClick={() => {toggleActive(index)}}>
-
-          </div>
-  
-        ))}
-      </div>
+      
+      <div className='card subCards'>
+          {cardsState.objects.map((element, index) => (
+            <div key={index} className={toggleActiveStyles(index)} onClick={() => { toggleActive(index); } }>
+              <p>subCard elements: {element.id.elements.join(", ")}</p>
+            </div>
+          ))}
+        </div>
 
       <div className="card card-small" id="mainCardArea">
-        <h1>mainCard: {mainCard.elements}</h1>
+        <h1>mainCard:</h1>
       </div>
 
       <div className="card card-small" id="card1">
@@ -181,10 +203,10 @@ const Game = () => {
       </div>
 
       <div className="card card-small" id="card2Area">
-        <p>card2: {card2.elements}</p>
+        <p>card2:</p>
       </div>
       <div className="card card-small" id="card3Area">
-        <p>card3: {card3.elements}</p>
+        <p>card3:</p>
       </div>
 
 
