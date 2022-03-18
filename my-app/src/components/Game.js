@@ -3,8 +3,6 @@ import createSets from '../utils/createElementSets';
 import shuffle from '../utils/shuffleSubCardOrder';
 import ReactDOM from "react-dom";
 import './Game.css';
-import { render } from 'express/lib/response';
-
 
 const Game = () => {
 
