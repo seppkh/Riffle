@@ -53,7 +53,7 @@ const Game = () => {
     },
     15: {
       "mainCardElementCount": 8,
-      "cardElementCount": 8,
+      "cardElementCount": 6,
       "matchingElementCount": 3
     },
   }   
@@ -73,10 +73,8 @@ const Game = () => {
     console.log("cardElementCount:", cardElementCount);
     console.log("matchingElementCount:", matchingElementCount);
 
-    // create sets of elements for each card
-    // save True match value to correct subset
+    // create sets of elements with isMatch and active flags for each card
     let cardSet = createSets(mainCardElementCount, cardElementCount, matchingElementCount);
-    console.log("cardSet:", cardSet);
 
     // appoint set of elements to mainCard
     let mainCard = cardSet.mainCard;
@@ -102,38 +100,70 @@ const Game = () => {
   }, [])
 
   const onCardClickHandler = (clicked_card) => {
- 
-    // extract isMatch value of clicked_card
+    // check if clicked card is active
+    // check if clicked card is matching
 
-    // if matched
-      // update score by 1
-      // increase time by 6 sec
-      // update level value
-      // update mainCardElementCount value,
-      // update cardElementCount value
-      // update matchingElementCount value
-        // if deactivated card count bigger than 0
-          // set other cards to active
-          // set deactivatedCardCount to 0
-      // set guessStatus to true
+    // if not active, return nothing
+    if (clicked_card.isActive === false) return "invalid move";
 
-    // else
-      // extract active value of clicked_card
+    // if active and matching
+    // update score by 1
+    // increase time by 6 sec
+    // update level value
+    // read deactivated card count
+      // if deactivated card count bigger than 0
+        // set other cards to active
+        // set deactivatedCardCount to 0
+    // set guessStatus to true
+    if (clicked_card.isActive === true && clicked_card.isMatch === true) {
+      score += 1;
+      time += 6;
+      level += 1
+      if (deactivatedCardCount > 1) {
+        card1.isActive = card2.isActive = card3.isActive = true;
+        deactivatedCardCount = 0;
+      }
+      guessStatus = true;
 
-      // if active
-        // deactivate clicked_card
-        // increase deActivatedCardCount by 1
-        // decrease score by 1
-        // decrease time by 3 sec
-      // else
-        // do nothing
+      return changeLevel();
+    }
+
+    // if active and not matching
+    if (clicked_card.isActive === true && clicked_card.isMatch === false) {
+      clicked_card.isActive = false;
+      deactivatedCardCount += 1;
+      score -= 1;
+      time -= 3;
+    } 
       
   }
 
+  const changeLevel = () => {
+
+  }
+
+  const checkTime = () => {
+
+  }
+
+
   return (
     <div>
-      <p>Elements: {ELEMENTS}</p>
       Tere!
+      <div class="card card-big" id="mainCardArea">
+        <h1>mainCard: {mainCard.elements}</h1>
+      </div>
+      <div class="card card-small" id="card1Area">
+        <p>card1: {card1.elements}</p>
+      </div>
+      <div class="card card-small" id="card2Area">
+        <p>card2: {card2.elements}</p>
+      </div>
+      <div class="card card-small" id="card3Area">
+        <p>card3: {card3.elements}</p>
+      </div>
+
+
     </div>
   )
 

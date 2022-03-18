@@ -9,17 +9,17 @@ var elementSets = {
   card1: {
     elements: [],
     isMatch: false,
-    active: true
+    isActive: true
   },
   card2: {
     elements: [],
     isMatch: false,
-    active: true
+    isActive: true
   },
   card3: {
     elements: [],
     isMatch: false,
-    active: true
+    isActive: true
   }
 };
 
@@ -77,17 +77,17 @@ function createSets(mainCardElementCount, subCardElementCount, maxMatching) {
     card1: {
       elements: card1,
       isMatch: true,
-      active: true
+      isActive: true
     },
     card2: {
       elements: card2,
       isMatch: false,
-      active: true
+      isActive: true
     },
     card3: {
       elements: card3,
       isMatch: false,
-      active: true
+      isActive: true
     },
   };
   
