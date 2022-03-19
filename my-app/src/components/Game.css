@@ -36,5 +36,9 @@
 }
 
 .container-counters {
-  margin-top: 50px;
+  position: absolute;
+  right: 0;
+  top: 0;
+  margin-right: 30px;
+  text-align: right;
 }
