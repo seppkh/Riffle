@@ -272,13 +272,7 @@ const Game = () => {
         <CardList subcards={cards.current.objects} title="All subcards" />
       </div>
       <br></br><br></br><br></br>
-      <div className='card subCards'>
-        {cards.current.objects.map((element, index) => (
-            <div key={index} className='{toggleActiveStyles(index)}' onClick={() => { toggleActive(index); } }>
-              <p>subCard elements: {element.id.elements.join(", ")}</p>
-            </div>
-          ))}
-      </div>
+      
     </div>
     
     <div className="container-counters">
@@ -301,4 +295,13 @@ const Game = () => {
 
 }
 
+/* 
+<div className='card subCards'>
+        {cards.current.objects.map((element, index) => (
+            <div key={index} className='{toggleActiveStyles(index)}' onClick={() => { toggleActive(index); } }>
+              <p>subCard elements: {element.id.elements.join(", ")}</p>
+            </div>
+          ))}
+      </div>
+*/
 export default Game;
