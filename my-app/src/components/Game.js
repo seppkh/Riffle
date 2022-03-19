@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import createSets from '../utils/createElementSets';
 import shuffle from '../utils/shuffleSubCardOrder';
 import ReactDOM from "react-dom";
@@ -7,14 +7,14 @@ import './Game.css';
 const Game = () => {
 
   var [gameOver, setGameOver] = useState(true)
-  var [score, setScore] = useState('')
-  var [level, setLeveL] = useState(1)
-  var [time, setTime] = useState('')
-  var [mainCardElementCount, setMainCardElementCount] = useState('')
-  var [cardElementCount, setCardElementCount] = useState('')
-  var [matchingElementCount, setMatchingElementCount] = useState('')
+  var [score, setScore] = useState(0)
+  var [level, setLevel] = useState(15)
+  var [time, setTime] = useState(0)
+  var [mainCardElementCount, setMainCardElementCount] = useState(0)
+  var [cardElementCount, setCardElementCount] = useState(0)
+  var [matchingElementCount, setMatchingElementCount] = useState(0)
   var [guessStatus, setGuessStatus] = useState(true)
-  var [deactivatedCardCount, setDeactivatedCardCount] = useState('')
+  var [deactivatedCardCount, setDeactivatedCardCount] = useState(0)
 
   var [cardSet, setCardSet] = useState({})
 
@@ -78,55 +78,62 @@ const Game = () => {
       "cardElementCount": 6,
       "matchingElementCount": 3
     },
-  }   
+  }
 
   useEffect(() => {
-    // set guessStatus to false
-    guessStatus = false;
+      // set guessStatus to false
+      setGuessStatus(false);
 
-    // read level
-    if (level === '') level = 1;
+      console.log("level:", level);
 
-    // set number of elements on mainCard
-    // set number of elements on subcards
-    // set number of matching elements on correct card
-    let { mainCardElementCount, cardElementCount, matchingElementCount } = LEVEL_SETUP[level];
-    console.log("mainCardElementCount:", mainCardElementCount);
-    console.log("cardElementCount:", cardElementCount);
-    console.log("matchingElementCount:", matchingElementCount);
+      // set number of elements on mainCard
+      // set number of elements on subcards
+      // set number of matching elements on correct card
+      setMainCardElementCount(LEVEL_SETUP[level].mainCardElementCount);
+      setCardElementCount(LEVEL_SETUP[level].cardElementCount);
+      setMatchingElementCount(LEVEL_SETUP[level].matchingElementCount);
 
-    // create sets of elements with isMatch and active flags for each card
-    let cardSet = createSets(mainCardElementCount, cardElementCount, matchingElementCount);
+      console.log("mainCardElementCount:", mainCardElementCount);
+      console.log("cardElementCount:", cardElementCount);
+      console.log("matchingElementCount:", matchingElementCount);
 
-    // appoint set of elements to mainCard
-    let mainCard = cardSet.mainCard;
-    console.log("mainCard:", mainCard);
+      // create sets of elements with isMatch and active flags for each card
+      setCardSet(createSets(mainCardElementCount, cardElementCount, matchingElementCount));
 
-    // suffle subcards values in cardSet and store in new array
-    var subCards = [];
-    subCards.push(cardSet.card1, cardSet.card2, cardSet.card3);
-    var subCardsShuffle = shuffle(subCards);
+      // appoint set of elements to mainCard
+      setMainCard(cardSet.mainCard);
+      console.log("mainCard:", mainCard);
 
-    // appoint set of elements to subcards 
-    [card1, card2, card3] = subCardsShuffle;
-    console.log("card1:", card1);
-    console.log("card2:", card2);
-    console.log("card3:", card3);
+      // suffle subcards values in cardSet and store in new array
+      var subCards = [];
+      subCards.push(cardSet.card1, cardSet.card2, cardSet.card3);
+      var subCardsShuffle = shuffle(subCards);
 
-    // set time to full time value (30 sec)
-    time = 30;
+      // appoint set of elements to subcards 
+      setCard1(subCardsShuffle[0]);
+      setCard2(subCardsShuffle[1]);
+      setCard3(subCardsShuffle[2]);
 
-    // set gameOver to false
-    gameOver = false;
+      console.log("card1:", card1);
+      console.log("card2:", card2);
+      console.log("card3:", card3);
+
+      // set time to full time value (30 sec)
+      setTime(30);
+
+      // set gameOver to false
+      setGameOver(false);
 
   }, [])
+
+
 
   const onCardClickHandler = (clicked_card) => {
     // check if clicked card is active
     // check if clicked card is matching
 
     // if not active, return nothing
-    if (clicked_card.isActive === false) return "invalid move";
+    if (clicked_card.isActive === false) return console.log("invalid move");
 
     // if active and matching
     // update score by 1
@@ -138,14 +145,15 @@ const Game = () => {
         // set deactivatedCardCount to 0
     // set guessStatus to true
     if (clicked_card.isActive === true && clicked_card.isMatch === true) {
-      score += 1;
-      time += 6;
-      level += 1
+      setScore((c) => c + 1)
+      setTime((t) => t + 1)
+      setLevel((l) => l + 1)
+
       if (deactivatedCardCount > 1) {
         card1.isActive = card2.isActive = card3.isActive = true;
-        deactivatedCardCount = 0;
+        setDeactivatedCardCount(0);
       }
-      guessStatus = true;
+      setGuessStatus(true);
 
       return; // changeLevel();
     }
@@ -153,9 +161,10 @@ const Game = () => {
     // if active and not matching
     if (clicked_card.isActive === true && clicked_card.isMatch === false) {
       clicked_card.isActive = false;
-      deactivatedCardCount += 1;
-      score -= 1;
-      time -= 3;
+      
+      setDeactivatedCardCount((dcc) => dcc + 1)
+      setScore((c) => c - 1)
+      setTime((t) => t - 3)
     } 
       
   }
@@ -174,8 +183,7 @@ const Game = () => {
 
 
   return (
-    <div>
-
+    <><div>
       <div className='card mainCard'>
         {cardsState.main.map((element, index) => (
           <div key={index} className="box boxMain">
@@ -183,32 +191,33 @@ const Game = () => {
           </div>
         ))}
       </div>
-      
+
       <div className='card subCards'>
-          {cardsState.objects.map((element, index) => (
-            <div key={index} className={toggleActiveStyles(index)} onClick={() => { toggleActive(index); } }>
-              <p>subCard elements: {element.id.elements.join(", ")}</p>
-            </div>
-          ))}
-        </div>
+        {cardsState.objects.map((element, index) => (
+          <div key={index} className={toggleActiveStyles(index)} onClick={() => { toggleActive(index); } }>
+            <p>subCard elements: {element.id.elements.join(", ")}</p>
+          </div>
+        ))}
+      </div> <br></br>
 
-      <div className="card card-small" id="mainCardArea">
-        <h1>mainCard:</h1>
+      <div className='card subCards'>
+        {cardsState.objects.map((element, index) => (
+          <div key={index} className={toggleActiveStyles(index)} onClick={() => { onCardClickHandler(element); } }>
+            <p>subCard elements: {element.id.elements.join(", ")}</p>
+          </div>
+        ))}
       </div>
-
-      <div className="card card-small" id="card1">
-        <p>card1</p>
-      </div>
-
-      <div className="card card-small" id="card2Area">
-        <p>card2:</p>
-      </div>
-      <div className="card card-small" id="card3Area">
-        <p>card3:</p>
-      </div>
-
-
+      
     </div>
+    
+    <div className="container-counters">
+      <div className="counters">
+        <p> Score: {score}</p>
+        <p> Level: {level}</p>
+        <p> Time: {time}</p>
+      </div>
+    </div></>
+
   )
 
 }

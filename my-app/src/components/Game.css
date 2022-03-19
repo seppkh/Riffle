@@ -34,3 +34,7 @@
 .active {
   background-color: #3498db;
 }
+
+.container-counters {
+  margin-top: 50px;
+}
