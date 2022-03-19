@@ -258,7 +258,7 @@ const Game = () => {
 
   return (
   <>
-    <button onClick={changeLevel}>Load the cards</button>
+    <button onClick={changeLevel}>Load cards</button>
 
     <div id='cardsArea'>
       <div className='card mainCard'>
@@ -284,7 +284,7 @@ const Game = () => {
     <div className="container-counters">
       <div className="counters">
         <p> Score: {score.current}</p>
-        <p> Level: {level.current}</p>
+        <p> Level: {level.current-1}</p>
         <p> mainCard elements: {mainCardElementCount.current}</p>
         <p> subCard elements: {cardElementCount.current}</p>
         <p> matching elements: {matchingElementCount.current}</p>
