@@ -7,51 +7,51 @@ import CardList from './CardList';
 
 const Game = () => {
 
-  var gameOver = useRef(true);
-    // var [gameOver, setGameOver] = useState(true)
-  var score = useRef(0);
-  var level = useRef(0);
-  var [currentLevel, setCurrentLeveL] = useState(0);
-  var time = useRef(0);
-  var mainCardElementCount = useRef(0);
-  var cardElementCount = useRef(0);
-  var matchingElementCount = useRef(0);
-  var guessStatus = useRef(true);
-    // var [guessStatus, setGuessStatus] = useState(true)
-  var deactivatedCardCount = useRef(0);
-  var counters = useRef([]);
+  let gameOver = useRef(true);
+    // let [gameOver, setGameOver] = useState(true)
+  let score = useRef(0);
+  let level = useRef(0);
+  let [currentLevel, setCurrentLeveL] = useState(0);
+  let time = useRef(0);
+  let mainCardElementCount = useRef(0);
+  let cardElementCount = useRef(0);
+  let matchingElementCount = useRef(0);
+  let guessStatus = useRef(true);
+    // let [guessStatus, setGuessStatus] = useState(true)
+  let deactivatedCardCount = useRef(0);
+  let counters = useRef([]);
 
-  // var [score, setScore] = useState(0)
-  // var [level, setLevel] = useState(2)
-  //var [time, setTime] = useState(0)
-  // var [mainCardElementCount, setMainCardElementCount] = useState(0)
-  // var [cardElementCount, setCardElementCount] = useState(0)
-  // var [matchingElementCount, setMatchingElementCount] = useState(0)
-  // var [guessStatus, setGuessStatus] = useState(true)
-  // var [deactivatedCardCount, setDeactivatedCardCount] = useState(0)
+  // let [score, setScore] = useState(0)
+  // let [level, setLevel] = useState(2)
+  //let [time, setTime] = useState(0)
+  // let [mainCardElementCount, setMainCardElementCount] = useState(0)
+  // let [cardElementCount, setCardElementCount] = useState(0)
+  // let [matchingElementCount, setMatchingElementCount] = useState(0)
+  // let [guessStatus, setGuessStatus] = useState(true)
+  // let [deactivatedCardCount, setDeactivatedCardCount] = useState(0)
 
-  var cardSet = useRef({})
+  let cardSet = useRef({})
 
-  var mainCard = useRef({
+  let mainCard = useRef({
     elements: []
   })
-  var card1 = useRef({
+  let card1 = useRef({
     elements: [],
     isMatch: false,
     isActive: true
   })
-  var card2 = useRef({
+  let card2 = useRef({
     elements: [],
     isMatch: false,
     isActive: true
   })
-  var card3 = useRef({
+  let card3 = useRef({
     elements: [],
     isMatch: false,
     isActive: true
   })
 
-  var cards = useRef({
+  let cards = useRef({
     activeObject: null,
     main: [{id: mainCard.current}],
     objects: [{id: card1.current}, {id: card2.current}, {id: card3.current}]
@@ -158,9 +158,9 @@ const Game = () => {
       console.log("mainCard:", mainCard.current);
 
       // suffle subcards values in cardSet and store in new array
-      var subCards = [];
+      let subCards = [];
       subCards.push(cardSet.current.card1, cardSet.current.card2, cardSet.current.card3);
-      var subCardsShuffle = shuffle(subCards);
+      let subCardsShuffle = shuffle(subCards);
 
       // appoint set of elements to subcards 
       card1.current = subCardsShuffle[0];
