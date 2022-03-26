@@ -277,11 +277,11 @@ const Game = () => {
     
     <div className="container-counters">
       <div className="counters">
-        <p> Score: {score.current}</p>
+        <p> Score: {score.current}</p><br></br>
         <p> Level: {level.current-1}</p>
         <p> mainCard elements: {mainCardElementCount.current}</p>
         <p> subCard elements: {cardElementCount.current}</p>
-        <p> matching elements: {matchingElementCount.current}</p>
+        <p> matching elements: {matchingElementCount.current}</p><br></br>
 
         <p> Time: {time.current}</p>
 

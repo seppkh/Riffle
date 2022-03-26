@@ -7,7 +7,7 @@ const CardList = ({ subcards, title }) => {
       <h2>{ title }</h2>
       {subcards.map((element, index) => (
         <div key={index} className='' onClick=''>
-          <p>subCard elements: {element.id.elements.join(", ")}</p>
+          <p>card{index+1} elements: {element.id.elements.join(", ")}</p>
         </div>
       ))}
     </div>
