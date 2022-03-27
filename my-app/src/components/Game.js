@@ -2,14 +2,15 @@ import React, { useState, useEffect, useRef } from 'react';
 import createSets from '../utils/createElementSets';
 import shuffle from '../utils/shuffleSubCardOrder';
 import './Game.css';
-import CardList from './CardList';
+import CardList from './SubcardList';
 import level_settings from '../assets/levelSettings';
+import Score from './Score';
 
 const Game = () => {
 
   let gameOver = useRef(true);
     // let [gameOver, setGameOver] = useState(true)
-  let score = useRef(0);
+  // let score = useRef(0);
   let nextLevel = useRef(0);
   let [currentLevel, setCurrentLevel] = useState(0);
   let time = useRef(0);
@@ -142,6 +143,9 @@ const Game = () => {
     console.log("card2.current:", card2.current);
     console.log("card3.current:", card3.current);
 
+    console.log("score.current");
+    console.log("time.current", time.current);
+
   }
   
 
@@ -150,7 +154,7 @@ const Game = () => {
     // check if clicked card is matching
 
     // if not active, return nothing
-    if (clicked_card.isActive === false) return console.log("invalid move");
+    if (clicked_card.isActive === false) return console.log("Invalid move");
 
     // if active and matching
     // update score by 1
@@ -162,7 +166,7 @@ const Game = () => {
         // set deactivatedCardCount to 0
     // set guessStatus to true
     if (clicked_card.isActive === true && clicked_card.isMatch === true) {
-      score.current += 1;
+      // score.current += 1;
       time.current += 6;
       changeLevel()
 
@@ -180,7 +184,7 @@ const Game = () => {
       clicked_card.isActive = false;
       
       deactivatedCardCount.current += 1;
-      score.current -= 1;
+      // score.current -= 1;
       time.current -= 3;
     } 
   }
@@ -218,7 +222,7 @@ const Game = () => {
     
     <div className="container-counters">
       <div className="counters">
-        <p> Score: {score.current}</p><br></br>
+        <Score /><br></br>
         <p> Level: {currentLevel}</p>
         <p> mainCard elements: {mainCardElementCount.current}</p>
         <p> subCard elements: {cardElementCount.current}</p>

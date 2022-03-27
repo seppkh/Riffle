@@ -11,6 +11,8 @@ const CardList = ({ subcards, title }) => {
           <div key={index} className={toggleActiveStyles(element)} onClick={() => {onCardClickHandler(element)}}>
             <p>
               card{index+1} elements:<br></br> {element.elements.join(", ")}
+           <br></br><br></br>
+              {element.isMatch.toString()}
             </p>
           </div>
         ))}
