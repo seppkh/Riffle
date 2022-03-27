@@ -1,30 +1,30 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 
-const Score = () => {
-  let score = useRef(5);
+const UpdateScore = () => {
+  let score = useRef(6);
 
   console.log("Score: ", score.current);
+  console.log(typeof(score.current));
   
-  return score.current;
-
-  /* 
   function increaseScore() {
     score.current += 1;
+    return;
   }
 
-  function decreaseScore(score) {
-    console.log("Score: ", score);
-    score -= 1;
-    console.log("Score new: ", score);
-  } 
+  function decreaseScore() {
+    console.log("Score: ", score.current);
+    score.current -= 1;
+    console.log("Score new: ", score.current);
+    return;
+  }
 
-  return (
-    <div className="score">
+  return  (
+    <div className="score.current">
       <p> Score: {score.current}</p>
     </div>
-  ) */
+  ) 
 }
 
-export default Score;
+export default UpdateScore;
 
 

@@ -4,13 +4,13 @@ import shuffle from '../utils/shuffleSubCardOrder';
 import './Game.css';
 import CardList from './SubcardList';
 import level_settings from '../assets/levelSettings';
-import Score from './Score';
+import UpdateScore from './Score';
 
 const Game = () => {
 
   let gameOver = useRef(true);
     // let [gameOver, setGameOver] = useState(true)
-  // let score = useRef(0);
+  let score = useRef(0);
   let nextLevel = useRef(0);
   let [currentLevel, setCurrentLevel] = useState(0);
   let time = useRef(0);
@@ -21,7 +21,8 @@ const Game = () => {
   let matchingElementCount = useRef(0);
   let deactivatedCardCount = useRef(0);
 
-  let guessStatus = useRef(true);
+  let [guessStatus, setGuessStatus] = useState(false);
+
     // let [guessStatus, setGuessStatus] = useState(true)
 
   let cardsContent = useRef({})
@@ -76,9 +77,6 @@ const Game = () => {
 
     console.log("currentLevel:",currentLevel);
     console.log("nextLevel.current:",nextLevel.current);
-
-      // set guessStatus to false
-      guessStatus.current = false;
 
       const tempLevel = nextLevel.current;
       const tempLEVEL_SETUP = LEVEL_SETUP.current
@@ -147,7 +145,17 @@ const Game = () => {
     console.log("time.current", time.current);
 
   }
+
+  useEffect(() => {
+    increaseScore();
+
+  }, [guessStatus]);
   
+
+  function increaseScore() {
+    score.current += 1;
+
+  }
 
   const onCardClickHandlerInvalid = (clicked_card) => {
     // check if clicked card is active
@@ -174,7 +182,7 @@ const Game = () => {
         card1.isActive = card2.isActive = card3.isActive = true;
         deactivatedCardCount.current = 0;
       }
-      guessStatus.current = true;
+      setGuessStatus(true);
 
       return; // changeLevel();
     }
@@ -200,6 +208,7 @@ const Game = () => {
     }
   }
 
+
   return (
   <>
     <button onClick={changeLevel}>Load cards</button>
@@ -222,13 +231,14 @@ const Game = () => {
     
     <div className="container-counters">
       <div className="counters">
-        <Score /><br></br>
+        <UpdateScore /><br></br>
         <p> Level: {currentLevel}</p>
         <p> mainCard elements: {mainCardElementCount.current}</p>
         <p> subCard elements: {cardElementCount.current}</p>
         <p> matching elements: {matchingElementCount.current}</p><br></br>
 
         <p> Time: {time.current}</p>
+        <p> guessStatus: {guessStatus.toString()}</p>
 
       </div>
     </div>
