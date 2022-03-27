@@ -14,16 +14,28 @@
   margin: 20px;
 }
 
+.subcard-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row wrap;
+}
+
 .box {
-  width: 250px;
-  height: 200px;
-  margin: 10px;
+  width: 300px;
+  height: 130px;
+  margin-left: 10px;
+  margin-right: 10px;
   transition: background-color .1s ease-in-out;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: row wrap;
 }
 
 .boxMain {
   width: 400px;
-  height: 220px;
+  height: 160px;
   background-color: #16a085;
 }
 

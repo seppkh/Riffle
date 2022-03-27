@@ -1,36 +1,29 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import createSets from '../utils/createElementSets';
 import shuffle from '../utils/shuffleSubCardOrder';
-import ReactDOM from "react-dom";
 import './Game.css';
 import CardList from './CardList';
+import level_settings from '../assets/levelSettings';
 
 const Game = () => {
 
   let gameOver = useRef(true);
     // let [gameOver, setGameOver] = useState(true)
   let score = useRef(0);
-  let level = useRef(0);
-  let [currentLevel, setCurrentLeveL] = useState(0);
+  let nextLevel = useRef(0);
+  let [currentLevel, setCurrentLevel] = useState(0);
   let time = useRef(0);
+
+  let counters = useRef([]);
   let mainCardElementCount = useRef(0);
   let cardElementCount = useRef(0);
   let matchingElementCount = useRef(0);
+  let deactivatedCardCount = useRef(0);
+
   let guessStatus = useRef(true);
     // let [guessStatus, setGuessStatus] = useState(true)
-  let deactivatedCardCount = useRef(0);
-  let counters = useRef([]);
 
-  // let [score, setScore] = useState(0)
-  // let [level, setLevel] = useState(2)
-  //let [time, setTime] = useState(0)
-  // let [mainCardElementCount, setMainCardElementCount] = useState(0)
-  // let [cardElementCount, setCardElementCount] = useState(0)
-  // let [matchingElementCount, setMatchingElementCount] = useState(0)
-  // let [guessStatus, setGuessStatus] = useState(true)
-  // let [deactivatedCardCount, setDeactivatedCardCount] = useState(0)
-
-  let cardSet = useRef({})
+  let cardsContent = useRef({})
 
   let mainCard = useRef({
     elements: []
@@ -53,86 +46,40 @@ const Game = () => {
 
   let cards = useRef({
     activeObject: null,
-    main: [{id: mainCard.current}],
-    objects: [{id: card1.current}, {id: card2.current}, {id: card3.current}]
+    main: [mainCard.current],
+    objects: [card1.current, card2.current, card3.current]
   });
 
   const ELEMENTS = [
     '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'
   ]
 
-  const LEVEL_SETUP = useRef({
-    0: {
-      "mainCardElementCount": 0,
-      "cardElementCount": 0,
-      "matchingElementCount": 0
-    },
-    1: {
-      "mainCardElementCount": 2,
-      "cardElementCount": 1,
-      "matchingElementCount": 1
-    },
-    2: {
-      "mainCardElementCount": 2,
-      "cardElementCount": 2,
-      "matchingElementCount": 1
-    },
-    3: {
-      "mainCardElementCount": 3,
-      "cardElementCount": 2,
-      "matchingElementCount": 1
-    },
-    4: {
-      "mainCardElementCount": 3,
-      "cardElementCount": 3,
-      "matchingElementCount": 2
-    },
-    5: {
-      "mainCardElementCount": 4,
-      "cardElementCount": 4,
-      "matchingElementCount": 2
-    },
-    6: {
-      "mainCardElementCount": 6,
-      "cardElementCount": 4,
-      "matchingElementCount": 2
-    },
-    7: {
-      "mainCardElementCount": 6,
-      "cardElementCount": 6,
-      "matchingElementCount": 2
-    },
-    8: {
-      "mainCardElementCount": 7,
-      "cardElementCount": 6,
-      "matchingElementCount": 3
-    },
-    9: {
-      "mainCardElementCount": 7,
-      "cardElementCount": 7,
-      "matchingElementCount": 3
-    },
-    10: {
-      "mainCardElementCount": 8,
-      "cardElementCount": 5,
-      "matchingElementCount": 2
-    },
-    15: {
-      "mainCardElementCount": 8,
-      "cardElementCount": 6,
-      "matchingElementCount": 3
-    },
-  });
+  const LEVEL_SETUP = useRef(level_settings);
 
   useEffect(() => {
+    changeLevel();
+  }, [])
+
+  
+  useEffect(() => {
+  // List of correct variables to use in HTML code:
+    // currentLevel – shows current level
+    // nextLevel.current – shows next coming level
+    // mainCard.current
+    // card1.current
+    // card2.current
+    // card3.current
+    // mainCardElementCount.current
+    // cardElementCount.current
+    // matchingElementCount.current
+
+    console.log("currentLevel:",currentLevel);
+    console.log("nextLevel.current:",nextLevel.current);
+
       // set guessStatus to false
       guessStatus.current = false;
 
-      if (level.current === 0) level.current = 0;
-      console.log("level.current:", level.current);
-      console.log("currentLevel:", currentLevel);
-
-      const tempLevel = level.current;
+      const tempLevel = nextLevel.current;
       const tempLEVEL_SETUP = LEVEL_SETUP.current
 
       // set number of elements on mainCard
@@ -145,21 +92,20 @@ const Game = () => {
 
       [ mainCardElementCount.current, cardElementCount.current, matchingElementCount.current ] = counters.current;
 
-      console.log("counters.current:", counters.current);
+      /* console.log("counters.current:", counters.current);
       console.log("mainCardElementCount:", mainCardElementCount.current);
       console.log("cardElementCount:", cardElementCount.current);
-      console.log("matchingElementCount:", matchingElementCount.current);
+      console.log("matchingElementCount:", matchingElementCount.current); */
 
       // create sets of elements with isMatch and active flags for each card
-      cardSet.current = createSets(mainCardElementCount.current, cardElementCount.current, matchingElementCount.current);
+      cardsContent.current = createSets(mainCardElementCount.current, cardElementCount.current, matchingElementCount.current);
 
       // appoint set of elements to mainCard
-      mainCard.current = cardSet.current.mainCard;
-      console.log("mainCard:", mainCard.current);
+      mainCard.current = cardsContent.current.mainCard;
 
-      // suffle subcards values in cardSet and store in new array
+      // suffle subcards values in cardsContent and store in new array
       let subCards = [];
-      subCards.push(cardSet.current.card1, cardSet.current.card2, cardSet.current.card3);
+      subCards.push(cardsContent.current.card1, cardsContent.current.card2, cardsContent.current.card3);
       let subCardsShuffle = shuffle(subCards);
 
       // appoint set of elements to subcards 
@@ -167,19 +113,11 @@ const Game = () => {
       card2.current = subCardsShuffle[1];
       card3.current = subCardsShuffle[2];
 
-      console.log("card1:", card1.current);
-      console.log("card2:", card2.current);
-      console.log("card3:", card3.current);
-
-      console.log("cards.current before:", cards.current);
-
       cards.current = {
         activeObject: null,
-        main: [{id: mainCard.current}],
-        objects: [{id: card1.current}, {id: card2.current}, {id: card3.current}]
+        main: [mainCard.current],
+        objects: [card1.current, card2.current, card3.current]
       };
-
-      console.log("cards.current after:", cards.current);
     
       // set time to full time value (30 sec)
       time.current = 30;
@@ -190,22 +128,24 @@ const Game = () => {
   }, [currentLevel])
 
   function changeLevel() {
-    console.log("previous level:",level.current);
-    level.current += 1;
-    setCurrentLeveL(level.current);
+    nextLevel.current += 1;
+    setCurrentLevel(nextLevel.current-1);
     
-    mainCard.current = cards.current.main.id;
-    card1.current = cards.current.objects[0].id;
-    card2.current = cards.current.objects[1].id;
-    card3.current = cards.current.objects[2].id;
+    mainCard.current = cards.current.main[0];
+    card1.current = cards.current.objects[0];
+    card2.current = cards.current.objects[1];
+    card3.current = cards.current.objects[2];
 
-    console.log("currentLevel:",currentLevel);
-
-    console.log("new level:",level.current);
+    console.log("-----");
+    console.log("mainCard.current:", mainCard.current);
+    console.log("card1.current:", card1.current);
+    console.log("card2.current:", card2.current);
+    console.log("card3.current:", card3.current);
 
   }
+  
 
-  const onCardClickHandler = (clicked_card) => {
+  const onCardClickHandlerInvalid = (clicked_card) => {
     // check if clicked card is active
     // check if clicked card is matching
 
@@ -224,7 +164,7 @@ const Game = () => {
     if (clicked_card.isActive === true && clicked_card.isMatch === true) {
       score.current += 1;
       time.current += 6;
-      level.current += 1;
+      changeLevel()
 
       if (deactivatedCardCount > 1) {
         card1.isActive = card2.isActive = card3.isActive = true;
@@ -243,8 +183,8 @@ const Game = () => {
       score.current -= 1;
       time.current -= 3;
     } 
-      
   }
+
   function toggleActive(index) {
     cards.current = {...cards, activeObject: cards.objects[index] };
   }
@@ -264,13 +204,14 @@ const Game = () => {
       <div className='card mainCard'>
         {cards.current.main.map((element, index) => (
           <div key={index} className="box boxMain">
-            <p id='mainCardContent'>mainCard elements: {element.id.elements.join(", ")}</p>
+            <p id='mainCardContent'>mainCard elements:<br></br> {element.elements.join(", ")}</p>
           </div>
         ))}
       </div>
       <div className='card subCards'>
-        <CardList subcards={cards.current.objects} title="All subcards" />
+        <CardList subcards={cards.current.objects} title="Subcards:" />
       </div>
+
       <br></br><br></br><br></br>
       
     </div>
@@ -278,7 +219,7 @@ const Game = () => {
     <div className="container-counters">
       <div className="counters">
         <p> Score: {score.current}</p><br></br>
-        <p> Level: {level.current-1}</p>
+        <p> Level: {currentLevel}</p>
         <p> mainCard elements: {mainCardElementCount.current}</p>
         <p> subCard elements: {cardElementCount.current}</p>
         <p> matching elements: {matchingElementCount.current}</p><br></br>
@@ -299,7 +240,7 @@ const Game = () => {
 <div className='card subCards'>
         {cards.current.objects.map((element, index) => (
             <div key={index} className='{toggleActiveStyles(index)}' onClick={() => { toggleActive(index); } }>
-              <p>subCard elements: {element.id.elements.join(", ")}</p>
+              <p>subCard elements: {element.elements.join(", ")}</p>
             </div>
           ))}
       </div>

@@ -1,15 +1,20 @@
 import Game from "./Game"; 
+import { onCardClickHandler, toggleActiveStyles } from "../utils/cardSelectFunctions";
 
 const CardList = ({ subcards, title }) => {
 
   return ( 
-    <div className="subcard-list">
-      <h2>{ title }</h2>
-      {subcards.map((element, index) => (
-        <div key={index} className='' onClick=''>
-          <p>card{index+1} elements: {element.id.elements.join(", ")}</p>
-        </div>
-      ))}
+    <div>
+      <h3>{ title }</h3>
+      <div className="subcard-list">
+        {subcards.map((element, index) => (
+          <div key={index} className={toggleActiveStyles(element)} onClick={() => {onCardClickHandler(element)}}>
+            <p>
+              card{index+1} elements:<br></br> {element.elements.join(", ")}
+            </p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
