@@ -153,6 +153,7 @@ const Game = () => {
 
 
   const onCardClickHandler = (clicked_card) => {
+    // disable clicking on card if currentLeveL is not yet 1
     if (currentLevel === 0) return console.log("No cards loaded yet - nothing to react to");
 
     // check if clicked card is active
@@ -163,14 +164,15 @@ const Game = () => {
     if (clicked_card.isActive === false) return console.log("Invalid move");
 
     // if active and matching
-    // update score by 1
-    // increase time by 6 sec
-    // update level value
+      // set guessStatus to true
+      // increase score by 1
+      // increase time by 6 sec
     // read deactivated card count
       // if deactivated card count bigger than 0
         // set other cards to active
         // set deactivatedCardCount to 0
-    // set guessStatus to true
+     // change level (level value)
+
     if (clicked_card.isActive === true && clicked_card.isMatch === true) {
       guessStatus.current = true;
       setScore((s) => s +1);
@@ -182,15 +184,20 @@ const Game = () => {
       }
       
       changeLevel();
-
       return console.log("Changing to next level");; 
     }
 
     // if active and not matching
+      // set guessStatus to false
+      // set clicked_card Active status to false
+      // increase deactivatedCardCount by 1
+      // decrease score by 1
+      // decrease time by 6 sec
+
     if (clicked_card.isActive === true && clicked_card.isMatch === false) {
       guessStatus.current = false;
       clicked_card.isActive = false;
-      
+
       deactivatedCardCount.current += 1;
       setScore((s) => s -1);
       setTime((t) => t -5);
@@ -271,15 +278,16 @@ const Game = () => {
       </div>
     </div>
     
-    <script src="./bundle.js"></script>
     </>
 
   )
 
 }
 
+export default Game;
+
+
 /* 
-{ (element) => {toggleActiveStyles(element) }}
 
  <CardList subcards={cards.current.objects} 
         toggleActiveStyles={toggleActiveStyles}
@@ -293,4 +301,4 @@ const Game = () => {
           ))}
       </div>
 */
-export default Game;
+
