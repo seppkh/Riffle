@@ -21,7 +21,7 @@ function onCardClickHandler(clicked_card) {
 
     return;
 
-          // cardIsActiveNoMatch();
+      // cardIsActiveNoMatch();
   }
 
   // if active and matching

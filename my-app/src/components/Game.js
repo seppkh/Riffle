@@ -10,10 +10,11 @@ const Game = () => {
 
   let gameOver = useRef(true);
     // let [gameOver, setGameOver] = useState(true)
-  let score = useRef(0);
+  let [score, setScore] = useState(0);
+  let [time, setTime] = useState(30);
+
   let nextLevel = useRef(0);
   let [currentLevel, setCurrentLevel] = useState(0);
-  let time = useRef(0);
 
   let counters = useRef([]);
   let mainCardElementCount = useRef(0);
@@ -21,7 +22,7 @@ const Game = () => {
   let matchingElementCount = useRef(0);
   let deactivatedCardCount = useRef(0);
 
-  let [guessStatus, setGuessStatus] = useState(false);
+  let guessStatus = useRef(true);
 
     // let [guessStatus, setGuessStatus] = useState(true)
 
@@ -59,6 +60,9 @@ const Game = () => {
   const LEVEL_SETUP = useRef(level_settings);
 
   useEffect(() => {
+
+    guessStatus.current = true;
+
     changeLevel();
   }, [])
 
@@ -117,9 +121,6 @@ const Game = () => {
         main: [mainCard.current],
         objects: [card1.current, card2.current, card3.current]
       };
-    
-      // set time to full time value (30 sec)
-      time.current = 30;
 
       // set gameOver to false
       gameOver.current = false;
@@ -127,6 +128,13 @@ const Game = () => {
   }, [currentLevel])
 
   function changeLevel() {
+
+    console.log("guessStatus.current:", guessStatus.current)
+
+    if (guessStatus.current === false && currentLevel > 0 ) return console.log("Error: can't change level because guessStatus in not true");
+
+    guessStatus.current = false;
+
     nextLevel.current += 1;
     setCurrentLevel(nextLevel.current-1);
     
@@ -141,25 +149,15 @@ const Game = () => {
     console.log("card2.current:", card2.current);
     console.log("card3.current:", card3.current);
 
-    console.log("score.current");
-    console.log("time.current", time.current);
-
   }
 
-  useEffect(() => {
-    increaseScore();
 
-  }, [guessStatus]);
-  
+  const onCardClickHandler = (clicked_card) => {
+    if (currentLevel === 0) return console.log("No cards loaded yet - nothing to react to");
 
-  function increaseScore() {
-    score.current += 1;
-
-  }
-
-  const onCardClickHandlerInvalid = (clicked_card) => {
     // check if clicked card is active
     // check if clicked card is matching
+    console.log("clicked_card", clicked_card);
 
     // if not active, return nothing
     if (clicked_card.isActive === false) return console.log("Invalid move");
@@ -174,29 +172,34 @@ const Game = () => {
         // set deactivatedCardCount to 0
     // set guessStatus to true
     if (clicked_card.isActive === true && clicked_card.isMatch === true) {
-      // score.current += 1;
-      time.current += 6;
-      changeLevel()
+      guessStatus.current = true;
+      setScore((s) => s +1);
+      setTime((t) => t +6);
 
-      if (deactivatedCardCount > 1) {
-        card1.isActive = card2.isActive = card3.isActive = true;
+      if (deactivatedCardCount.current > 1) {
+        card1.current.isActive = card2.current.isActive = card3.current.isActive = true;
         deactivatedCardCount.current = 0;
       }
-      setGuessStatus(true);
+      
+      changeLevel();
 
-      return; // changeLevel();
+      return console.log("Changing to next level");; 
     }
 
     // if active and not matching
     if (clicked_card.isActive === true && clicked_card.isMatch === false) {
+      guessStatus.current = false;
       clicked_card.isActive = false;
       
       deactivatedCardCount.current += 1;
-      // score.current -= 1;
-      time.current -= 3;
+      setScore((s) => s -1);
+      setTime((t) => t -5);
+
+      return console.log("Deactivating wrong card");;
     } 
   }
 
+  /*
   function toggleActive(index) {
     cards.current = {...cards, activeObject: cards.objects[index] };
   }
@@ -205,6 +208,16 @@ const Game = () => {
       return "box active"
     } else {
       return "box inactive"
+    }
+  } */
+
+  function toggleActiveStyles(clicked_card) {
+    // console.log("clicked_card style:", clicked_card)
+  
+    if (clicked_card.isActive === false) {
+      return "box inactive"
+    } else {
+      return "box active"
     }
   }
 
@@ -222,7 +235,19 @@ const Game = () => {
         ))}
       </div>
       <div className='card subCards'>
-        <CardList subcards={cards.current.objects} title="Subcards:" />
+        <div className="subcard-list">
+          {cards.current.objects.map((element, index) => (
+            <div key={index} 
+            className= {toggleActiveStyles(element)} 
+            onClick={ () => {onCardClickHandler(element)} }>
+              <p>
+                card{index+1} elements:<br></br> {element.elements.join(", ")}
+            <br></br><br></br>
+                {element.isMatch.toString()}
+              </p>
+            </div>
+          ))}
+        </div>
       </div>
 
       <br></br><br></br><br></br>
@@ -231,14 +256,17 @@ const Game = () => {
     
     <div className="container-counters">
       <div className="counters">
-        <UpdateScore /><br></br>
+        <p> Score: {score}</p><br></br>
+
         <p> Level: {currentLevel}</p>
         <p> mainCard elements: {mainCardElementCount.current}</p>
         <p> subCard elements: {cardElementCount.current}</p>
-        <p> matching elements: {matchingElementCount.current}</p><br></br>
+        <p> matching elements: {matchingElementCount.current}</p>
+        <p> deactivatedCardCount: {deactivatedCardCount.current}</p>
+        <br></br>
 
-        <p> Time: {time.current}</p>
-        <p> guessStatus: {guessStatus.toString()}</p>
+        <p> Time: {time}</p>
+        <p> guessStatus: {guessStatus.current.toString()}</p>
 
       </div>
     </div>
@@ -251,6 +279,12 @@ const Game = () => {
 }
 
 /* 
+{ (element) => {toggleActiveStyles(element) }}
+
+ <CardList subcards={cards.current.objects} 
+        toggleActiveStyles={toggleActiveStyles}
+        onCardClickHandler={onCardClickHandler} title="Subcards:" />
+
 <div className='card subCards'>
         {cards.current.objects.map((element, index) => (
             <div key={index} className='{toggleActiveStyles(index)}' onClick={() => { toggleActive(index); } }>
