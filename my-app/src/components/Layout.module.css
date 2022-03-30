@@ -1,0 +1,19 @@
+.Layout {
+  display: grid;
+  padding: 50px;
+  min-height: 100vh;
+  box-sizing: border-box;
+  margin: 0 auto;
+  max-width: 1084px;
+}
+
+.Split {
+  grid-template-columns: 1fr 1fr;
+}
+
+.Section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

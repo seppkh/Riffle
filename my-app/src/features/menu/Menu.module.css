@@ -1,0 +1,7 @@
+.Menu {
+  list-style: none;
+  padding: 0;
+  align-items: flex-start;
+  display: block;
+  min-width: 300px;
+}
