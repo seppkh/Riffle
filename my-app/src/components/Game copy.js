@@ -8,10 +8,10 @@ import UpdateScore from './Score';
 
 const Game = () => {
 
-  let [gameOver, setGameOver] = useState(false);
+  let gameOver = useRef(true);
     // let [gameOver, setGameOver] = useState(true)
   let [score, setScore] = useState(0);
-  let [time, setTime] = useState(0);
+  let [time, setTime] = useState(30);
 
   let nextLevel = useRef(0);
   let [currentLevel, setCurrentLevel] = useState(0);
@@ -45,7 +45,7 @@ const Game = () => {
     isActive: true
   })
 
-  let [ cards, setCards ] = useState({
+  let cards = useRef({
     activeObject: null,
     main: [mainCard.current],
     objects: [card1.current, card2.current, card3.current]
@@ -57,10 +57,10 @@ const Game = () => {
 
   const LEVEL_SETUP = useRef(level_settings);
 
- /* useEffect(() => {
+  useEffect(() => {
 
     changeLevel();
-  }, []) */
+  }, [])
 
   
   useEffect(() => {
@@ -102,7 +102,7 @@ const Game = () => {
       cardsContent.current = createSets(mainCardElementCount.current, cardElementCount.current, matchingElementCount.current);
 
       // appoint set of elements to mainCard
-      mainCard.current = (cardsContent.current.mainCard);
+      mainCard.current = cardsContent.current.mainCard;
 
       // suffle subcards values in cardsContent and store in new array
       let subCards = [];
@@ -114,31 +114,34 @@ const Game = () => {
       card2.current = subCardsShuffle[1];
       card3.current = subCardsShuffle[2];
 
-      console.log("mainCard from useEffect", mainCard.current);
+      console.log("mainCard.current from useEffect", mainCard.current);
       console.log("card1.current from useEffect", card1.current);
       console.log("card2.current from useEffect", card2.current);
       console.log("card3.current from useEffect", card3.current);
 
-      setCards({
+      cards.current = {
         activeObject: null,
         main: [mainCard.current],
         objects: [card1.current, card2.current, card3.current]
-      });
+      };
 
       // set gameOver to false
-      setGameOver(false);
+      gameOver.current = false;
 
   }, [currentLevel]) // THIS changes every time from true to false or from false to true!
 
 
   function changeLevel() {
 
-    if (gameOver === false && time === 0) setTime((t) => t +30);
-
     if (guessStatus.current === false ) return console.log("Error: can't change level because guessStatus in not true");
 
     nextLevel.current += 1;
-    setCurrentLevel(nextLevel.current);
+    setCurrentLevel(nextLevel.current-1);
+    
+    mainCard.current = cards.current.main[0];
+    card1.current = cards.current.objects[0];
+    card2.current = cards.current.objects[1];
+    card3.current = cards.current.objects[2];
 
     console.log("-----");
     console.log("mainCard.current:", mainCard.current);
@@ -239,7 +242,7 @@ const Game = () => {
 
     <div id='cardsArea'>
       <div className='card mainCard'>
-        {cards.main.map((element, index) => (
+        {cards.current.main.map((element, index) => (
           <div key={index} className="box boxMain">
             <p id='mainCardContent'>mainCard elements:<br></br> {element.elements.join(", ")}</p>
           </div>
@@ -247,7 +250,7 @@ const Game = () => {
       </div>
       <div className='card subCards'>
         <div className="subcard-list">
-          {cards.objects.map((element, index) => (
+          {cards.current.objects.map((element, index) => (
             <div key={index} 
             className= {toggleActiveStyles(element)} 
             onClick={ () => {onCardClickHandler(element)} }>
