@@ -2,9 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import createSets from '../utils/createElementSets';
 import shuffle from '../utils/shuffleSubCardOrder';
 import './Game.css';
-import CardList from './SubcardList';
 import level_settings from '../assets/levelSettings';
-import UpdateScore from './Score';
+import Timer from './Countdown';
 
 const Game = () => {
 
@@ -12,7 +11,9 @@ const Game = () => {
   let [gameRestarted, setGameRestarted] = useState(0);
 
   let [score, setScore] = useState(0);
-  let [time, setTime] = useState(0);
+  let [time, setTime] = useState(15);
+  let [timeChangeCounter, setTimeChangeCounter] = useState(0);
+  let timeChange = useRef(0);
 
   let nextLevel = useRef(0);
   let [currentLevel, setCurrentLevel] = useState(0);
@@ -68,11 +69,11 @@ const Game = () => {
 // if time runs out end game
   useEffect(() => {
 
-    if (time < -10) { 
+    if (Timer.timer <= 0) { 
       setGameOver(true) 
       alert("Game over! Time is over!")
     }
-  }, [time]);
+  }, [Timer.timer]);
 
 // load new cards when currentLevel changes
   useEffect(() => {
@@ -142,6 +143,8 @@ const Game = () => {
   function changeLevel() {
     console.log("gameOver", gameOver)
     console.log("time", time)
+
+    console.log("Timer.timer", Timer.timer)
     console.log("currentLevel", currentLevel)
     console.log("nextLevel.current", nextLevel.current)
     
@@ -188,7 +191,10 @@ const Game = () => {
       guessStatus.current = true;
 
       setScore((s) => s +1);
-      setTime((t) => t +6);
+      setTime((t) => t +7);
+      
+      setTimeChangeCounter((n) => n +1);
+      timeChange.current = 7;
 
       if (deactivatedCardCount.current > 1) {
         card1.current.isActive = card2.current.isActive = card3.current.isActive = true;
@@ -215,7 +221,10 @@ const Game = () => {
 
       deactivatedCardCount.current += 1;
       setScore((s) => s -1);
-      setTime((t) => t -15);
+      setTime((t) => t -5);
+      
+      setTimeChangeCounter((n) => n +1);
+      timeChange.current = -5;
 
       return console.log("Deactivating wrong card");;
     } 
@@ -242,6 +251,7 @@ const Game = () => {
     }
   }
 
+// Loading initial cards function
   function loadFirstCards() {
     if (currentLevel === 0) { 
       return changeLevel();
@@ -254,6 +264,8 @@ const Game = () => {
     return console.log("The game is active and cards are already loaded :)")
   }
 
+
+// Restart Game actions
   function restartGame() {
     setGameOver(() => false);
 
@@ -307,7 +319,8 @@ const Game = () => {
           {cards.objects.map((element, index) => (
             <div key={index} 
             className= {toggleActiveStyles(element)} 
-            onClick={ () => {onCardClickHandler(element)} }>
+            onClick={ () => { 
+              onCardClickHandler(element)} }>
               <p>
                 card{index+1} elements:<br></br> {element.elements.join(", ")}
             <br></br><br></br>
@@ -336,7 +349,7 @@ const Game = () => {
         <p> deactivatedCardCount: {deactivatedCardCount.current}</p>
         <br></br>
 
-        <p> Time: {time}</p>
+        <Timer changeTimeCounter={timeChangeCounter} timeChange={timeChange.current} />
         <p> guessStatus: {guessStatus.current.toString()}</p>
 
       </div>
