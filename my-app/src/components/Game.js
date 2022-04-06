@@ -8,7 +8,8 @@ import Timer from './Countdown';
 const Game = () => {
 
   let [gameOver, setGameOver] = useState(false);
-  let [gameRestarted, setGameRestarted] = useState(0);
+
+  let [gameRestartedCounter, setGameRestartedCounter] = useState(0);
 
   let [score, setScore] = useState(0);
   let [time, setTime] = useState(15);
@@ -268,6 +269,7 @@ const Game = () => {
 // Restart Game actions
   function restartGame() {
     setGameOver(() => false);
+    setTimeChangeCounter(() => -1)
 
     nextLevel.current = 0;
     setCurrentLevel(() => nextLevel.current);
@@ -293,19 +295,18 @@ const Game = () => {
       objects: [card1.current, card2.current, card3.current]
     }));
     
-    setGameRestarted((gr) => gr +1);
+    setGameRestartedCounter((gr) => gr +1);
   }
   
+
   useEffect(() => {
     changeLevel();
 
-  }, [gameRestarted]);
+  }, [gameRestartedCounter]);
 
 
   return (
   <>
-    <button onClick={loadFirstCards}>Load cards</button>
-
     <div id='cardsArea'>
       <div className='card mainCard'>
         {cards.main.map((element, index) => (
@@ -340,7 +341,8 @@ const Game = () => {
     
     <div className="container-counters">
       <div className="counters">
-        <p> Score: {score}</p><br></br>
+        <p> Score: {score}</p>
+        <br></br>
 
         <p> Level: {currentLevel}</p>
         <p> mainCard elements: {mainCardElementCount.current}</p>
@@ -349,8 +351,13 @@ const Game = () => {
         <p> deactivatedCardCount: {deactivatedCardCount.current}</p>
         <br></br>
 
-        <Timer changeTimeCounter={timeChangeCounter} timeChange={timeChange.current} />
+        <Timer 
+          changeTimeCounter={timeChangeCounter} 
+          timeChange={timeChange.current}
+          gameRestartedCounter={gameRestartedCounter} />
         <p> guessStatus: {guessStatus.current.toString()}</p>
+        <p> gameOver: {gameOver.toString()}</p>
+
 
       </div>
     </div>
@@ -365,6 +372,8 @@ export default Game;
 
 
 /* 
+  <button onClick={loadFirstCards}>Load cards</button>
+
 
  <CardList subcards={cards.current.objects} 
         toggleActiveStyles={toggleActiveStyles}

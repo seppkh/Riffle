@@ -54,6 +54,26 @@ const level_settings = {
     "cardElementCount": 5,
     "matchingElementCount": 2
   },
+  11: {
+    "mainCardElementCount": 8,
+    "cardElementCount": 5,
+    "matchingElementCount": 2
+  },
+  12: {
+    "mainCardElementCount": 8,
+    "cardElementCount": 5,
+    "matchingElementCount": 3
+  },
+  13: {
+    "mainCardElementCount": 8,
+    "cardElementCount": 6,
+    "matchingElementCount": 3
+  },
+  14: {
+    "mainCardElementCount": 8,
+    "cardElementCount": 6,
+    "matchingElementCount": 3
+  },
   15: {
     "mainCardElementCount": 8,
     "cardElementCount": 6,
