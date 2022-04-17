@@ -13,7 +13,7 @@ useEffect(() => {
 
   if (changeTimeCounter === -1) {
     changeTimeCounter = 0;
-    return setTimer(() => 30)}
+    return setTimer(30)}
   ;
 
   setTimer((state) => state + timeChange);

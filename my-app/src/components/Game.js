@@ -1,165 +1,103 @@
 import React, { useState, useEffect, useRef } from 'react';
-import createSets from '../utils/createElementSets';
-import shuffle from '../utils/shuffleSubCardOrder';
 import './Game.css';
 import level_settings from '../assets/levelSettings';
 import Timer from './Countdown';
+import Counters from './Counters';
+import ShowCards from './ShowCards';
+import createSets from '../utils/createElementSets';
+import MainCard from './MainCard';
+import SubCards from './SubCards';
+
+
+// START OF CHANGES
 
 const Game = () => {
 
   let [gameOver, setGameOver] = useState(false);
-
   let [gameRestartedCounter, setGameRestartedCounter] = useState(0);
 
   let [score, setScore] = useState(0);
   let [time, setTime] = useState(15);
   let [timeChangeCounter, setTimeChangeCounter] = useState(0);
-  let timeChange = useRef(0);
+  let [timeChange, setTimeChange] = useState(0);
 
-  let nextLevel = useRef(0);
   let [currentLevel, setCurrentLevel] = useState(0);
+  let [mainCardElementCount, setMainCardElementCount] = useState(0);
+  let [cardElementCount, setCardElementCount] = useState(0);
+  let [matchingElementCount, setMatchingElementCount] = useState(0);
+  let [deactivatedCardCount, setDeactivatedCardCount] = useState(0);
 
-  let counters = useRef([]);
-  let mainCardElementCount = useRef(0);
-  let cardElementCount = useRef(0);
-  let matchingElementCount = useRef(0);
-  let deactivatedCardCount = useRef(0);
+  let [guessStatus, setGuessStatus] = useState(true);
 
-  let guessStatus = useRef(true);
-
-  let cardsContent = useRef({})
-
-  let mainCard = useRef({
-    elements: []
+  let [mainCard, setMainCard] = useState({
+    elements: [22, 34]
   })
-  let card1 = useRef({
-    elements: [],
+  let [card1, setCard1] = useState({
+    elements: [22],
+    isMatch: true,
+    isActive: true
+  })
+  let [card2, setCard2] = useState({
+    elements: [16],
     isMatch: false,
     isActive: true
   })
-  let card2 = useRef({
-    elements: [],
-    isMatch: false,
-    isActive: true
-  })
-  let card3 = useRef({
-    elements: [],
+  let [card3, setCard3] = useState({
+    elements: [7],
     isMatch: false,
     isActive: true
   })
 
-  let [ cards, setCards ] = useState({
-    activeObject: null,
-    main: [mainCard.current],
-    objects: [card1.current, card2.current, card3.current]
-  });
+  const LEVEL_SETUP = level_settings;
 
-  const ELEMENTS = [
-    '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'
-  ]
 
-  const LEVEL_SETUP = useRef(level_settings);
-
-/*
 // load first level
- useEffect(() => {
+useEffect(() => {
 
     changeLevel();
-  }, []); */
 
-// if time runs out end game
-  useEffect(() => {
-
-    if (Timer.timer <= 0) { 
-      setGameOver(true) 
-      alert("Game over! Time is over!")
-    }
-  }, [Timer.timer]);
-
-// load new cards when currentLevel changes
-  useEffect(() => {
-
-  // List of correct variables to use in HTML code:
-    // currentLevel – shows current level
-    // nextLevel.current – shows next coming level
-    // mainCard.current
-    // card1.current
-    // card2.current
-    // card3.current
-    // mainCardElementCount.current
-    // cardElementCount.current
-    // matchingElementCount.current
-
-    console.log("-----");
-    console.log("nextLevel.current:",nextLevel.current);
-    console.log("currentLevel:",currentLevel);
-
-      const tempLevel = nextLevel.current;
-      const tempLEVEL_SETUP = LEVEL_SETUP.current
-
-      // set number of elements on mainCard
-      // set number of elements on subcards
-      // set number of matching elements on correct card      
-      counters.current = [
-        tempLEVEL_SETUP[tempLevel].mainCardElementCount,
-        tempLEVEL_SETUP[tempLevel].cardElementCount,
-        tempLEVEL_SETUP[tempLevel].matchingElementCount];
-
-      [ mainCardElementCount.current, cardElementCount.current, matchingElementCount.current ] = counters.current;
-
-      // create sets of elements with isMatch and active flags for each card
-      cardsContent.current = createSets(mainCardElementCount.current, cardElementCount.current, matchingElementCount.current);
-
-      // appoint set of elements to mainCard
-      mainCard.current = (cardsContent.current.mainCard);
-
-      // suffle subcards values in cardsContent and store in new array
-      let subCards = [];
-      subCards.push(cardsContent.current.card1, cardsContent.current.card2, cardsContent.current.card3);
-      let subCardsShuffle = shuffle(subCards);
-
-      // appoint set of elements to subcards 
-      card1.current = subCardsShuffle[0];
-      card2.current = subCardsShuffle[1];
-      card3.current = subCardsShuffle[2];
-
-      console.log("mainCard.current:", mainCard.current);
-      console.log("card1.current:", card1.current);
-      console.log("card2.current:", card2.current);
-      console.log("card3.current:", card3.current);
-
-      setCards({
-        activeObject: null,
-        main: [mainCard.current],
-        objects: [card1.current, card2.current, card3.current]
-      });
-
-      // set gameOver to false
-      setGameOver(false);
-
-  }, [currentLevel]);
-
-
+}, []);  
+  
+  
 // changeLevel logic and conditions
-  function changeLevel() {
-    console.log("gameOver", gameOver)
-    console.log("time", time)
+const changeLevel = () => {
+  console.log("gameOver", gameOver)
+  console.log("time", time)
+  console.log("Timer.timer", Timer.timer)
 
-    console.log("Timer.timer", Timer.timer)
-    console.log("currentLevel", currentLevel)
-    console.log("nextLevel.current", nextLevel.current)
-    
+  console.log("currentLevel", currentLevel)
 
-    if (gameOver === false && time === 0 && nextLevel.current === 0) setTime((t) => t +30);
+  if (gameOver === false && time === 0 && currentLevel === 0) setTime(30);
 
-    if (guessStatus.current === false) return console.log("Error: can't change level because guessStatus in not true");
+  if (guessStatus === false) return console.log("Error: can't change level because guessStatus in not true");
 
-    nextLevel.current += 1;
-    setCurrentLevel(() => nextLevel.current);
+  setCurrentLevel((prev) => prev +1);
 
-    console.log("currentLevel", currentLevel)
-    console.log("nextLevel.current", nextLevel.current)
+};
+
+  // set number of elements on mainCard
+  // set number of elements on subcards
+  // set number of matching elements on correct card
+useEffect(() => {
+
+  setMainCardElementCount(LEVEL_SETUP[currentLevel].mainCardElementCounter);
+  setCardElementCount(LEVEL_SETUP[currentLevel].cardElementCounter);
+  setMatchingElementCount(LEVEL_SETUP[currentLevel].matchingElementCounter);
+
+}, [currentLevel, setMainCardElementCount, setCardElementCount, setMatchingElementCount]);
+
+
+// load new cards after currentLevel is changed and counters set
+  const updateCardsContent = () => { 
+    console.log("currentLevel in Game.js", currentLevel);
+
+    console.log("mainCardElementCount in Game.js", mainCardElementCount);
+    console.log("cardElementCount in Game.js", cardElementCount);
+    console.log("matchingElementCount in Game.js", matchingElementCount);
+
+
   };
+
 
 
   const onCardClickHandler = (clicked_card) => {
@@ -189,17 +127,20 @@ const Game = () => {
     if (clicked_card.isActive === true && clicked_card.isMatch === true) {
  
       // set guessStatus to true
-      guessStatus.current = true;
+      setGuessStatus(true);
 
       setScore((s) => s +1);
       setTime((t) => t +7);
       
       setTimeChangeCounter((n) => n +1);
-      timeChange.current = 7;
+      setTimeChange(7);
 
-      if (deactivatedCardCount.current > 1) {
-        card1.current.isActive = card2.current.isActive = card3.current.isActive = true;
-        deactivatedCardCount.current = 0;
+      if (deactivatedCardCount > 1) {
+        setCard1({...card1, isActive: true});
+        setCard2({...card2, isActive: true});
+        setCard3({...card3, isActive: true});
+
+        setDeactivatedCardCount(0);
       }
 
       console.log("Correct card! Changing to next level");
@@ -215,47 +156,72 @@ const Game = () => {
       // decrease time by 6 sec
 
     if (clicked_card.isActive === true && clicked_card.isMatch === false) {
-      guessStatus.current = false;
-      console.log("guessStatus.current:", guessStatus.current);
+      setGuessStatus(false);
+      console.log("guessStatus:", guessStatus);
 
       clicked_card.isActive = false;
 
-      deactivatedCardCount.current += 1;
+      setDeactivatedCardCount((prev) => prev +1);
       setScore((s) => s -1);
       setTime((t) => t -5);
       
       setTimeChangeCounter((n) => n +1);
-      timeChange.current = -5;
+      setTimeChange(-5);
 
       return console.log("Deactivating wrong card");;
     } 
   }
 
-  /*
-  function toggleActive(index) {
-    cards.current = {...cards, activeObject: cards.objects[index] };
-  }
-  function toggleActiveStyles(index) {
-    if (cards.current.objects[index] === cards.activeObject) {
-      return "box active"
-    } else {
-      return "box inactive"
-    }
-  } */
 
-  function toggleActiveStyles(clicked_card) {
+// Restart Game actions
+  function restartGame() {
+    setGameOver(false);
+    setTimeChangeCounter(-1);
+
+    setCurrentLevel(0);
+
+    setScore(0);
+    setTime(0);
+    setDeactivatedCardCount(0);
+    
+    setGuessStatus(true);
+
+    setMainCard({
+      elements: []
+    });
+    setCard1({
+      elements: [],
+      isMatch: false,
+      isActive: true
+    });
+    setCard2({
+      elements: [],
+      isMatch: false,
+      isActive: true
+    });
+    setCard3({
+      elements: [],
+      isMatch: false,
+      isActive: true
+    });
+    
+    setGameRestartedCounter((gr) => gr +1);
+  }
   
-    if (clicked_card.isActive === false) {
-      return "box inactive"
-    } else {
-      return "box active"
-    }
-  }
+  // if time runs out end game
+  useEffect(() => {
 
-// Loading initial cards function
+    if (Timer.timer <= 0) { 
+      setGameOver(true) 
+      alert("Game over! Time is over!")
+    }
+  }, [Timer.timer]); 
+
+  // Loading initial cards function
+  /*
   function loadFirstCards() {
     if (currentLevel === 0) { 
-      return changeLevel();
+      return changeLevel;
     }
 
     if (gameOver === true) {
@@ -263,101 +229,64 @@ const Game = () => {
     }
 
     return console.log("The game is active and cards are already loaded :)")
-  }
+  } */
 
-
-// Restart Game actions
-  function restartGame() {
-    setGameOver(() => false);
-    setTimeChangeCounter(() => -1)
-
-    nextLevel.current = 0;
-    setCurrentLevel(() => nextLevel.current);
-
-    setScore(() => 0);
-    setTime(() => 0);
-    deactivatedCardCount.current = 0;
+  // change card color
+  function toggleActiveStyles(clicked_card) {
     
-    guessStatus.current = true;
-
-    mainCard.current = {
-      elements: []
+    if (clicked_card.isActive === false) {
+      return "box inactive"
+    } else {
+      return "box active"
     }
-    card1.current = card2.current = card3.current = {
-      elements: [],
-      isMatch: false,
-      isActive: true
-    }
-
-    setCards(() => ({
-      activeObject: null,
-      main: [mainCard.current],
-      objects: [card1.current, card2.current, card3.current]
-    }));
-    
-    setGameRestartedCounter((gr) => gr +1);
   }
-  
-
-  useEffect(() => {
-    changeLevel();
-
-  }, [gameRestartedCounter]);
-
 
   return (
   <>
-    <div id='cardsArea'>
-      <div className='card mainCard'>
-        {cards.main.map((element, index) => (
-          <div key={index} className="box boxMain">
-            <p id='mainCardContent'>mainCard elements:<br></br> {element.elements.join(", ")}</p>
-          </div>
-        ))}
-      </div>
-      <div className='card subCards'>
-        <div className="subcard-list">
-          {cards.objects.map((element, index) => (
-            <div key={index} 
-            className= {toggleActiveStyles(element)} 
-            onClick={ () => { 
-              onCardClickHandler(element)} }>
-              <p>
-                card{index+1} elements:<br></br> {element.elements.join(", ")}
-            <br></br><br></br>
-                {element.isMatch.toString()}
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
-      <br></br><br></br><br></br>
+    <div id='cardsArea' >
 
-      <button onClick={restartGame}>Restart game</button>
+      <ShowCards key="show-cards" title="showcards component"
+        mainCard={mainCard}
+        setMainCard={setMainCard}
+        card1={card1}
+        setCard1={setCard1}
+        card2={card2}
+        setCard2={setCard2}
+        card3={card3}
+        setCard3={setCard3}
+        mainCardElementCount={mainCardElementCount}
+        cardElementCount={cardElementCount}
+        matchingElementCount={matchingElementCount}
+        toggleActiveStyles={toggleActiveStyles}
+        onCardClickHandler={onCardClickHandler}
+        setGameOver={setGameOver}
+        updateCardsContent={updateCardsContent}
+        />
 
-      <br></br><br></br><br></br>
-      
     </div>
-    
+
+    <div>
+      <button onClick={restartGame}>Restart game</button>
+    </div>
+  
+
     <div className="container-counters">
       <div className="counters">
-        <p> Score: {score}</p>
-        <br></br>
-
-        <p> Level: {currentLevel}</p>
-        <p> mainCard elements: {mainCardElementCount.current}</p>
-        <p> subCard elements: {cardElementCount.current}</p>
-        <p> matching elements: {matchingElementCount.current}</p>
-        <p> deactivatedCardCount: {deactivatedCardCount.current}</p>
-        <br></br>
+        <Counters key="counters" title="counters component"
+        score={score}
+        currentLevel={currentLevel}
+        mainCardElementCount={mainCardElementCount}
+        cardElementCount={cardElementCount}
+        matchingElementCount={matchingElementCount}
+        deactivatedCardCount={deactivatedCardCount}
+        guessStatus={guessStatus}
+        gameOver={gameOver}
+        />
 
         <Timer 
           changeTimeCounter={timeChangeCounter} 
-          timeChange={timeChange.current}
+          timeChange={timeChange}
           gameRestartedCounter={gameRestartedCounter} />
-        <p> guessStatus: {guessStatus.current.toString()}</p>
-        <p> gameOver: {gameOver.toString()}</p>
-
 
       </div>
     </div>
