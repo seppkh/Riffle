@@ -10,10 +10,10 @@ const gameStates = {
 // eraldi kaartide store
 // func võtab sisse leveli ja annab õiged kaardid
 
-const useStore = create(set => ({
+const useStoreGame = create(set => ({
   level: 1,
-  timeLeft: 30,
   score: 0,
+  timeLeft: 30,
   gameState: gameStates.notStarted,
   increaseLevel: () => set(state => ({ level: state.level + 1 })),
   reset: () => set({ 
@@ -61,5 +61,6 @@ const useStore = create(set => ({
     }
   })
 
-
 }))
+
+export default useStoreGame;

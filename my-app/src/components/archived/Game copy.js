@@ -1,10 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
-import createSets from '../utils/createElementSets';
-import shuffle from '../utils/shuffleSubCardOrder';
+import createSets from '../../utils/createElementSets';
+import shuffle from '../../utils/shuffleSubCardOrder';
 import './Game.css';
-import CardList from './SubcardList';
-import level_settings from '../assets/levelSettings';
-import UpdateScore from './Score';
+import level_settings from '../../assets/levelSettings';
 
 const Game = () => {
 
@@ -51,9 +49,6 @@ const Game = () => {
     objects: [card1.current, card2.current, card3.current]
   });
 
-  const ELEMENTS = [
-    '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'
-  ]
 
   const LEVEL_SETUP = useRef(level_settings);
 

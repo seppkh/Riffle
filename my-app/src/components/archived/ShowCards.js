@@ -1,5 +1,5 @@
-import createSets from '../utils/createElementSets';
-import shuffle from '../utils/shuffleSubCardOrder';
+import createSets from '../../utils/createElementSets';
+import shuffle from '../../utils/shuffleSubCardOrder';
 import MainCard from './MainCard';
 import SubCards from './SubCards';
 
