@@ -64,7 +64,7 @@ function getRandomInt(max) {
 }
 
 // create and save values for each card :
-function createSets(mainCardElementCount, subCardElementCount, maxMatching) {
+function createSets({ mainCardElementCount, subCardElementCount, maxMatching }) {
   var mainCard = getRandom(numbersArr, mainCardElementCount);
   var card1 = includeSomeThenGetRandom(numbersArr, subCardElementCount, mainCard, maxMatching);
   var card2 = includeSomeThenGetRandom(numbersArr, subCardElementCount, mainCard, maxMatching - getRandomInt(maxMatching));
