@@ -1,15 +1,18 @@
+import useStoreCards from "../store/cardStore";
 import SubCardWithStores from "./SubCardWithStores";
 
 const SubCardsWithStores = () => {
 
+  const {card1, card2, card3} = useStoreCards();
+
   return (
   <>
     <div>
-      <SubCardWithStores key="card1" title="card1" />
+      <SubCardWithStores card= {card1} />
 
-      <SubCardWithStores key="card2" title="card2" />
+      <SubCardWithStores card= {card2} />
 
-      <SubCardWithStores key="card3" title="card3" />
+      <SubCardWithStores card= {card3} />
     </div>
   </>
   )

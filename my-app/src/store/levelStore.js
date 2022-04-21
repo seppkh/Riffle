@@ -79,6 +79,7 @@ const levelSettings = {
     "cardElementCount": 6,
     "matchingElementCount": 3
   },
+
 };
 
 export default levelSettings;

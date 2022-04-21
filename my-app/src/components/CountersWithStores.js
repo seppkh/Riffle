@@ -8,11 +8,13 @@ const CountersWithStores = () => {
 
 
   return (
+  <>
     <div>
-      <p>level: {level}</p> <br></br>
-      <p>score: {score}</p> <br></br>
-      <p>timeLeft: {timeLeft}</p> <br></br>
+      <p>level: {level}</p>
+      <p>score: {score}</p>
+      <p>timeLeft: {timeLeft}</p>
     </div>
+  </>
   )
 }
 

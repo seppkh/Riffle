@@ -1,7 +1,7 @@
 import create from 'zustand';
-import levelSettings from '../assets/levelSettings';
 import useStoreGame from './gameStateStore';
 import createSets from '../utils/createElementSets';
+import levelSettings from './levelStore';
 
 // eraldi kaartide store
 // func võtab sisse leveli ja annab õiged kaardid
@@ -25,11 +25,13 @@ const useStoreCards = create(set => ({
     isMatch: false,
     isActive: true
   },
-  level: useStoreGame(state => state.level),
+  levelSettings: levelSettings,
   
-  assignCards: () => set(() => {
+  assignCards: () => set((state) => {
     const cardsContent = createSets(
-      levelSettings.level.mainCardElementCount, levelSettings.level.cardElementCount, levelSettings.level.matchingElementCount );
+      state.levelSettings.mainCardElementCount, 
+      state.levelSettings.cardElementCount, 
+      state.levelSettings.matchingElementCount );
       
     return {
       mainCard: cardsContent.mainCard,
@@ -40,7 +42,6 @@ const useStoreCards = create(set => ({
    }),
 
   deactivateCard: (clicked_card) => set(() => { 
-  
       useStoreGame.decreaseTime();
       return {
         clicked_card: {...clicked_card, isActive: false },
@@ -55,11 +56,11 @@ const useStoreCards = create(set => ({
     }
    }),
 
-   onCardClickHandler: (clicked_card) => set(() => {
+   onCardClickHandler: (clicked_card) => set(state => {
 
     // disable clicking on card if game not started or level not yet 1
-    if (useStoreGame.state.gameState !== "running") return console.log("Game is not running");
-    if (useStoreGame.state.level === 0) return console.log("No cards loaded yet - nothing to react to");
+    if (state.gameState !== "running") return console.log("Game is not running");
+    if (state.level === 0) return console.log("No cards loaded yet - nothing to react to");
 
     // if not active, return nothing
     if (clicked_card.isActive === false) return console.log("Invalid move – clicked card is already inactive");

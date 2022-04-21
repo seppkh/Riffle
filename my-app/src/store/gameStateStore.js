@@ -7,9 +7,6 @@ const gameStates = {
   ended: "ended",
 }
 
-// eraldi kaartide store
-// func võtab sisse leveli ja annab õiged kaardid
-
 const useStoreGame = create(set => ({
   level: 1,
   score: 0,

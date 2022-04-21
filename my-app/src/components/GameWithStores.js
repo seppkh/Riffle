@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import useStoreGame from '../store/gameStateStore';
 import ShowCardsWithStores from './ShowCardsWithStores';
 import CountersWithStores from './CountersWithStores';
@@ -10,9 +10,6 @@ const GameWithStores = () => {
   const reset = useStoreGame(state => state.reset);
   const togglePause = useStoreGame(state => state.togglePause);
 
-
-  const increaseLevel = useStoreGame(state => state.increaseLevel);
-  const level = useStoreGame(state => state.level);
   const gameState = useStoreGame(state => state.gameState);
 
   // if game is paused, cover the game
@@ -23,6 +20,11 @@ const GameWithStores = () => {
    if (gameState === "ended") {
 
   }
+
+  useEffect(() => {
+
+
+  }, [])
   
 
   const onCardClickHandler = (clicked_card) => {
@@ -63,7 +65,7 @@ const GameWithStores = () => {
   return (
   <>
     <div>
-      <button onClick={startGame}>Start game</button>
+      <button onClick={ () => { reset(); startGame(); } }>Start game</button>
       <button onClick={reset}>Reset</button>
       <button onClick={togglePause}>Pause</button>
     </div>
