@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
-import useStoreGame from '../store/gameStateStore';
 import ShowCardsWithStores from './ShowCardsWithStores';
 import CountersWithStores from './CountersWithStores';
+import useStoreSlices from '../store/rootSliceStore';
 
 
 const GameWithStores = () => {
 
-  const startGame = useStoreGame(state => state.startGame);
-  const reset = useStoreGame(state => state.reset);
-  const togglePause = useStoreGame(state => state.togglePause);
+  const startGame = useStoreSlices(state => state.startGame);
+  const reset = useStoreSlices(state => state.reset);
+  const togglePause = useStoreSlices(state => state.togglePause);
 
-  const gameState = useStoreGame(state => state.gameState);
+  const gameState = useStoreSlices(state => state.gameState);
 
   // if game is paused, cover the game
   if (gameState === "paused") {
@@ -50,17 +50,7 @@ const GameWithStores = () => {
       // decrease score by 1
       // decrease time by 6 sec
 
-  }
-
-  // change card color
-  function toggleActiveStyles(clicked_card) {
-    
-    if (clicked_card.isActive === false) {
-      return "box inactive"
-    } else {
-      return "box active"
-    }
-  }
+  } 
 
   return (
   <>
