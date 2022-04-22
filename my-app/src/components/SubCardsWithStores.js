@@ -1,9 +1,9 @@
-import useStoreCards from "../store/cardStore";
+import useStoreSlices from "../store/rootSliceStore";
 import SubCardWithStores from "./SubCardWithStores";
 
 const SubCardsWithStores = () => {
 
-  const {card1, card2, card3} = useStoreCards();
+  const {card1, card2, card3} = useStoreSlices();
 
   return (
   <>

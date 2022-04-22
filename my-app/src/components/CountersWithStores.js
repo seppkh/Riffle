@@ -1,10 +1,10 @@
-import useStoreGame from "../store/gameStateStore";
+import useStoreSlices from "../store/rootSliceStore";
 
 const CountersWithStores = () => {
 
-  const level = useStoreGame(state => state.level);
-  const score = useStoreGame(state => state.score);
-  const timeLeft = useStoreGame(state => state.timeLeft);
+  const level = useStoreSlices(state => state.level);
+  const score = useStoreSlices(state => state.score);
+  const timeLeft = useStoreSlices(state => state.timeLeft);
 
 
   return (

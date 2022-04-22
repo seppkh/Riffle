@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
-import useStoreGame from '../store/gameStateStore';
 import ShowCardsWithStores from './ShowCardsWithStores';
 import CountersWithStores from './CountersWithStores';
+import useStoreSlices from '../store/rootSliceStore';
 
 
 const GameWithStores = () => {
 
-  const startGame = useStoreGame(state => state.startGame);
-  const reset = useStoreGame(state => state.reset);
-  const togglePause = useStoreGame(state => state.togglePause);
+  const startGame = useStoreSlices(state => state.startGame);
+  const reset = useStoreSlices(state => state.reset);
+  const togglePause = useStoreSlices(state => state.togglePause);
 
-  const gameState = useStoreGame(state => state.gameState);
+  const gameState = useStoreSlices(state => state.gameState);
 
   // if game is paused, cover the game
   if (gameState === "paused") {

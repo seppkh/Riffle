@@ -1,8 +1,8 @@
-import useStoreCards from "../store/cardStore";
+import useStoreSlices from "../store/rootSliceStore";
 
 const MainCardWithStores = () => {
 
-  const mainCard = useStoreCards(state => state.mainCard);
+  const mainCard = useStoreSlices(state => state.mainCard);
 
   return (
   <>

@@ -1,14 +1,12 @@
-import useStoreCards from "../store/cardStore";
+import OnCardClickHandler from "../utils/cardClickFunc";
 
 const SubCardWithStores = ({ card }) => {
-
-  const onCardClickHandler = useStoreCards(state => state.onCardClickHandler);
 
   return (
   <>
     <div 
     className=''
-    onClick={ () => onCardClickHandler(card) }>
+    onClick={ () => OnCardClickHandler(card) }>
       <p>
         subCard elements:<br></br> {card.elements.join(", ")}
         {card.isMatch.toString()}

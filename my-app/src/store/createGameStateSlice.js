@@ -1,4 +1,3 @@
-import create from 'zustand';
 
 const gameStates = {
   notStarted: "notStarted",
@@ -7,7 +6,7 @@ const gameStates = {
   ended: "ended",
 }
 
-const useStoreGame = create(set => ({
+const createGameSlice = (set, get) => ({
   level: 1,
   score: 0,
   timeLeft: 30,
@@ -58,6 +57,6 @@ const useStoreGame = create(set => ({
     }
   })
 
-}))
+})
 
-export default useStoreGame;
+export default createGameSlice;
