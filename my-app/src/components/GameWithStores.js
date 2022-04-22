@@ -50,17 +50,7 @@ const GameWithStores = () => {
       // decrease score by 1
       // decrease time by 6 sec
 
-  }
-
-  // change card color
-  function toggleActiveStyles(clicked_card) {
-    
-    if (clicked_card.isActive === false) {
-      return "box inactive"
-    } else {
-      return "box active"
-    }
-  }
+  } 
 
   return (
   <>

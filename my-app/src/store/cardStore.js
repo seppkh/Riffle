@@ -1,12 +1,11 @@
-
+import create from 'zustand';
 import createSets from '../utils/createElementSets';
 import levelSettings from './levelSettings';
 
-// create rootSliceStore, kus kogud kokku kõik related funktsioonid
-// startGame running nupule vajutades, elemendid kuva
-// timer jooksma
+// eraldi kaartide store
+// func võtab sisse leveli ja annab õiged kaardid
 
-const createCardSlice = (set, get) => ({
+const useStoreCards = create(set => ({
   mainCard: {
     elements: []
   },
@@ -42,9 +41,9 @@ const createCardSlice = (set, get) => ({
    }),
 
   deactivateCard: (clicked_card) => set(() => { 
-    return {
-      clicked_card: {...clicked_card, isActive: false },
-    }
+      return {
+        clicked_card: {...clicked_card, isActive: false },
+      }
   }),
 
   activateCards: () => set(state => {
@@ -55,6 +54,6 @@ const createCardSlice = (set, get) => ({
     }
    }),
 
-})
+}))
 
-export default createCardSlice;
+export default useStoreCards;
