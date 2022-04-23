@@ -57,7 +57,7 @@ const GameWithStores = () => {
     <div>
       <button onClick={ () => { reset(); startGame(); } }>Start game</button>
       <button onClick={reset}>Reset</button>
-      <button onClick={togglePause}>Pause</button>
+      <button onClick={togglePause}>Pause/Unpause</button>
     </div>
 
     <div>

@@ -4,10 +4,12 @@ import GameWithStores from './components/GameWithStores';
 import React from 'react';
 
 function App() {
+  // <LandingScreen />
+
   return (
     <>
       <div className='App'>
-        <LandingScreen />
+        
         <header className='App-header'>
           <GameWithStores />
         </header>
