@@ -12,7 +12,7 @@ const levelSettings = {
   2: {
     "mainCardElementCount": 7,
     "cardElementCount": 2,
-    "matchingElementCount": 3
+    "matchingElementCount": 2
   },
   3: {
     "mainCardElementCount": 3,

@@ -8,7 +8,7 @@ const MainCardWithStores = () => {
   <>
     <div>
       <p id='mainCardContent'>
-        mainCard elements:<br></br> {mainCard.elements.join(", ")}
+        mainCard elements: {mainCard.elements.join(", ")}
       </p>
     </div>
   </>

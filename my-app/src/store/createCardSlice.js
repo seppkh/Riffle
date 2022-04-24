@@ -11,16 +11,19 @@ const createCardSlice = (set, get) => ({
     elements: []
   },
   card1: {
+    title: "card1",
     elements: [],
     isMatch: false,
     isActive: true
   },
   card2: {
+    title: "card2",
     elements: [],
     isMatch: false,
     isActive: true
   },
   card3: {
+    title: "card3",
     elements: [],
     isMatch: false,
     isActive: true
@@ -28,23 +31,38 @@ const createCardSlice = (set, get) => ({
   levelSettings: levelSettings,
   
   assignCards: () => set((state) => {
-    const cardsContent = createSets(
-      state.levelSettings.mainCardElementCount, 
-      state.levelSettings.cardElementCount, 
-      state.levelSettings.matchingElementCount );
+    const {mainCardElementCount, cardElementCount, matchingElementCount } = levelSettings[state.level];
+
+    const cardsContent = createSets( mainCardElementCount, cardElementCount, matchingElementCount);
       
     return {
       mainCard: cardsContent.mainCard,
-      card1: cardsContent.card1,
-      card2: cardsContent.card2,
-      card3: cardsContent.card3
+      card1: {title: "card1", ...cardsContent.card1},
+      card2: {title: "card2", ...cardsContent.card2,},
+      card3: {title: "card3", ...cardsContent.card3}
     }
    }),
 
-  deactivateCard: (clicked_card) => set(() => { 
-    return {
-      clicked_card: {...clicked_card, isActive: false },
+  deactivateCard: (clicked_card) => set((state) => {
+
+    const title = clicked_card.title;
+
+    if (title === "card1") {
+      return {
+        card1: {...state.card1, isActive: false },
+      }
     }
+    if (title === "card2") {
+      return {
+        card2: {...state.card2, isActive: false },
+      }
+    }
+    if (title === "card3") {
+      return {
+        card3: {...state.card3, isActive: false },
+      }
+    }
+   
   }),
 
   activateCards: () => set(state => {
@@ -52,6 +70,33 @@ const createCardSlice = (set, get) => ({
       card1: {...state.card1, isActive: true },
       card2: {...state.card2, isActive: true },
       card3: {...state.card3, isActive: true },
+    }
+   }),
+   
+   unAssignCards: () => set((state) => {
+    
+    return {
+      mainCard: {
+        elements: []
+      },
+      card1: {
+        title: "card1",
+        elements: [],
+        isMatch: false,
+        isActive: true
+      },
+      card2: {
+        title: "card2",
+        elements: [],
+        isMatch: false,
+        isActive: true
+      },
+      card3: {
+        title: "card3",
+        elements: [],
+        isMatch: false,
+        isActive: true
+      }
     }
    }),
 

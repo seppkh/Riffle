@@ -11,6 +11,25 @@ const GameWithStores = () => {
   const togglePause = useStoreSlices(state => state.togglePause);
 
   const gameState = useStoreSlices(state => state.gameState);
+  const assignCards = useStoreSlices(state => state.assignCards);
+  const unAssignCards = useStoreSlices(state => state.unAssignCards);
+
+
+  const tick = useStoreSlices(state => state.tick);
+
+  const MINUTE_MS = 1000;
+
+  useEffect(() => {
+    if (gameState !== "running") return;
+
+    const interval = setInterval(() => {
+      tick();
+    }, MINUTE_MS);
+
+    return () => clearInterval(interval);
+  
+  }, [gameState])
+  
 
   // if game is paused, cover the game
   if (gameState === "paused") {
@@ -21,11 +40,7 @@ const GameWithStores = () => {
 
   }
 
-  useEffect(() => {
 
-
-  }, [])
-  
 
   const onCardClickHandler = (clicked_card) => {
     // check if clicked card is active
@@ -55,9 +70,9 @@ const GameWithStores = () => {
   return (
   <>
     <div>
-      <button onClick={ () => { reset(); startGame(); } }>Start game</button>
-      <button onClick={reset}>Reset</button>
-      <button onClick={togglePause}>Pause</button>
+      <button onClick={ () => { reset(); startGame(); assignCards() } }>Start game</button>
+      <button onClick={ () => { reset(); unAssignCards(); } }>Reset</button>
+      <button onClick={togglePause}>Pause/Unpause</button>
     </div>
 
     <div>

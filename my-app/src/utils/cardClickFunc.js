@@ -1,49 +1,42 @@
-import useStoreSlices from "../store/rootSliceStore";
 
-function OnCardClickHandler(clicked_card) {
-  console.log("Hei:");
+const OnCardClickHandler = (clicked_card, useStoreSlices) => {
+
+  console.log("clicked_card", clicked_card);
 
   const {decreaseTime, 
     deactivateCard, 
     increaseScore, 
-    activateCards, 
+    activateCards,
+    assignCards,
     increaseLevel,
-    gameState, 
-    level } = useStoreSlices;
-
-  // const gameState =  useStoreSlices((state) => state.gameState);
-
-  gameState = "running";
-  level = 1;
-
-  console.log("Another:");
-
-  console.log("gameState:", gameState);
-  console.log("level:", level);
-  console.log("clicked_card:", clicked_card);
+    gameState } = useStoreSlices;
 
   // disable clicking on card if game not started or level not yet 1
-  if (gameState !== "running") return console.log("Game is not running");
-  if (level === 0) return console.log("No cards loaded yet - nothing to react to");
+  
+  if (gameState === 'notStarted') return console.log("Game is not started yet");
+  if (gameState === 'paused') return console.log("Game is paused");
+  if (gameState === 'ended') return console.log("Game is ended");
 
   // if not active, return nothing
-  if (clicked_card.isActive === false) return console.log("Invalid move – clicked card is already inactive");
+  if (clicked_card.isActive === false) return console.log("Invalid move - clicked card is not active");
 
   if (clicked_card.isActive === true && clicked_card.isMatch === false) {
 
-    console.log("Wrong guess – card is now deactivated");
-    return (
-      decreaseTime,
-      deactivateCard
-    );
+    console.log("Wrong guess - deactivating card");
+    decreaseTime();
+    deactivateCard(clicked_card);
+
+    return;
   }
 
   if (clicked_card.isActive === true && clicked_card.isMatch === true) {
 
     return (
-      increaseScore,
-      activateCards,
-      increaseLevel
+      console.log("Correct card!"),
+      increaseScore(),
+      activateCards(),
+      increaseLevel(),
+      assignCards()
     );
 
   }
