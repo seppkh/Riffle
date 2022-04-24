@@ -12,7 +12,7 @@ const SubCardWithStores = ({ card }) => {
     className=''
     onClick={ () => OnCardClickHandler(card, useStoreSlicesRead) }>
       <p>
-        subCard elements:<br></br> {card.elements.join(", ")}
+        subCard elements: {card.elements.join(", ")}<br></br>
         {card.isMatch.toString()}
         <br></br><br></br>
 

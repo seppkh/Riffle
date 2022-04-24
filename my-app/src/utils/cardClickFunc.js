@@ -1,10 +1,13 @@
 
 const OnCardClickHandler = (clicked_card, useStoreSlices) => {
 
+  console.log("clicked_card", clicked_card);
+
   const {decreaseTime, 
     deactivateCard, 
     increaseScore, 
-    activateCards, 
+    activateCards,
+    assignCards,
     increaseLevel,
     gameState } = useStoreSlices;
 
@@ -32,7 +35,8 @@ const OnCardClickHandler = (clicked_card, useStoreSlices) => {
       console.log("Correct card!"),
       increaseScore(),
       activateCards(),
-      increaseLevel()
+      increaseLevel(),
+      assignCards()
     );
 
   }

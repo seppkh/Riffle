@@ -25,7 +25,7 @@ const createGameSlice = (set, get) => ({
         gameState: gameStates.ended
       }
     }
-    return { timeleft: state.timeLeft -1 }
+    return { timeLeft: state.timeLeft -1 }
   }),
   increaseScore: () => set(state => ({ 
     score: state.score + 1,
@@ -45,6 +45,11 @@ const createGameSlice = (set, get) => ({
   }),
   togglePause: () => set(state => { 
     if (state.gameState === gameStates.paused) {
+      if (state.timeLeft === 0) {
+        return {
+          gameState: gameStates.ended
+        }
+      }
       return {
         gameState: gameStates.running
       }
