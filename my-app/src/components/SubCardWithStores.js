@@ -12,8 +12,8 @@ const SubCardWithStores = ({ card }) => {
     className=''
     onClick={ () => OnCardClickHandler(card, useStoreSlicesRead) }>
       <p>
-        subCard elements: {card.elements.join(", ")}<br></br>
-        {card.isMatch.toString()}
+        {card.elements.join(", ")}<br></br>
+        { card.isMatch.toString() }
         <br></br><br></br>
 
       </p>

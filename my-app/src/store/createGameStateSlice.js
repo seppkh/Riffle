@@ -60,6 +60,16 @@ const createGameSlice = (set, get) => ({
     return {
       gameState: gameStates.running
     }
+  }),
+  toggleMute: () => set(() => {
+    return {
+      
+    }
+  }),
+  exit: () => set(() => {
+    return {
+      
+    }
   })
 
 })
