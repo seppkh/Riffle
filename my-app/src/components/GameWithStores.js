@@ -1,22 +1,16 @@
 import React, { useEffect } from 'react';
-import ShowCardsWithStores from './ShowCardsWithStores';
-import CountersWithStores from './CountersWithStores';
 import useStoreSlices from '../store/rootSliceStore';
+import ShowContentWithStores from './ShowContentWithStores';
+import './StickyButtons.css';
 
 
 const GameWithStores = () => {
 
-  const startGame = useStoreSlices(state => state.startGame);
-  const reset = useStoreSlices(state => state.reset);
-  const togglePause = useStoreSlices(state => state.togglePause);
-
+  const toggleMute = useStoreSlices(state => state.toggleMute);
+  const exit = useStoreSlices(state => state.exit);
   const gameState = useStoreSlices(state => state.gameState);
-  const assignCards = useStoreSlices(state => state.assignCards);
-  const unAssignCards = useStoreSlices(state => state.unAssignCards);
-
 
   const tick = useStoreSlices(state => state.tick);
-
   const MINUTE_MS = 1000;
 
   useEffect(() => {
@@ -31,57 +25,18 @@ const GameWithStores = () => {
   }, [gameState])
   
 
-  // if game is paused, cover the game
-  if (gameState === "paused") {
-
-  }
-   // if game is ended, cover the game and show restart button
-   if (gameState === "ended") {
-
-  }
-
-
-
-  const onCardClickHandler = (clicked_card) => {
-    // check if clicked card is active
-    // check if clicked card is matching
-
-    // if not active, return nothing
-
-    // if active and matching
-      // set guessStatus to true
-      // increase score by 1
-      // increase time by 6 sec
-    // read deactivated card count
-      // if deactivated card count bigger than 0
-        // set other cards to active
-        // set deactivatedCardCount to 0
-     // change level (level value)
-
-    // if active and not matching
-      // set guessStatus to false
-      // set clicked_card Active status to false
-      // increase deactivatedCardCount by 1
-      // decrease score by 1
-      // decrease time by 6 sec
-
-  } 
 
   return (
   <>
-    <div>
-      <button onClick={ () => { reset(); startGame(); assignCards() } }>Start game</button>
-      <button onClick={ () => { reset(); unAssignCards(); } }>Reset</button>
-      <button onClick={togglePause}>Pause/Unpause</button>
+    <div className='stickybuttons-all'>
+      <button onClick={exit}>Exit</button>
+      <button onClick={toggleMute}>Mute/Unmute</button>
     </div>
 
     <div>
-      <CountersWithStores />
+      <ShowContentWithStores />
     </div>
 
-    <div id='cardsArea' >
-      <ShowCardsWithStores key="show-cards" title="showcards component" />
-    </div>  
   </>
 
   )
