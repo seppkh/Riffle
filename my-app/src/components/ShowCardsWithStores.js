@@ -6,9 +6,9 @@ const ShowCardsWithStores = () => {
   return (
   <>
     <div>
-      <MainCardWithStores key="mainCard" title="mainCard component" />
+      <MainCardWithStores />
 
-      <SubCardsWithStores key="subCards" title="subCards component" />
+      <SubCardsWithStores />
     </div>
   </>
   )

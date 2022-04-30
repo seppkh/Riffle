@@ -19,7 +19,7 @@ const ShowContentWithStores = () => {
     return (
       <>
         <p>Setting up your gameplay...</p>
-        <h2>Click the button to begin playing</h2><br/>
+        <h2>Click the button to start your game</h2><br/>
         <button onClick={ () => { reset(); startGame(); assignCards() } }>Start game</button>
       </>
     )
@@ -45,7 +45,7 @@ const ShowContentWithStores = () => {
 
     return (
       <>
-        <h2>Game ended – you ran out of time!</h2>
+        <h2>Game over – you ran out of time!</h2>
         <p>Your final score is {score} points</p>
         <h5>{endingMessage}</h5><br/>
 
@@ -57,18 +57,15 @@ const ShowContentWithStores = () => {
 
   if (gameState === 'running') {
     return (
-      <>       
-        <div>
-          <CountersWithStores />
-        </div>
+      <>
+      <div>
+        <CountersWithStores />
 
-        <div id='cardsArea' >
-          <ShowCardsWithStores key="show-cards" title="showcards component" />
-        </div>
+        <ShowCardsWithStores />
         <br/>
 
         <button onClick={togglePause}>Pause</button>
-
+      </div>
       </>
     )
   }
