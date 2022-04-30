@@ -38,6 +38,9 @@ const ShowContentWithStores = () => {
 
   if (gameState === 'ended') {
     let endingMessage = '';
+    let suffix = 'points';
+    if (score === 1) suffix  = 'point';
+
     if (score <= 5 ) endingMessage = "A little disappointing if I'm honest...";
     if (score > 5 && score <= 10 ) endingMessage = 'Nicely done!';
     if (score > 10 && score <= 20 ) endingMessage = 'You aced it!';
@@ -46,7 +49,7 @@ const ShowContentWithStores = () => {
     return (
       <>
         <h2>Game over – you ran out of time!</h2>
-        <p>Your final score is {score} points</p>
+        <p>Your final score is {score} {suffix}</p>
         <h5>{endingMessage}</h5><br/>
 
         <p>Surely you can beat your own score...</p>
