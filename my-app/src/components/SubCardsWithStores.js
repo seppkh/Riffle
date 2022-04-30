@@ -1,5 +1,7 @@
 import useStoreSlices from "../store/rootSliceStore";
 import SubCardWithStores from "./SubCardWithStores";
+import './Subcards.css';
+
 
 const SubCardsWithStores = () => {
 
@@ -7,7 +9,7 @@ const SubCardsWithStores = () => {
 
   return (
   <>
-    <div>
+    <div className='subcards-all'>
       <SubCardWithStores card= {card1} />
 
       <SubCardWithStores card= {card2} />

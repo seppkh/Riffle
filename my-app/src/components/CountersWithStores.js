@@ -1,4 +1,5 @@
 import useStoreSlices from "../store/rootSliceStore";
+import './Counters.css';
 
 const CountersWithStores = () => {
 
@@ -9,10 +10,10 @@ const CountersWithStores = () => {
 
   return (
   <>
-    <div className="counters">
+    <div className='counters-all'>
       <p>level: {level}</p>
-      <p>score: {score}</p>
       <p>time: {timeLeft}</p>
+      <p>score: {score}</p>
     </div>
   </>
   )

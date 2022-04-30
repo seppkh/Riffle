@@ -1,5 +1,6 @@
 import OnCardClickHandler from "../utils/cardClickFunc";
 import useStoreSlices from "../store/rootSliceStore";
+import './Subcard.css';
 
 
 const SubCardWithStores = ({ card }) => {
@@ -11,12 +12,8 @@ const SubCardWithStores = ({ card }) => {
     <div 
     className=''
     onClick={ () => OnCardClickHandler(card, useStoreSlicesRead) }>
-      <p>
-        {card.elements.join(", ")}<br></br>
-        { card.isMatch.toString() }
-        <br></br><br></br>
-
-      </p>
+      <p className='subcard-elements'>{card.elements.join(", ")}</p>
+      <p className='subcard-match'>{ card.isMatch.toString() } </p>
     </div>
   </>
   )
