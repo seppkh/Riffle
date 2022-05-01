@@ -1,7 +1,7 @@
 # Riffle
-Riffle game with React
+Riffle game with Node and React.js
 
-## Common setup
+## Setup
 
 Clone the repo and install the dependencies.
 ```
