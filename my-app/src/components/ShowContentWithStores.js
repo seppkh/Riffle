@@ -1,7 +1,9 @@
 import useStoreSlices from "../store/rootSliceStore";
 import CountersWithStores from "./CountersWithStores";
 import ShowCardsWithStores from "./ShowCardsWithStores";
-import logo from '../assets/flashcardMascot.png';
+import logoFlashcard from '../assets/flashcardMascot.png';
+import logoEnded from '../assets/endedMascot.png';
+
 
 const ShowContentWithStores = () => {
 
@@ -48,11 +50,12 @@ const ShowContentWithStores = () => {
 
     if (score <= 5 ) endingMessage = "A little disappointing if I'm honest...";
     if (score > 5 && score <= 10 ) endingMessage = 'Nicely done!';
-    if (score > 10 && score <= 20 ) endingMessage = 'You aced it!';
+    if (score > 10 && score <= 20 ) endingMessage = 'You rocked it!';
     if (score > 20) endingMessage = "Wow! You're a natural pro at this game!";
 
     return (
       <>
+       <img src={logoEnded} alt='endedImg' height="150px"/>
         <h2>Game over – you ran out of time!</h2>
         <p>Your final score is {score} {suffix}</p>
         <h5>{endingMessage}</h5><br/>
@@ -69,7 +72,7 @@ const ShowContentWithStores = () => {
 
     return (
       <>
-      <img src={logo} alt='flashcardImg' width="150px"/>
+      <img src={logoFlashcard} alt='flashcardImg' height="150px"/>
       <h2>{flashcardText}</h2>
       <button onClick={ () => { toggleFlashcard(); } }>Continue</button>
 
