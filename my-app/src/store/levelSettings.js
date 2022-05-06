@@ -7,77 +7,104 @@ const levelSettings = {
   1: {
     "mainCardElementCount": 2,
     "cardElementCount": 1,
-    "matchingElementCount": 1
+    "matchingElementCount": 1,
+    "showFlashcard": false,
   },
   2: {
     "mainCardElementCount": 7,
     "cardElementCount": 2,
-    "matchingElementCount": 2
+    "matchingElementCount": 2,
+    "showFlashcard": false,
   },
   3: {
     "mainCardElementCount": 3,
     "cardElementCount": 2,
-    "matchingElementCount": 1
+    "matchingElementCount": 1,
+    "showFlashcard": false,
   },
   4: {
     "mainCardElementCount": 8,
     "cardElementCount": 4,
-    "matchingElementCount": 2
+    "matchingElementCount": 2,
+    "showFlashcard": false,
   },
   5: {
     "mainCardElementCount": 4,
     "cardElementCount": 4,
-    "matchingElementCount": 2
+    "matchingElementCount": 2,
+    "showFlashcard": false,
   },
   6: {
     "mainCardElementCount": 6,
     "cardElementCount": 4,
-    "matchingElementCount": 2
+    "matchingElementCount": 2,
+    "showFlashcard": true,
+    "text": "In next five levels each correct card will have 3 matching symbols!",
+    "img": './flashcardMascot.png'
   },
   7: {
     "mainCardElementCount": 6,
     "cardElementCount": 6,
-    "matchingElementCount": 2
+    "matchingElementCount": 2,
+    "showFlashcard": false,
   },
   8: {
     "mainCardElementCount": 7,
     "cardElementCount": 6,
-    "matchingElementCount": 3
+    "matchingElementCount": 3,
+    "showFlashcard": false,
   },
   9: {
     "mainCardElementCount": 7,
     "cardElementCount": 7,
-    "matchingElementCount": 3
+    "matchingElementCount": 3,
+    "showFlashcard": false,
   },
   10: {
     "mainCardElementCount": 8,
     "cardElementCount": 5,
-    "matchingElementCount": 2
+    "matchingElementCount": 2,
+    "showFlashcard": false,
   },
   11: {
     "mainCardElementCount": 8,
     "cardElementCount": 5,
-    "matchingElementCount": 2
+    "matchingElementCount": 2,
+    "showFlashcard": true,
+    "text": "Let's make it a bit more difficult and make colors more similar!",
+    "img": "./assets/flashcardMascot.png"
   },
   12: {
     "mainCardElementCount": 8,
     "cardElementCount": 5,
-    "matchingElementCount": 3
+    "matchingElementCount": 3,
+    "showFlashcard": false,
   },
   13: {
     "mainCardElementCount": 8,
     "cardElementCount": 6,
-    "matchingElementCount": 3
+    "matchingElementCount": 3,
+    "showFlashcard": false,
   },
   14: {
     "mainCardElementCount": 8,
     "cardElementCount": 6,
-    "matchingElementCount": 3
+    "matchingElementCount": 3,
+    "showFlashcard": false,
   },
   15: {
     "mainCardElementCount": 8,
     "cardElementCount": 6,
-    "matchingElementCount": 3
+    "matchingElementCount": 3,
+    "showFlashcard": false,
+  },
+  16: {
+    "mainCardElementCount": 8,
+    "cardElementCount": 6,
+    "matchingElementCount": 3,
+    "showFlashcard": true,
+    "text": "From here on everthing's 1000x more difficult!!",
+    "img": "./assets/flashcardMascot.png"
   },
 
 };
