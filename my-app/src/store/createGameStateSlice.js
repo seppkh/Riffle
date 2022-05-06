@@ -4,12 +4,14 @@ const gameStates = {
   running: "running",
   paused: "paused",
   ended: "ended",
+  flashcard: "flashcard"
 }
 
 const createGameSlice = (set, get) => ({
   level: 1,
   score: 0,
   timeLeft: 30,
+  timeLeftBonus: 3,
   gameState: gameStates.notStarted,
   increaseLevel: () => set(state => ({ level: state.level + 1 })),
   reset: () => set({ 
@@ -70,7 +72,28 @@ const createGameSlice = (set, get) => ({
     return {
       
     }
-  })
+  }),
+  toggleFlashcard: () => set(state => { 
+    if (state.gameState === gameStates.flashcard) {
+      return {
+        timeLeft: 30,
+        gameState: gameStates.running
+      }
+    }
+    return { gameState: gameStates.flashcard }
+  }),
+  tickBonus: () => set(state => {
+    if (state.timeLeft <= 0) return;
+    if (state.timeLeftBonus <= 0.1) return { timeLeftBonus: 0};
+    return { timeLeftBonus: (state.timeLeftBonus -0.0250).toFixed(2) }
+  }),
+  resetTimeLeftBonus: () => set(state => {
+    return { timeLeftBonus: 3 }
+  }),
+  increaseScoreBonus: () => set(state => ({ 
+    score: state.score + 3,
+    timeLeft: state.timeLeft + 5 
+  })),
 
 })
 

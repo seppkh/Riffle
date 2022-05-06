@@ -1,7 +1,7 @@
 import useStoreSlices from "../store/rootSliceStore";
 import CountersWithStores from "./CountersWithStores";
 import ShowCardsWithStores from "./ShowCardsWithStores";
-
+import logo from '../assets/flashcardMascot.png';
 
 const ShowContentWithStores = () => {
 
@@ -14,6 +14,10 @@ const ShowContentWithStores = () => {
 
   const assignCards = useStoreSlices(state => state.assignCards);
   const unAssignCards = useStoreSlices(state => state.unAssignCards);
+
+  const level = useStoreSlices(state => state.level);
+  const levelSettings = useStoreSlices(state => state.levelSettings);
+  const toggleFlashcard = useStoreSlices(state => state.toggleFlashcard);
 
   if (gameState === 'notStarted') {
     return (
@@ -39,6 +43,7 @@ const ShowContentWithStores = () => {
   if (gameState === 'ended') {
     let endingMessage = '';
     let suffix = 'points';
+
     if (score === 1) suffix  = 'point';
 
     if (score <= 5 ) endingMessage = "A little disappointing if I'm honest...";
@@ -54,6 +59,20 @@ const ShowContentWithStores = () => {
 
         <p>Surely you can beat your own score...</p>
         <button onClick={ () => { reset(); unAssignCards(); } }>Play again</button>
+      </>
+    )
+  }
+
+  if (gameState === 'flashcard') {
+
+    let flashcardText = levelSettings[level].text;
+
+    return (
+      <>
+      <img src={logo} alt='flashcardImg' width="150px"/>
+      <h2>{flashcardText}</h2>
+      <button onClick={ () => { toggleFlashcard(); } }>Continue</button>
+
       </>
     )
   }
