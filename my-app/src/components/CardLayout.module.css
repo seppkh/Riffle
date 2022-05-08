@@ -1,0 +1,38 @@
+.CardsWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.MainCard {
+  padding: 200px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.BottomCards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  background-color: green;
+  column-gap: 10px;
+  row-gap: 1em;
+}
+
+.LeftCard {
+  padding: 100px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.CenterCard {
+  padding: 100px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.RightCard {
+  padding: 100px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}

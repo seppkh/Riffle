@@ -1,9 +1,10 @@
-import styles from "./Logo.module.css";
+import styles from './Logo.module.css';
+import logo from '../assets/logo.png';
 
 const Logo = () => {
   return (
     <div className={styles.Container}>
-      <h1 className={styles.Logo}>Riffle</h1>
+      <img className={styles.Logo} src={logo} alt='Logo' />
     </div>
   );
 };
