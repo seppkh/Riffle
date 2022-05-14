@@ -3,6 +3,9 @@ import useStoreSlices from '../store/rootSliceStore';
 import ShowContentWithStores from './ShowContentWithStores';
 import './StickyButtons.css';
 
+import useSound from 'use-sound';
+import lastSecondsBeep from '../assets/sounds/lastSecondsBeep.mp3';
+
 
 const GameWithStores = () => {
 
@@ -19,21 +22,25 @@ const GameWithStores = () => {
   const tickBonus = useStoreSlices(state => state.tickBonus);
   const MINUTE_MS_BONUS = 25;
 
+  const timeLeft = useStoreSlices(state => state.timeLeft);
+  const [playTimerEnding] = useSound(lastSecondsBeep);
+
   useEffect(() => {
     if (gameState !== "running") return;
 
     const timeInterval = setInterval(() => {
       tick();
     }, MINUTE_MS);
-
     const bonusTimeInterval = setInterval(() => {
       tickBonus();
     }, MINUTE_MS_BONUS);
 
+    if (timeLeft <= 5) playTimerEnding();
+
     return () => { clearInterval(timeInterval);
       clearInterval(bonusTimeInterval); }
   
-  }, [gameState])
+  }, [gameState, timeLeft])
 
 
   useEffect(() => {

@@ -1,7 +1,13 @@
 import useStoreSlices from "../store/rootSliceStore";
 import CountersWithStores from "./CountersWithStores";
 import ShowCardsWithStores from "./ShowCardsWithStores";
-import logo from '../assets/flashcardMascot.png';
+import logoFlashcard from '../assets/flashcardMascot.png';
+import logoEnded from '../assets/endedMascot.png';
+
+import useSound from 'use-sound';
+import gameOver from '../assets/sounds/gameOver.mp3';
+import flashCard from '../assets/sounds/flashCard.mp3';
+
 
 const ShowContentWithStores = () => {
 
@@ -18,6 +24,10 @@ const ShowContentWithStores = () => {
   const level = useStoreSlices(state => state.level);
   const levelSettings = useStoreSlices(state => state.levelSettings);
   const toggleFlashcard = useStoreSlices(state => state.toggleFlashcard);
+
+  const [playGameOver] = useSound(gameOver);
+  const [playFlashcard] = useSound(flashCard);
+
 
   if (gameState === 'notStarted') {
     return (
@@ -41,6 +51,8 @@ const ShowContentWithStores = () => {
   }
 
   if (gameState === 'ended') {
+    playGameOver();
+
     let endingMessage = '';
     let suffix = 'points';
 
@@ -48,11 +60,12 @@ const ShowContentWithStores = () => {
 
     if (score <= 5 ) endingMessage = "A little disappointing if I'm honest...";
     if (score > 5 && score <= 10 ) endingMessage = 'Nicely done!';
-    if (score > 10 && score <= 20 ) endingMessage = 'You aced it!';
+    if (score > 10 && score <= 20 ) endingMessage = 'You rocked it!';
     if (score > 20) endingMessage = "Wow! You're a natural pro at this game!";
 
     return (
       <>
+       <img src={logoEnded} alt='endedImg' height="150px"/>
         <h2>Game over – you ran out of time!</h2>
         <p>Your final score is {score} {suffix}</p>
         <h5>{endingMessage}</h5><br/>
@@ -64,12 +77,13 @@ const ShowContentWithStores = () => {
   }
 
   if (gameState === 'flashcard') {
+    playFlashcard();
 
     let flashcardText = levelSettings[level].text;
 
     return (
       <>
-      <img src={logo} alt='flashcardImg' width="150px"/>
+      <img src={logoFlashcard} alt='flashcardImg' height="150px"/>
       <h2>{flashcardText}</h2>
       <button onClick={ () => { toggleFlashcard(); } }>Continue</button>
 
