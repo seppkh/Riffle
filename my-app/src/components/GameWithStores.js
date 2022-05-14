@@ -5,6 +5,7 @@ import './StickyButtons.css';
 
 import useSound from 'use-sound';
 import lastSecondsBeep from '../assets/sounds/lastSecondsBeep.mp3';
+import gameBackground from '../assets/sounds/gameBackground.mp3';
 
 
 const GameWithStores = () => {
@@ -24,6 +25,13 @@ const GameWithStores = () => {
 
   const timeLeft = useStoreSlices(state => state.timeLeft);
   const [playTimerEnding] = useSound(lastSecondsBeep);
+  const [playBackground, { stop }] = useSound(gameBackground, {interrupt:false});
+
+  useEffect(() => {
+    if (gameState === "running") { stop(); playBackground(); };
+    if (gameState !== "running" && gameState !== "flashcard") stop();
+
+  }, [gameState])
 
   useEffect(() => {
     if (gameState !== "running") return;

@@ -16,8 +16,9 @@ const createGameSlice = (set, get) => ({
   increaseLevel: () => set(state => ({ level: state.level + 1 })),
   reset: () => set({ 
     level: 1, 
-    timeLeft: 30, 
     score: 0,
+    timeLeft: 30, 
+    timeLeftBonus: 3,
     gameState: gameStates.notStarted }),
   tick: () => set(state => {
     if (state.timeLeft === 0) return;

@@ -8,7 +8,6 @@ import useSound from 'use-sound';
 import gameOver from '../assets/sounds/gameOver.mp3';
 import flashCard from '../assets/sounds/flashCard.mp3';
 
-
 const ShowContentWithStores = () => {
 
   const gameState = useStoreSlices(state => state.gameState);
@@ -27,7 +26,6 @@ const ShowContentWithStores = () => {
 
   const [playGameOver] = useSound(gameOver);
   const [playFlashcard] = useSound(flashCard);
-
 
   if (gameState === 'notStarted') {
     return (
