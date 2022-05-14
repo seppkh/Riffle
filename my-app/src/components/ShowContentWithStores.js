@@ -4,6 +4,10 @@ import ShowCardsWithStores from "./ShowCardsWithStores";
 import logoFlashcard from '../assets/flashcardMascot.png';
 import logoEnded from '../assets/endedMascot.png';
 
+import useSound from 'use-sound';
+import gameOver from '../assets/sounds/gameOver.mp3';
+import flashCard from '../assets/sounds/flashCard.mp3';
+
 
 const ShowContentWithStores = () => {
 
@@ -20,6 +24,10 @@ const ShowContentWithStores = () => {
   const level = useStoreSlices(state => state.level);
   const levelSettings = useStoreSlices(state => state.levelSettings);
   const toggleFlashcard = useStoreSlices(state => state.toggleFlashcard);
+
+  const [playGameOver] = useSound(gameOver);
+  const [playFlashcard] = useSound(flashCard);
+
 
   if (gameState === 'notStarted') {
     return (
@@ -43,6 +51,8 @@ const ShowContentWithStores = () => {
   }
 
   if (gameState === 'ended') {
+    playGameOver();
+
     let endingMessage = '';
     let suffix = 'points';
 
@@ -67,6 +77,7 @@ const ShowContentWithStores = () => {
   }
 
   if (gameState === 'flashcard') {
+    playFlashcard();
 
     let flashcardText = levelSettings[level].text;
 
