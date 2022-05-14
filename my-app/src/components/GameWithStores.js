@@ -10,7 +10,7 @@ import gameBackground from '../assets/sounds/gameBackground.mp3';
 
 const GameWithStores = () => {
 
-  const toggleMute = useStoreSlices(state => state.toggleMute);
+  const toggleSound = useStoreSlices(state => state.toggleSound);
   const exit = useStoreSlices(state => state.exit);
   const gameState = useStoreSlices(state => state.gameState);
 
@@ -24,14 +24,16 @@ const GameWithStores = () => {
   const MINUTE_MS_BONUS = 25;
 
   const timeLeft = useStoreSlices(state => state.timeLeft);
-  const [playTimerEnding] = useSound(lastSecondsBeep);
-  const [playBackground, { stop }] = useSound(gameBackground, {interrupt:false});
+
+  const soundState = useStoreSlices(state => state.soundState);
+  const [playTimerEnding] = useSound(lastSecondsBeep, {soundEnabled: soundState});
+  const [playBackground, { stop }] = useSound(gameBackground, {interrupt:false, soundEnabled: soundState});
 
   useEffect(() => {
     if (gameState === "running") { stop(); playBackground(); };
     if (gameState !== "running" && gameState !== "flashcard") stop();
 
-  }, [gameState])
+  }, [gameState, soundState])
 
   useEffect(() => {
     if (gameState !== "running") return;
@@ -64,7 +66,7 @@ const GameWithStores = () => {
   <>
     <div className='stickybuttons-all'>
       <button onClick={exit}>Exit</button>
-      <button onClick={toggleMute}>Mute/Unmute</button>
+      <button onClick={toggleSound}>Mute/Unmute</button>
     </div>
 
     <div>

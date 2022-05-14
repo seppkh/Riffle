@@ -24,8 +24,10 @@ const ShowContentWithStores = () => {
   const levelSettings = useStoreSlices(state => state.levelSettings);
   const toggleFlashcard = useStoreSlices(state => state.toggleFlashcard);
 
-  const [playGameOver] = useSound(gameOver);
-  const [playFlashcard] = useSound(flashCard);
+
+  const soundState = useStoreSlices(state => state.soundState);
+  const [playGameOver] = useSound(gameOver, {soundEnabled: soundState});
+  const [playFlashcard] = useSound(flashCard, {soundEnabled: soundState});
 
   if (gameState === 'notStarted') {
     return (

@@ -11,10 +11,11 @@ import bonusPoint from '../assets/sounds/bonusPoint.mp3';
 const SubCardWithStores = ({ card }) => {
 
   const useStoreSlicesRead  = useStoreSlices();
+  const soundState = useStoreSlices(state => state.soundState);
 
-  const [playRight] = useSound(guessRight);
-  const [playWrong] = useSound(guessWrong);
-  const [playBonus] = useSound(bonusPoint);
+  const [playRight] = useSound(guessRight, {soundEnabled: soundState});
+  const [playWrong] = useSound(guessWrong, {soundEnabled: soundState});
+  const [playBonus] = useSound(bonusPoint, {soundEnabled: soundState});
 
   return (
   <>
