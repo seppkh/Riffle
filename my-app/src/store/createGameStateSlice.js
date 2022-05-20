@@ -7,17 +7,24 @@ const gameStates = {
   flashcard: "flashcard"
 }
 
+const soundStates = {
+  notMute: true,
+  mute: false,
+}
+
 const createGameSlice = (set, get) => ({
   level: 1,
   score: 0,
   timeLeft: 30,
   timeLeftBonus: 3,
   gameState: gameStates.notStarted,
+  soundState: soundStates.notMute,
   increaseLevel: () => set(state => ({ level: state.level + 1 })),
   reset: () => set({ 
     level: 1, 
-    timeLeft: 30, 
     score: 0,
+    timeLeft: 30, 
+    timeLeftBonus: 3,
     gameState: gameStates.notStarted }),
   tick: () => set(state => {
     if (state.timeLeft === 0) return;
@@ -63,9 +70,14 @@ const createGameSlice = (set, get) => ({
       gameState: gameStates.running
     }
   }),
-  toggleMute: () => set(() => {
-    return {
-      
+  toggleSound: () => set(state => {
+    if (state.soundState === soundStates.notMute) {
+      return {
+        soundState: soundStates.mute
+      }
+    }
+    return { 
+      soundState: soundStates.notMute
     }
   }),
   exit: () => set(() => {
