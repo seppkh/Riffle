@@ -13,6 +13,7 @@ const SubCardWithStores = ({ card }) => {
   const useStoreSlicesRead  = useStoreSlices();
   const soundState = useStoreSlices(state => state.soundState);
 
+  
   const [playRight] = useSound(guessRight, {soundEnabled: soundState});
   const [playWrong] = useSound(guessWrong, {soundEnabled: soundState});
   const [playBonus] = useSound(bonusPoint, {soundEnabled: soundState});
