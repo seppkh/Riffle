@@ -1,15 +1,15 @@
 import styles from './Card.module.css';
 import { useMemo } from 'react';
 import CardElement from './CardElement';
+import clsx from 'clsx';
 
 const getRandomIndexOfArray = (input) => {
   const randomIndex = Math.floor(Math.random() * input.length);
   return randomIndex;
 };
 
-const Card = ({ elements }) => {
+const Card = ({ elements, isMain }) => {
   const elementLocations = useMemo(() => {
-    console.log(elements);
     let locations = 'abcdefghijkl'.split('');
     const output = new Map();
     elements.forEach((element) => {
@@ -18,7 +18,6 @@ const Card = ({ elements }) => {
       // eemaldada locationitest selle indexiga elemendi
       const [location] = locations.splice(locationIndex, 1);
       // outputi lisada selle elemendi kohale locationi
-      console.log(element, location);
       output.set(element, location);
     });
 
@@ -31,8 +30,11 @@ const Card = ({ elements }) => {
       <CardElement key={element} element={element} location={elementLocation} />
     );
   };
-  console.log(elementLocations);
-  return <div className={styles.Card}>{elements.map(renderElement)}</div>;
+  return (
+    <div className={clsx(styles.Card, { [styles.isLarge]: isMain })}>
+      {elements.map(renderElement)}
+    </div>
+  );
 };
 
 export default Card;

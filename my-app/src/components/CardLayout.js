@@ -3,7 +3,7 @@ import styles from './CardLayout.module.css';
 import Card from './Card';
 
 const CardLayout = () => {
-  const Elements = [6, 9, 3, 1];
+  const Elements = [19, 22, 47, 34];
 
   const [filteredList, setFilteredList] = useState(Elements);
 
@@ -13,7 +13,7 @@ const CardLayout = () => {
         <>
           <div className={styles.MainCardWrapper}>
             <div className={styles.MainCard}>
-              <Card elements={Elements} />
+              <Card isMain elements={Elements} />
             </div>
           </div>
 
