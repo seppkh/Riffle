@@ -1,26 +1,20 @@
-import React, { useState, useCallback } from "react";
-import MenuItem from "./MenuItem";
-import styles from "./Menu.module.css";
+import React, { useState, useCallback } from 'react';
+import MenuItem from './MenuItem';
+import styles from './Menu.module.css';
 
 const menuOptions = [
   {
-    label: "Singleplayer"
+    label: 'Play game',
   },
   {
-    label: "Multiplayer"
+    label: 'Instructions',
   },
   {
-    label: "Instructions"
+    label: 'Options',
   },
   {
-    label: "Options"
+    label: 'Credits',
   },
-  {
-    label: "Credits"
-  },
-  {
-    label: "Exit"
-  }
 ];
 
 const Menu = ({ onMenuItemSelect = () => {} }) => {

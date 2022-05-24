@@ -1,0 +1,15 @@
+.Card {
+  display: grid;
+  grid-template-columns: repeat(4, 80px);
+  grid-template-rows: repeat(3, 80px);
+  grid-template-areas:
+    'a b c d'
+    'e f g h'
+    'i j k l';
+  background-color: bisque;
+}
+
+.isLarge {
+  grid-template-columns: repeat(4, 120px);
+  grid-template-rows: repeat(3, 120px);
+}
