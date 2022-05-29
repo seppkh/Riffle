@@ -7,6 +7,7 @@ import logoEnded from '../assets/endedMascot.png';
 import useSound from 'use-sound';
 import gameOver from '../assets/sounds/gameOver.mp3';
 import flashCard from '../assets/sounds/flashCard.mp3';
+import { checkHighScore, showHighScores } from "../utils/saveScoresFunc";
 
 const ShowContentWithStores = () => {
 
@@ -28,6 +29,11 @@ const ShowContentWithStores = () => {
   const soundState = useStoreSlices(state => state.soundState);
   const [playGameOver] = useSound(gameOver, {soundEnabled: soundState});
   const [playFlashcard] = useSound(flashCard, {soundEnabled: soundState});
+
+  const playerName = useStoreSlices(state => state.playerName);
+  const changePlayerName = useStoreSlices(state => state.changePlayerName);
+
+  // https://stackoverflow.com/questions/68881913/using-prompt-in-react-but-the-page-keeps-refreshing
 
   if (gameState === 'notStarted') {
     return (
@@ -63,12 +69,16 @@ const ShowContentWithStores = () => {
     if (score > 10 && score <= 20 ) endingMessage = 'You rocked it!';
     if (score > 20) endingMessage = "Wow! You're a natural pro at this game!";
 
+    checkHighScore(score);
+
     return (
       <>
        <img src={logoEnded} alt='endedImg' height="150px"/>
         <h2>Game over – you ran out of time!</h2>
         <p>Your final score is {score} {suffix}</p>
-        <h5>{endingMessage}</h5><br/>
+        <h5>{endingMessage}</h5>
+
+        {showHighScores()}
 
         <p>Surely you can beat your own score...</p>
         <button onClick={ () => { reset(); unAssignCards(); } }>Play again</button>

@@ -15,7 +15,7 @@ const soundStates = {
 const createGameSlice = (set, get) => ({
   level: 1,
   score: 0,
-  timeLeft: 30,
+  timeLeft: 5,
   timeLeftBonus: 3,
   gameState: gameStates.notStarted,
   soundState: soundStates.notMute,
@@ -23,7 +23,7 @@ const createGameSlice = (set, get) => ({
   reset: () => set({ 
     level: 1, 
     score: 0,
-    timeLeft: 30, 
+    timeLeft: 5, 
     timeLeftBonus: 3,
     gameState: gameStates.notStarted }),
   tick: () => set(state => {
@@ -37,7 +37,7 @@ const createGameSlice = (set, get) => ({
     return { timeLeft: state.timeLeft -1 }
   }),
   increaseScore: () => set(state => ({ 
-    score: state.score + 1,
+    score: state.score + 53,
     timeLeft: state.timeLeft + 5 
   })),
   decreaseTime: () => set(state => { 
@@ -106,7 +106,11 @@ const createGameSlice = (set, get) => ({
     score: state.score + 3,
     timeLeft: state.timeLeft + 5 
   })),
-
+  playerName: '',
+  changePlayerName: () => set(() => ({ 
+    playerName: (prompt("Enter your name:")),
+  })),
+  
 })
 
 export default createGameSlice;
