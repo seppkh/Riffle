@@ -26,12 +26,12 @@ const icons = [
 const iconColors = ['red', 'blue', 'green', 'orange', 'purple'];
 
 const getIconForElement = (element) => {
-  const iconIndex = (element - 1) % 10;
+  const iconIndex = element % 10;
   return icons[iconIndex];
 };
 
 const getColorForElement = (element) => {
-  const colorIndex = Math.floor((element - 1) / 10);
+  const colorIndex = Math.floor(element / 10);
   return iconColors[colorIndex];
 };
 
