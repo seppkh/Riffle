@@ -8,7 +8,8 @@ const getRandomIndexOfArray = (input) => {
   return randomIndex;
 };
 
-const Card = ({ elements, isMain }) => {
+const Card = ({ elements, isMain, onClick }) => {
+  console.log(elements);
   const elementLocations = useMemo(() => {
     let locations = 'abcdefghijkl'.split('');
     const output = new Map();
@@ -31,7 +32,12 @@ const Card = ({ elements, isMain }) => {
     );
   };
   return (
-    <div className={clsx(styles.Card, { [styles.isLarge]: isMain })}>
+    <div
+      onClick={() => {
+        onClick?.(); //call on click if onclick is defined
+      }}
+      className={clsx(styles.Card, { [styles.isLarge]: isMain })}
+    >
       {elements.map(renderElement)}
     </div>
   );
