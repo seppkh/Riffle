@@ -1,16 +1,7 @@
 .Logo {
-  color: thistle;
-  font-size: 4rem;
-  font-family: "Courier New", Courier, monospace;
-  font-weight: 700;
-  display: inline-flex;
-  text-align: unset;
-  color: var(--color-subdued);
-  margin: 0;
-  padding: 0;
-  animation: logo-hover 3s infinite ease-in-out;
-  text-shadow: 5px 5px #44444455;
-  will-change: transition;
+  width: 350px;
+  height: 100px;
+  padding: 10px;
 }
 
 .Container {

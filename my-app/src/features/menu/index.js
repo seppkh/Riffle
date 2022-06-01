@@ -1,30 +1,24 @@
-import React, { useState, useCallback } from "react";
-import MenuItem from "./MenuItem";
-import styles from "./Menu.module.css";
+import React, { useState, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
+import MenuItem from './MenuItem';
+import styles from './Menu.module.css';
 
 const menuOptions = [
   {
-    label: "Singleplayer"
+    label: 'Instructions',
   },
   {
-    label: "Multiplayer"
+    label: 'Options',
   },
   {
-    label: "Instructions"
+    label: 'Credits',
   },
-  {
-    label: "Options"
-  },
-  {
-    label: "Credits"
-  },
-  {
-    label: "Exit"
-  }
 ];
 
 const Menu = ({ onMenuItemSelect = () => {} }) => {
   const [activeLabel, setActiveLabel] = useState(-1);
+  const navigate = useNavigate();
+
   const handleLabelClick = useCallback(
     (label) => {
       setActiveLabel(label);
@@ -35,6 +29,12 @@ const Menu = ({ onMenuItemSelect = () => {} }) => {
 
   return (
     <ul className={styles.Menu}>
+      <MenuItem
+        onClick={() => {
+          navigate('/game');
+        }}
+        label={'Play Game'}
+      ></MenuItem>
       {menuOptions.map((option) => (
         <MenuItem
           onClick={() => handleLabelClick(option.label)}

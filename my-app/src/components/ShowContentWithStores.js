@@ -1,6 +1,6 @@
-import useStoreSlices from "../store/rootSliceStore";
-import CountersWithStores from "./CountersWithStores";
-import ShowCardsWithStores from "./ShowCardsWithStores";
+import useStoreSlices from '../store/rootSliceStore';
+import CountersWithStores from './CountersWithStores';
+import CardLayout from './CardLayout';
 import logoFlashcard from '../assets/flashcardMascot.png';
 import logoEnded from '../assets/endedMascot.png';
 
@@ -10,25 +10,23 @@ import flashCard from '../assets/sounds/flashCard.mp3';
 import { checkHighScore, showHighScores } from "../utils/saveScoresFunc";
 
 const ShowContentWithStores = () => {
+  const gameState = useStoreSlices((state) => state.gameState);
+  const score = useStoreSlices((state) => state.score);
 
-  const gameState = useStoreSlices(state => state.gameState);
-  const score = useStoreSlices(state => state.score);
+  const startGame = useStoreSlices((state) => state.startGame);
+  const reset = useStoreSlices((state) => state.reset);
+  const togglePause = useStoreSlices((state) => state.togglePause);
 
-  const startGame = useStoreSlices(state => state.startGame);
-  const reset = useStoreSlices(state => state.reset);
-  const togglePause = useStoreSlices(state => state.togglePause);
+  const assignCards = useStoreSlices((state) => state.assignCards);
+  const unAssignCards = useStoreSlices((state) => state.unAssignCards);
 
-  const assignCards = useStoreSlices(state => state.assignCards);
-  const unAssignCards = useStoreSlices(state => state.unAssignCards);
+  const level = useStoreSlices((state) => state.level);
+  const levelSettings = useStoreSlices((state) => state.levelSettings);
+  const toggleFlashcard = useStoreSlices((state) => state.toggleFlashcard);
 
-  const level = useStoreSlices(state => state.level);
-  const levelSettings = useStoreSlices(state => state.levelSettings);
-  const toggleFlashcard = useStoreSlices(state => state.toggleFlashcard);
-
-
-  const soundState = useStoreSlices(state => state.soundState);
-  const [playGameOver] = useSound(gameOver, {soundEnabled: soundState});
-  const [playFlashcard] = useSound(flashCard, {soundEnabled: soundState});
+  const soundState = useStoreSlices((state) => state.soundState);
+  const [playGameOver] = useSound(gameOver, { soundEnabled: soundState });
+  const [playFlashcard] = useSound(flashCard, { soundEnabled: soundState });
 
   const scoreEntered = useStoreSlices(state => state.scoreEntered);
   const toggleScoreEntered = useStoreSlices(state => state.toggleScoreEntered);
@@ -40,21 +38,32 @@ const ShowContentWithStores = () => {
     return (
       <>
         <p>Setting up your gameplay...</p>
-        <h2>Click the button to start your game</h2><br/>
-        <button onClick={ () => { reset(); startGame(); assignCards() } }>Start game</button>
+        <h2>Click the button to start your game</h2>
+        <br />
+        <button
+          onClick={() => {
+            reset();
+            startGame();
+            assignCards();
+          }}
+        >
+          Start game
+        </button>
       </>
-    )
+    );
   }
 
   if (gameState === 'paused') {
     return (
       <>
         <h2>Game is paused</h2>
-        <p>Needed a break already, yeh?</p><br/>
-        <h2>Click the button to continue your game</h2><br/>
+        <p>Needed a break already, yeh?</p>
+        <br />
+        <h2>Click the button to continue your game</h2>
+        <br />
         <button onClick={togglePause}>Unpause</button>
       </>
-    )
+    );
   }
 
   if (gameState === 'ended') {
@@ -65,26 +74,34 @@ const ShowContentWithStores = () => {
     let endingMessage = '';
     let suffix = 'points';
 
-    if (score === 1) suffix  = 'point';
+    if (score === 1) suffix = 'point';
 
-    if (score <= 5 ) endingMessage = "A little disappointing if I'm honest...";
-    if (score > 5 && score <= 10 ) endingMessage = 'Nicely done!';
-    if (score > 10 && score <= 20 ) endingMessage = 'You rocked it!';
+    if (score <= 5) endingMessage = "A little disappointing if I'm honest...";
+    if (score > 5 && score <= 10) endingMessage = 'Nicely done!';
+    if (score > 10 && score <= 20) endingMessage = 'You rocked it!';
     if (score > 20) endingMessage = "Wow! You're a natural pro at this game!";
 
     return (
       <>
-       <img src={logoEnded} alt='endedImg' height="150px"/>
+        <img src={logoEnded} alt='endedImg' height='150px' />
         <h2>Game over – you ran out of time!</h2>
-        <p>Your final score is {score} {suffix}</p>
+        <p>
+          Your final score is {score} {suffix}
+        </p>
         <h5>{endingMessage}</h5>
-
-        {showHighScores()}
+        <br />
 
         <p>Surely you can beat your own score...</p>
-        <button onClick={ () => { reset(); unAssignCards(); } }>Play again</button>
+        <button
+          onClick={() => {
+            reset();
+            unAssignCards();
+          }}
+        >
+          Play again
+        </button>
       </>
-    )
+    );
   }
 
   if (gameState === 'flashcard') {
@@ -94,29 +111,29 @@ const ShowContentWithStores = () => {
 
     return (
       <>
-      <img src={logoFlashcard} alt='flashcardImg' height="150px"/>
-      <h2>{flashcardText}</h2>
-      <button onClick={ () => { toggleFlashcard(); } }>Continue</button>
-
+        <img src={logoFlashcard} alt='flashcardImg' height='150px' />
+        <h2>{flashcardText}</h2>
+        <button
+          onClick={() => {
+            toggleFlashcard();
+          }}
+        >
+          Continue
+        </button>
       </>
-    )
+    );
   }
 
   if (gameState === 'running') {
     return (
-      <>
-      <div>
+      <div className='gameBoard'>
         <CountersWithStores />
 
-        <ShowCardsWithStores />
-        <br/>
-
+        <CardLayout />
         <button onClick={togglePause}>Pause</button>
       </div>
-      </>
-    )
+    );
   }
-
-}
+};
 
 export default ShowContentWithStores;
