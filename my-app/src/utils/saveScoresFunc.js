@@ -3,12 +3,13 @@ const NO_OF_HIGH_SCORES = 10;
 const HIGH_SCORES = 'highScores';
 
 
-function checkHighScore(score) {
+function checkHighScore(score, scoreEntered, toggleScoreEntered) {
   const highScores = JSON.parse(localStorage.getItem(HIGH_SCORES)) ?? [];
   const lowestScore = highScores[NO_OF_HIGH_SCORES - 1]?.score ?? 0;
   
-  if (score > lowestScore) {
+  if ((score > lowestScore) && scoreEntered === false) {
     saveHighScore(score, highScores);
+    toggleScoreEntered();
   }
 }
 

@@ -30,8 +30,9 @@ const ShowContentWithStores = () => {
   const [playGameOver] = useSound(gameOver, {soundEnabled: soundState});
   const [playFlashcard] = useSound(flashCard, {soundEnabled: soundState});
 
-  const playerName = useStoreSlices(state => state.playerName);
-  const changePlayerName = useStoreSlices(state => state.changePlayerName);
+  const scoreEntered = useStoreSlices(state => state.scoreEntered);
+  const toggleScoreEntered = useStoreSlices(state => state.toggleScoreEntered);
+
 
   // https://stackoverflow.com/questions/68881913/using-prompt-in-react-but-the-page-keeps-refreshing
 
@@ -57,7 +58,9 @@ const ShowContentWithStores = () => {
   }
 
   if (gameState === 'ended') {
+  
     playGameOver();
+    // checkHighScore(score, scoreEntered, toggleScoreEntered);
 
     let endingMessage = '';
     let suffix = 'points';
@@ -68,8 +71,6 @@ const ShowContentWithStores = () => {
     if (score > 5 && score <= 10 ) endingMessage = 'Nicely done!';
     if (score > 10 && score <= 20 ) endingMessage = 'You rocked it!';
     if (score > 20) endingMessage = "Wow! You're a natural pro at this game!";
-
-    checkHighScore(score);
 
     return (
       <>
