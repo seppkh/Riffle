@@ -106,7 +106,16 @@ const createGameSlice = (set, get) => ({
     score: state.score + 3,
     timeLeft: state.timeLeft + 5 
   })),
-
+  scoreEntered: false,
+  toggleScoreEntered: () => set(state => { 
+    if (state.scoreEntered === false) {
+      return {
+        scoreEntered: true,
+      }
+    }
+    return { scoreEntered: false }
+  }),
+  
 })
 
 export default createGameSlice;

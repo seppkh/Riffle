@@ -7,6 +7,7 @@ import logoEnded from '../assets/endedMascot.png';
 import useSound from 'use-sound';
 import gameOver from '../assets/sounds/gameOver.mp3';
 import flashCard from '../assets/sounds/flashCard.mp3';
+import { checkHighScore, showHighScores } from "../utils/saveScoresFunc";
 
 const ShowContentWithStores = () => {
   const gameState = useStoreSlices((state) => state.gameState);
@@ -26,6 +27,12 @@ const ShowContentWithStores = () => {
   const soundState = useStoreSlices((state) => state.soundState);
   const [playGameOver] = useSound(gameOver, { soundEnabled: soundState });
   const [playFlashcard] = useSound(flashCard, { soundEnabled: soundState });
+
+  const scoreEntered = useStoreSlices(state => state.scoreEntered);
+  const toggleScoreEntered = useStoreSlices(state => state.toggleScoreEntered);
+
+
+  // https://stackoverflow.com/questions/68881913/using-prompt-in-react-but-the-page-keeps-refreshing
 
   if (gameState === 'notStarted') {
     return (
@@ -60,7 +67,9 @@ const ShowContentWithStores = () => {
   }
 
   if (gameState === 'ended') {
+  
     playGameOver();
+    // checkHighScore(score, scoreEntered, toggleScoreEntered);
 
     let endingMessage = '';
     let suffix = 'points';
