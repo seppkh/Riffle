@@ -65,15 +65,29 @@ const icons = [
   IconWebcam
 ];
 
-const iconColors = ['red', 'blue', 'green', 'orange', 'purple'];
+const iconColors = [
+  'salmon', 'red', 'firebrick', 
+  'lightblue', 'dodgerblue', 'mediumblue', 
+  'greenyellow', 'mediumseagreen', 'green',
+  'sandybrown', 'orange', 'saddlebrown',
+  'violet', 'darkorchid', 'indigo'
+];
+
+/*
+  '#FA8072', '#DC143C', '#8B0000', // reds
+  '#87CEFA', '#1E90FF', '#0000CD', // blues
+  '#ADFF2F', '#3CB371', '#006400', // greens
+  '#F4A460', '#FFA500', '#8B4513', // oranges
+  '#DDA0DD', '#9932CC', '#4B0082'  // purples
+*/
 
 const getIconForElement = (element) => {
-  const iconIndex = element % 10;
+  const iconIndex = element % 30;
   return icons[iconIndex];
 };
 
 const getColorForElement = (element) => {
-  const colorIndex = Math.floor(element / 10);
+  const colorIndex = Math.floor(element / 30);
   return iconColors[colorIndex];
 };
 

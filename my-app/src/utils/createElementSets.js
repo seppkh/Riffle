@@ -1,7 +1,7 @@
 import shuffle from "./shuffleSubCardOrder";
 
 // create list of available numbers:
-let numbersArr = Array.from(Array(50).keys());
+let numbersArr = Array.from(Array(300).keys());
 
 // create as set of 4 cards for the gameplay:
 let elementSets = {
