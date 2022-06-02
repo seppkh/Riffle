@@ -1,16 +1,18 @@
 .Card {
   display: grid;
+  padding: 60px;
   grid-template-columns: repeat(3, 80px);
   grid-template-rows: repeat(3, 80px);
   grid-template-areas:
     'a b c d'
     'e f g h'
     'i j k l';
-  background-color: rgb(212, 191, 191);
+  background-color: rgb(204, 199, 199);
   border-radius: 50%;
+  box-shadow: 0 5px grey;
 }
 
 .isLarge {
-  grid-template-columns: repeat(3, 120px);
-  grid-template-rows: repeat(3, 120px);
+  grid-template-columns: repeat(3, 100px);
+  grid-template-rows: repeat(3, 100px);
 }
