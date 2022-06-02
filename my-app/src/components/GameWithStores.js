@@ -1,13 +1,15 @@
-import React, { useEffect } from 'react';
-import useStoreSlices from '../store/rootSliceStore';
-import ShowContentWithStores from './ShowContentWithStores';
-import './StickyButtons.css';
+import React, { useEffect } from "react";
+import useStoreSlices from "../store/rootSliceStore";
+import ShowContentWithStores from "./ShowContentWithStores";
+import { useNavigate } from "react-router-dom";
 
-import useSound from 'use-sound';
-import lastSecondsBeep from '../assets/sounds/lastSecondsBeep.mp3';
-import gameBackground from '../assets/sounds/gameBackground.mp3';
+import useSound from "use-sound";
+import lastSecondsBeep from "../assets/sounds/lastSecondsBeep.mp3";
+import gameBackground from "../assets/sounds/gameBackground.mp3";
 
 const GameWithStores = () => {
+  const navigate = useNavigate();
+
   const toggleSound = useStoreSlices((state) => state.toggleSound);
   const exit = useStoreSlices((state) => state.exit);
   const gameState = useStoreSlices((state) => state.gameState);
@@ -33,15 +35,15 @@ const GameWithStores = () => {
   });
 
   useEffect(() => {
-    if (gameState === 'running') {
+    if (gameState === "running") {
       stop();
       playBackground();
     }
-    if (gameState !== 'running' && gameState !== 'flashcard') stop();
+    if (gameState !== "running" && gameState !== "flashcard") stop();
   }, [gameState, soundState]);
 
   useEffect(() => {
-    if (gameState !== 'running') return;
+    if (gameState !== "running") return;
 
     const timeInterval = setInterval(() => {
       tick();
@@ -66,12 +68,18 @@ const GameWithStores = () => {
 
   return (
     <>
-      <div className='stickybuttons-all'>
-        <button onClick={exit}>Exit</button>
+      <div className="stickybuttons-all">
+        <button
+          onClick={() => {
+            navigate("/");
+          }}
+        >
+          Exit
+        </button>
         <button onClick={toggleSound}>Mute/Unmute</button>
       </div>
 
-      <div className='Game'>
+      <div className="Game">
         <ShowContentWithStores />
       </div>
     </>
