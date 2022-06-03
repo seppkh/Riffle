@@ -10,8 +10,9 @@ const getRandomIndexOfArray = (input) => {
 
 const Card = ({ elements, isMain, onClick }) => {
   console.log(elements);
+
   const elementLocations = useMemo(() => {
-    let locations = 'abcdefghijkl'.split('');
+    let locations = 'abcdefghi'.split('');
     const output = new Map();
     elements.forEach((element) => {
       // random index alljäänud locationitest
@@ -28,10 +29,14 @@ const Card = ({ elements, isMain, onClick }) => {
   const renderElement = (element) => {
     const elementLocation = elementLocations.get(element);
     return (
+      <>
       <CardElement key={element} element={element} location={elementLocation} />
+      </>
     );
   };
+
   return (
+    <>
     <div
       onClick={() => {
         onClick?.(); //call on click if onclick is defined
@@ -40,6 +45,8 @@ const Card = ({ elements, isMain, onClick }) => {
     >
       {elements.map(renderElement)}
     </div>
+    </>
+
   );
 };
 
