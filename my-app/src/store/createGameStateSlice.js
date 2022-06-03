@@ -12,14 +12,14 @@ const gameStates = {
 const createGameSlice = (set, get) => ({
   level: 0,
   score: 0,
-  timeLeft: 7,
+  timeLeft: 180,
   timeLeftBonus: 3,
   gameState: gameStates.menu,
   increaseLevel: () => set(state => ({ level: state.level + 1 })),
   resetCounters: () => set({ 
     level: 0, 
     score: 0,
-    timeLeft: 7, 
+    timeLeft: 180, 
     timeLeftBonus: 3 
   }),
   tick: () => set(state => {
@@ -76,7 +76,7 @@ const createGameSlice = (set, get) => ({
   toggleFlashcard: () => set(state => { 
     if (state.gameState === gameStates.flashcard) {
       return {
-        timeLeft: 7,
+        timeLeft: 180,
         gameState: gameStates.running
       }
     }

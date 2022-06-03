@@ -8,6 +8,7 @@ const ShowCardsWithStores = () => {
   const mainCard = useStoreSlices((state) => state.mainCard);
 
   return (
+    <>
     <div className={styles.CardsWrapper}>
       <div className={styles.MainCard}>
         <Card isMain elements={mainCard.elements} />
@@ -17,6 +18,7 @@ const ShowCardsWithStores = () => {
         <SubCardsWithStores />
       </div>
     </div>
+    </>
   );
 };
 

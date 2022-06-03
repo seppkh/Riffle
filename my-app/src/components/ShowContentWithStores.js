@@ -133,12 +133,15 @@ const ShowContentWithStores = () => {
 
   if (gameState === 'running') {
     return (
+      <>
       <div className='gameBoard'>
         <CountersWithStores />
 
         <CardLayout />
         <button onClick={togglePause}>Pause</button>
       </div>
+      </>
+
     );
   }
 };

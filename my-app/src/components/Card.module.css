@@ -4,9 +4,9 @@
   grid-template-columns: repeat(3, 80px);
   grid-template-rows: repeat(3, 80px);
   grid-template-areas:
-    'a b c d'
-    'e f g h'
-    'i j k l';
+    'a b c'
+    'd e f'
+    'g h i';
   background-color: rgb(204, 199, 199);
   border-radius: 50%;
   box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;

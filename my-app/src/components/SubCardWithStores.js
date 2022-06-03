@@ -17,18 +17,18 @@ const SubCardWithStores = ({ card }) => {
   const [playBonus] = useSound(bonusPoint, { soundEnabled: soundState });
 
   return (
-    <Card
-      onClick={() =>
-        OnCardClickHandler(
-          card,
-          useStoreSlicesRead,
-          playRight,
-          playWrong,
-          playBonus
-        )
-      }
+    <>
+    <Card 
+      onClick={() => OnCardClickHandler(
+        card,
+        useStoreSlicesRead,
+        playRight,
+        playWrong,
+        playBonus
+      )}
       elements={card.elements}
-    />
+      isMatch={card.isMatch} />
+      </>
   );
 };
 

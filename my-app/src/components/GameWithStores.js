@@ -5,14 +5,12 @@ import { useNavigate } from "react-router-dom";
 
 import useSound from 'use-sound';
 import lastSecondsBeep from '../assets/sounds/lastSecondsBeep.mp3';
-import gameBackground from '../assets/sounds/gameBackground.mp3';
 import PlaySounds from './PlaySounds';
 
 const GameWithStores = () => {
   const navigate = useNavigate();
 
   const toggleSound = useStoreSlices((state) => state.toggleSound);
-  const exit = useStoreSlices((state) => state.exit);
   const gameState = useStoreSlices((state) => state.gameState);
 
   const level = useStoreSlices((state) => state.level);

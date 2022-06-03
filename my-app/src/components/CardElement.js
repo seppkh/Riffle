@@ -1,10 +1,10 @@
 import styles from './CardElement.module.css';
 import { ReactComponent as IconBalloon } from '../assets/icons/balloon.svg';
 import { ReactComponent as IconBasketball } from '../assets/icons/basketball.svg';
-import { ReactComponent as IconPc } from '../assets/icons/pc.svg';
+// import { ReactComponent as IconPc } from '../assets/icons/pc.svg';
 import { ReactComponent as IconBucket } from '../assets/icons/bucket.svg';
 import { ReactComponent as IconDishwasher } from '../assets/icons/dishwasher.svg';
-import { ReactComponent as IconUsb } from '../assets/icons/usb.svg';
+// import { ReactComponent as IconUsb } from '../assets/icons/usb.svg';
 import { ReactComponent as IconFootball } from '../assets/icons/football.svg';
 import { ReactComponent as IconFork } from '../assets/icons/fork.svg';
 import { ReactComponent as IconHeadphones } from '../assets/icons/headphones.svg';
@@ -33,10 +33,10 @@ import { ReactComponent as IconWebcam } from '../assets/icons/webcam.svg';
 const icons = [
   IconBalloon,
   IconBasketball,
-  IconPc,
+  // IconPc,
   IconBucket,
   IconDishwasher,
-  IconUsb,
+  // IconUsb,
   IconFootball,
   IconFork,
   IconHeadphones,
@@ -48,6 +48,7 @@ const icons = [
   IconMagic,
   IconMicrowave,
   IconMop,
+   /*
   IconMouse,
   IconOven,
   IconPaintbrush,
@@ -60,11 +61,19 @@ const icons = [
   IconTreelog,
   IconUSB,
   IconVolleyball,
-  IconWebcam,
+  IconWebcam, */
 ];
 
 const iconColors = [
-  'salmon',
+  'red',
+  'blue',
+  'green',
+  'orange',
+  'purple',
+];
+
+/*
+'salmon',
   'red',
   'firebrick',
   'lightblue',
@@ -79,7 +88,7 @@ const iconColors = [
   'violet',
   'darkorchid',
   'indigo',
-];
+*/
 
 /*
   '#FA8072', '#DC143C', '#8B0000', // reds
@@ -90,12 +99,12 @@ const iconColors = [
 */
 
 const getIconForElement = (element) => {
-  const iconIndex = element % 30;
+  const iconIndex = element % 5;
   return icons[iconIndex];
 };
 
 const getColorForElement = (element) => {
-  const colorIndex = Math.floor(element / 30);
+  const colorIndex = Math.floor(element / 5);
   return iconColors[colorIndex];
 };
 
@@ -103,9 +112,11 @@ const CardElement = ({ element, location }) => {
   const Icon = getIconForElement(element);
 
   return (
+    <>
     <div className={styles.CardElement} style={{ gridArea: location }}>
       <Icon style={{ fill: getColorForElement(element) }} />
     </div>
+    </>
   );
 };
 
