@@ -2,6 +2,7 @@ import React, { useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MenuItem from './MenuItem';
 import styles from './Menu.module.css';
+import useStoreSlices from '../../store/rootSliceStore';
 
 const menuOptions = [
   {
@@ -18,6 +19,7 @@ const menuOptions = [
 const Menu = ({ onMenuItemSelect = () => {} }) => {
   const [activeLabel, setActiveLabel] = useState(-1);
   const navigate = useNavigate();
+  const gameState = useStoreSlices((state) => state.gameState);
 
   const handleLabelClick = useCallback(
     (label) => {
@@ -27,11 +29,13 @@ const Menu = ({ onMenuItemSelect = () => {} }) => {
     [activeLabel]
   );
 
+  console.log("gameState:", gameState);
+
   return (
     <ul className={styles.Menu}>
       <MenuItem
-        onClick={() => {
-          navigate('/game');
+        onClick={() => { 
+          navigate('/game')
         }}
         label={'Play Game'}
       ></MenuItem>

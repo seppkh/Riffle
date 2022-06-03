@@ -3,9 +3,10 @@ import useStoreSlices from "../store/rootSliceStore";
 import ShowContentWithStores from "./ShowContentWithStores";
 import { useNavigate } from "react-router-dom";
 
-import useSound from "use-sound";
-import lastSecondsBeep from "../assets/sounds/lastSecondsBeep.mp3";
-import gameBackground from "../assets/sounds/gameBackground.mp3";
+import useSound from 'use-sound';
+import lastSecondsBeep from '../assets/sounds/lastSecondsBeep.mp3';
+import gameBackground from '../assets/sounds/gameBackground.mp3';
+import PlaySounds from './PlaySounds';
 
 const GameWithStores = () => {
   const navigate = useNavigate();
@@ -29,18 +30,16 @@ const GameWithStores = () => {
   const [playTimerEnding] = useSound(lastSecondsBeep, {
     soundEnabled: soundState,
   });
-  const [playBackground, { stop }] = useSound(gameBackground, {
-    interrupt: false,
-    soundEnabled: soundState,
-  });
+  
+  const setGameStateToNotStarted = useStoreSlices((state) => state.setGameStateToNotStarted);
 
-  useEffect(() => {
-    if (gameState === "running") {
-      stop();
-      playBackground();
-    }
-    if (gameState !== "running" && gameState !== "flashcard") stop();
-  }, [gameState, soundState]);
+
+  useEffect(() => {    
+    if (gameState === 'menu')
+      setGameStateToNotStarted();
+      
+  }, []);
+
 
   useEffect(() => {
     if (gameState !== "running") return;
@@ -59,6 +58,7 @@ const GameWithStores = () => {
       clearInterval(bonusTimeInterval);
     };
   }, [gameState, timeLeft]);
+
 
   useEffect(() => {
     if (levelSettings[level].showFlashcard === true) {
@@ -81,6 +81,7 @@ const GameWithStores = () => {
 
       <div className="Game">
         <ShowContentWithStores />
+        <PlaySounds />
       </div>
     </>
   );

@@ -2,13 +2,15 @@ const levelSettings = {
   0: {
     "mainCardElementCount": 0,
     "cardElementCount": 0,
-    "matchingElementCount": 0
+    "matchingElementCount": 0,
   },
   1: {
     "mainCardElementCount": 5,
     "cardElementCount": 5,
     "matchingElementCount": 1,
-    "showFlashcard": false,
+    "showFlashcard": true,
+    "text": "In next five levels each correct card will have 1 matching symbol",
+    "img": './flashcardMascot.png'
   },
   2: {
     "mainCardElementCount": 5,
@@ -39,7 +41,7 @@ const levelSettings = {
     "cardElementCount": 6,
     "matchingElementCount": 2,
     "showFlashcard": true,
-    "text": "In next five levels each correct card will have 3 matching symbols!",
+    "text": "In next five levels each correct card will have 2 matching symbols",
     "img": './flashcardMascot.png'
   },
   7: {

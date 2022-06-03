@@ -4,9 +4,17 @@ import { SplitLayout } from "../../components/Layout";
 import TiltedScreen from "../../components/TiltedScreen";
 import Logo from "../../components/Logo";
 import Explanation from "../../components/Explanation";
+import { useEffect } from "react";
+import useStoreSlices from "../../store/rootSliceStore";
 
 const LandingScreen = (props) => {
   const [selectedMenuOption, setSelectedMenuOption] = useState(null);
+  const setGameStateToMenu = useStoreSlices((state) => state.setGameStateToMenu);
+
+  useEffect(() => {
+    setGameStateToMenu();
+  }, []);
+  
   return (
     <SplitLayout
       left={
