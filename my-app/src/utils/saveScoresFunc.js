@@ -9,7 +9,6 @@ function checkHighScore(score, scoreEntered, toggleScoreEntered) {
   
   if ((score > lowestScore) && scoreEntered === false) {
     saveHighScore(score, highScores);
-    toggleScoreEntered();
   }
 }
 

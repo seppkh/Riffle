@@ -4,28 +4,24 @@ const gameStates = {
   running: "running",
   paused: "paused",
   ended: "ended",
-  flashcard: "flashcard"
+  flashcard: "flashcard",
+  menu: "menu"
 }
 
-const soundStates = {
-  notMute: true,
-  mute: false,
-}
 
 const createGameSlice = (set, get) => ({
-  level: 1,
+  level: 0,
   score: 0,
-  timeLeft: 30,
+  timeLeft: 7,
   timeLeftBonus: 3,
-  gameState: gameStates.notStarted,
-  soundState: soundStates.notMute,
+  gameState: gameStates.menu,
   increaseLevel: () => set(state => ({ level: state.level + 1 })),
-  reset: () => set({ 
-    level: 1, 
+  resetCounters: () => set({ 
+    level: 0, 
     score: 0,
-    timeLeft: 30, 
-    timeLeftBonus: 3,
-    gameState: gameStates.notStarted }),
+    timeLeft: 7, 
+    timeLeftBonus: 3 
+  }),
   tick: () => set(state => {
     if (state.timeLeft === 0) return;
     if (state.timeLeft === 1) {
@@ -52,6 +48,18 @@ const createGameSlice = (set, get) => ({
       timeLeft,
     }
   }),
+  startGame: () => set(() => {
+    return {
+      gameState: gameStates.running,
+      level: 1,
+    }
+  }),
+  setGameStateToNotStarted: () => set(() => {
+    return { gameState: gameStates.notStarted }
+  }),
+  setGameStateToMenu: () => set(() => {
+    return { gameState: gameStates.menu }
+  }),
   togglePause: () => set(state => { 
     if (state.gameState === gameStates.paused) {
       if (state.timeLeft === 0) {
@@ -65,30 +73,10 @@ const createGameSlice = (set, get) => ({
     }
     return { gameState: gameStates.paused }
   }),
-  startGame: () => set(() => {
-    return {
-      gameState: gameStates.running
-    }
-  }),
-  toggleSound: () => set(state => {
-    if (state.soundState === soundStates.notMute) {
-      return {
-        soundState: soundStates.mute
-      }
-    }
-    return { 
-      soundState: soundStates.notMute
-    }
-  }),
-  exit: () => set(() => {
-    return {
-      
-    }
-  }),
   toggleFlashcard: () => set(state => { 
     if (state.gameState === gameStates.flashcard) {
       return {
-        timeLeft: 30,
+        timeLeft: 7,
         gameState: gameStates.running
       }
     }
@@ -106,15 +94,6 @@ const createGameSlice = (set, get) => ({
     score: state.score + 3,
     timeLeft: state.timeLeft + 5 
   })),
-  scoreEntered: false,
-  toggleScoreEntered: () => set(state => { 
-    if (state.scoreEntered === false) {
-      return {
-        scoreEntered: true,
-      }
-    }
-    return { scoreEntered: false }
-  }),
   
 })
 

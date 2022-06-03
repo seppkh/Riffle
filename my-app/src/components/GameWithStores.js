@@ -6,6 +6,7 @@ import './StickyButtons.css';
 import useSound from 'use-sound';
 import lastSecondsBeep from '../assets/sounds/lastSecondsBeep.mp3';
 import gameBackground from '../assets/sounds/gameBackground.mp3';
+import PlaySounds from './PlaySounds';
 
 const GameWithStores = () => {
   const toggleSound = useStoreSlices((state) => state.toggleSound);
@@ -27,18 +28,16 @@ const GameWithStores = () => {
   const [playTimerEnding] = useSound(lastSecondsBeep, {
     soundEnabled: soundState,
   });
-  const [playBackground, { stop }] = useSound(gameBackground, {
-    interrupt: false,
-    soundEnabled: soundState,
-  });
+  
+  const setGameStateToNotStarted = useStoreSlices((state) => state.setGameStateToNotStarted);
 
-  useEffect(() => {
-    if (gameState === 'running') {
-      stop();
-      playBackground();
-    }
-    if (gameState !== 'running' && gameState !== 'flashcard') stop();
-  }, [gameState, soundState]);
+
+  useEffect(() => {    
+    if (gameState === 'menu')
+      setGameStateToNotStarted();
+      
+  }, []);
+
 
   useEffect(() => {
     if (gameState !== 'running') return;
@@ -58,6 +57,7 @@ const GameWithStores = () => {
     };
   }, [gameState, timeLeft]);
 
+
   useEffect(() => {
     if (levelSettings[level].showFlashcard === true) {
       toggleFlashcard();
@@ -73,6 +73,7 @@ const GameWithStores = () => {
 
       <div className='Game'>
         <ShowContentWithStores />
+        <PlaySounds />
       </div>
     </>
   );
