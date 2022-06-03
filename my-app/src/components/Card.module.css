@@ -9,7 +9,7 @@
     'i j k l';
   background-color: rgb(204, 199, 199);
   border-radius: 50%;
-  box-shadow: 0 5px grey;
+  box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 }
 
 .isLarge {
