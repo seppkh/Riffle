@@ -29,21 +29,6 @@ const SubCardWithStores = ({ card }) => {
       }
       elements={card.elements}
     />
-    // <div
-    //   className=''
-    //   onClick={() =>
-    //     OnCardClickHandler(
-    //       card,
-    //       useStoreSlicesRead,
-    //       playRight,
-    //       playWrong,
-    //       playBonus
-    //     )
-    //   }
-    // >
-    //   <p className='subcard-elements'>{card.elements.join(', ')}</p>
-    //   <p className='subcard-match'>{card.isMatch.toString()} </p>
-    // </div>
   );
 };
 

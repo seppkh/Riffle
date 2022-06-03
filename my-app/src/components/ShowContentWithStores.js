@@ -4,18 +4,17 @@ import CardLayout from './CardLayout';
 import logoFlashcard from '../assets/flashcardMascot.png';
 import logoEnded from '../assets/endedMascot.png';
 
-import useSound from 'use-sound';
-import gameOver from '../assets/sounds/gameOver.mp3';
-import flashCard from '../assets/sounds/flashCard.mp3';
 import { checkHighScore, showHighScores } from "../utils/saveScoresFunc";
+
 
 const ShowContentWithStores = () => {
   const gameState = useStoreSlices((state) => state.gameState);
   const score = useStoreSlices((state) => state.score);
 
   const startGame = useStoreSlices((state) => state.startGame);
-  const reset = useStoreSlices((state) => state.reset);
+  const resetCounters = useStoreSlices((state) => state.resetCounters);
   const togglePause = useStoreSlices((state) => state.togglePause);
+  const setGameStateToNotStarted = useStoreSlices((state) => state.setGameStateToNotStarted);
 
   const assignCards = useStoreSlices((state) => state.assignCards);
   const unAssignCards = useStoreSlices((state) => state.unAssignCards);
@@ -24,17 +23,21 @@ const ShowContentWithStores = () => {
   const levelSettings = useStoreSlices((state) => state.levelSettings);
   const toggleFlashcard = useStoreSlices((state) => state.toggleFlashcard);
 
-  const soundState = useStoreSlices((state) => state.soundState);
-  const [playGameOver] = useSound(gameOver, { soundEnabled: soundState });
-  const [playFlashcard] = useSound(flashCard, { soundEnabled: soundState });
+  const toggleSound = useStoreSlices((state) => state.toggleSound);
 
-  const scoreEntered = useStoreSlices(state => state.scoreEntered);
-  const toggleScoreEntered = useStoreSlices(state => state.toggleScoreEntered);
-
-
+  
   // https://stackoverflow.com/questions/68881913/using-prompt-in-react-but-the-page-keeps-refreshing
 
+
+  if (gameState === 'menu') {    
+    return (
+      <>Hei!
+       </>
+    );
+  }
+
   if (gameState === 'notStarted') {
+
     return (
       <>
         <p>Setting up your gameplay...</p>
@@ -42,7 +45,7 @@ const ShowContentWithStores = () => {
         <br />
         <button
           onClick={() => {
-            reset();
+            resetCounters();
             startGame();
             assignCards();
           }}
@@ -68,7 +71,6 @@ const ShowContentWithStores = () => {
 
   if (gameState === 'ended') {
   
-    playGameOver();
     // checkHighScore(score, scoreEntered, toggleScoreEntered);
 
     let endingMessage = '';
@@ -91,11 +93,17 @@ const ShowContentWithStores = () => {
         <h5>{endingMessage}</h5>
         <br />
 
+        {showHighScores()};
+
         <p>Surely you can beat your own score...</p>
         <button
           onClick={() => {
-            reset();
+            resetCounters();
+            setGameStateToNotStarted();
             unAssignCards();
+            toggleSound();
+            toggleSound();
+
           }}
         >
           Play again
@@ -105,7 +113,6 @@ const ShowContentWithStores = () => {
   }
 
   if (gameState === 'flashcard') {
-    playFlashcard();
 
     let flashcardText = levelSettings[level].text;
 
