@@ -24,13 +24,11 @@ import { ReactComponent as IconPlunger } from '../assets/icons/plunger.svg';
 import { ReactComponent as IconPrinter } from '../assets/icons/printer.svg';
 import { ReactComponent as IconRake } from '../assets/icons/rake.svg';
 import { ReactComponent as IconShovel } from '../assets/icons/shovel.svg';
-import { ReactComponent as IconToothbrush } from '../assets/icons/toothbruch.svg';
+import { ReactComponent as IconToothbrush } from '../assets/icons/toothbrush.svg';
 import { ReactComponent as IconTreelog } from '../assets/icons/treelog.svg';
 import { ReactComponent as IconUSB } from '../assets/icons/usb.svg';
 import { ReactComponent as IconVolleyball } from '../assets/icons/volleyball.svg';
 import { ReactComponent as IconWebcam } from '../assets/icons/webcam.svg';
-
-
 
 const icons = [
   IconBalloon,
@@ -62,15 +60,25 @@ const icons = [
   IconTreelog,
   IconUSB,
   IconVolleyball,
-  IconWebcam
+  IconWebcam,
 ];
 
 const iconColors = [
-  'salmon', 'red', 'firebrick', 
-  'lightblue', 'dodgerblue', 'mediumblue', 
-  'greenyellow', 'mediumseagreen', 'green',
-  'sandybrown', 'orange', 'saddlebrown',
-  'violet', 'darkorchid', 'indigo'
+  'salmon',
+  'red',
+  'firebrick',
+  'lightblue',
+  'dodgerblue',
+  'mediumblue',
+  'greenyellow',
+  'mediumseagreen',
+  'green',
+  'sandybrown',
+  'orange',
+  'saddlebrown',
+  'violet',
+  'darkorchid',
+  'indigo',
 ];
 
 /*
