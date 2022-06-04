@@ -45,7 +45,9 @@ const ShowContentWithStores = () => {
 
     if (gameState === 'menu') {    
       return (
-        <>Hei!
+        <>
+        <p>Jõudsid lehele localhost:3000/game ilma menüüs käimata.</p> 
+        <p>Mine <a href="http://localhost:3000/">http://localhost:3000/</a> ja alusta mängu sealt.</p>
          </>
       );
     } 
