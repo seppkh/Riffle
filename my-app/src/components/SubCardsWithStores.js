@@ -3,6 +3,12 @@ import SubCardWithStores from './SubCardWithStores';
 import './Subcards.css';
 
 const SubCardsWithStores = () => {
+  const {
+    gameState,
+  } = useStoreSlices();
+
+  console.log("gameState from SubCardsWithStores:", gameState);
+
   const { card1, card2, card3 } = useStoreSlices();
 
   return (

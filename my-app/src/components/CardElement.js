@@ -29,6 +29,7 @@ import { ReactComponent as IconTreelog } from '../assets/icons/treelog.svg';
 import { ReactComponent as IconUSB } from '../assets/icons/usb.svg';
 import { ReactComponent as IconVolleyball } from '../assets/icons/volleyball.svg';
 import { ReactComponent as IconWebcam } from '../assets/icons/webcam.svg';
+import useStoreSlices from '../store/rootSliceStore';
 
 const icons = [
   IconBalloon,
@@ -64,6 +65,8 @@ const icons = [
   IconWebcam, */
 ];
 
+const iconsLength = icons.length;
+
 const iconColors = [
   'red',
   'blue',
@@ -72,52 +75,114 @@ const iconColors = [
   'purple',
 ];
 
-/*
-'salmon',
+const iconColorMediumShades = [
   'red',
-  'firebrick',
-  'lightblue',
-  'dodgerblue',
-  'mediumblue',
-  'greenyellow',
-  'mediumseagreen',
+  'blue',
   'green',
-  'sandybrown',
   'orange',
-  'saddlebrown',
-  'violet',
-  'darkorchid',
-  'indigo',
-*/
+  'purple',
+];
 
-/*
+const iconColorReds = [
   '#FA8072', '#DC143C', '#8B0000', // reds
+];
+const iconColorBlues = [
   '#87CEFA', '#1E90FF', '#0000CD', // blues
+];
+const iconColorGreens = [
   '#ADFF2F', '#3CB371', '#006400', // greens
+];
+const iconColorOranges = [
   '#F4A460', '#FFA500', '#8B4513', // oranges
+];
+const iconColorPurples = [
   '#DDA0DD', '#9932CC', '#4B0082'  // purples
-*/
+];
+
+// creates a new array of n random colorSets from a given list of colorSets
+function getRandom(arr, n) {
+  let result = new Array(n),
+      len = arr.length,
+      taken = new Array(len);
+  if (n > len)
+      throw new RangeError("getRandom: more colorSets taken than available");
+  while (n--) {
+      let x = Math.floor(Math.random() * len);
+      result[n] = arr[x in taken ? taken[x] : x];
+      taken[x] = --len in taken ? taken[len] : len;
+  }
+  return result;
+}
+
+const selectRandomColorSets = (colorSetAmount) => {
+  const allSets = [
+    iconColorReds, iconColorBlues, iconColorGreens, iconColorOranges, iconColorPurples
+  ];
+
+  // console.log("allSets:", allSets)
+
+  const selectedRandomColorSets = getRandom(allSets, colorSetAmount);
+
+  let selectedColors = [];
+
+  selectedRandomColorSets.forEach(element => selectedColors.push(...element));
+
+  return selectedColors;
+}
+
 
 const getIconForElement = (element) => {
-  const iconIndex = element % 5;
+  const iconIndex = element % icons.length;
   return icons[iconIndex];
 };
 
-const getColorForElement = (element) => {
-  const colorIndex = Math.floor(element / 5);
-  return iconColors[colorIndex];
+
+const selectColorSets = (level) => {
+  let result = [];
+  let colorSetCount = 0;
+
+  if (level >= 0 && level <= 5) {
+    result.push(...iconColorMediumShades);
+  };
+
+  if (level >= 6) {
+    if (level >= 6 && level <= 10)
+      colorSetCount = 1;
+    if (level >= 11 && level <= 15)
+      colorSetCount = 1;
+  
+    result.push(...selectRandomColorSets(colorSetCount));
+  };
+
+  // console.log("selectedColors", result);
+  // console.log("selectedColors.length", result.length);
+
+  return result;
+}
+
+const getColorForElement = (element, selectedColorSets) => {
+  
+  const colorIndex = Math.floor(element / selectedColorSets.length);
+
+  return selectedColorSets[colorIndex];
 };
 
 const CardElement = ({ element, location }) => {
   const Icon = getIconForElement(element);
+  const level = useStoreSlices((state) => state.level);
+  let selectedColorSets = [];
+
+  selectedColorSets.push(...selectColorSets(level));
+
+  // console.log("selectedColorSets", selectedColorSets)
 
   return (
     <>
     <div className={styles.CardElement} style={{ gridArea: location }}>
-      <Icon style={{ fill: getColorForElement(element) }} />
+      <Icon style={{ fill: getColorForElement(element, selectedColorSets) }} />
     </div>
     </>
   );
 };
 
-export default CardElement;
+export { CardElement, iconsLength };

@@ -6,7 +6,7 @@ const soundStates = {
 
 const createSoundsSlice = (set, get) => ({
 
-  soundState: soundStates.notMute,
+  soundState: soundStates.mute,
   soundPlaying: false,
   toggleSound: () => set((state) => {
     if (state.soundState === soundStates.notMute) {

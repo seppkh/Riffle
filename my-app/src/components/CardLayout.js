@@ -5,7 +5,13 @@ import Card from './Card';
 import styles from './CardLayout.module.css';
 
 const ShowCardsWithStores = () => {
-  const mainCard = useStoreSlices((state) => state.mainCard);
+
+  const {
+    gameState,
+    mainCard,
+  } = useStoreSlices();
+
+  console.log("gameState from CardLayout:", gameState);
 
   return (
     <>
