@@ -2,6 +2,7 @@ import React from "react";
 import useStoreSlices from "../store/rootSliceStore";
 import ShowContentWithStores from "./ShowContentWithStores";
 import { useNavigate } from "react-router-dom";
+import { useMemo } from "react";
 
 
 const GameWithStores = () => {
@@ -15,13 +16,30 @@ const GameWithStores = () => {
     toggleSound
   } = useStoreSlices();
 
+  const showFlashcard = levelSettings[level].showFlashcard;
+
   console.log("gameState1 from GameWithStores:", gameState);
 
-  if (levelSettings[level].showFlashcard === true & gameState !== "running") {
-    toggleFlashcard();
-  }
-
   console.log("gameState1.5 from GameWithStores:", gameState);
+
+
+  const content = useMemo((level) => {
+
+    if (level === 1) {
+      if (showFlashcard && gameState !== "running") {
+        toggleFlashcard();
+      }
+    }
+  
+    if (showFlashcard && gameState !== "flashcard") {
+        toggleFlashcard();
+    }
+  
+    return <ShowContentWithStores />
+
+  }, [level]);
+
+  
 /*
   const loadContent = useCallback(
     (state) => {
@@ -44,7 +62,7 @@ const GameWithStores = () => {
       </div>
 
       <div className="Game">
-          <ShowContentWithStores />
+        {content}
       </div>
     </>
   );

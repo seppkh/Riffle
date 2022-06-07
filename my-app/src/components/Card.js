@@ -9,7 +9,7 @@ const getRandomIndexOfArray = (input) => {
   return randomIndex;
 };
 
-const Card = ({ elements, isMain, onClick }) => {
+const Card = ({ elements, isMain, onClick, elementsColors }) => {
   // console.log(elements);
 
   const locationPoints = useStoreSlices((state) => state.locationPoints);
@@ -29,11 +29,12 @@ const Card = ({ elements, isMain, onClick }) => {
     return output;
   }, [elements]);
 
+
   const renderElement = (element) => {
     const elementLocation = elementLocations.get(element);
     return (
       <>
-      <CardElement key={element} element={element} location={elementLocation} />
+      <CardElement key={element} element={element} location={elementLocation} elementsColors={elementsColors} />
       </>
     );
   };

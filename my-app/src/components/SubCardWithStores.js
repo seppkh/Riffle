@@ -8,7 +8,7 @@ import guessRight from '../assets/sounds/guessRight.mp3';
 import guessWrong from '../assets/sounds/guessWrong.mp3';
 import bonusPoint from '../assets/sounds/bonusPoint.mp3';
 
-const SubCardWithStores = ({ card }) => {
+const SubCardWithStores = ({ card, elementsColors }) => {
 
   const {
     soundState,
@@ -32,7 +32,7 @@ const SubCardWithStores = ({ card }) => {
         // playBonus
       )}
       elements={card.elements}
-      isMatch={card.isMatch} />
+      elementsColors={elementsColors} />
       </>
   );
 };

@@ -1,5 +1,5 @@
+import { iconsLength } from "../components/Icons";
 import shuffle from "./shuffleSubCardOrder";
-import { iconsLength } from "../components/CardElement.js"
 
 // create list of available numbers:
 let numbersArr = Array.from(Array(iconsLength).keys());

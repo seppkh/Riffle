@@ -2,7 +2,7 @@ import useStoreSlices from '../store/rootSliceStore';
 import SubCardWithStores from './SubCardWithStores';
 import './Subcards.css';
 
-const SubCardsWithStores = () => {
+const SubCardsWithStores = ({ elementsColors }) => {
   const {
     gameState,
   } = useStoreSlices();
@@ -13,11 +13,11 @@ const SubCardsWithStores = () => {
 
   return (
     <>
-      <SubCardWithStores card={card1} />
+      <SubCardWithStores card={card1} elementsColors={elementsColors} />
 
-      <SubCardWithStores card={card2} />
+      <SubCardWithStores card={card2} elementsColors={elementsColors}/>
 
-      <SubCardWithStores card={card3} />
+      <SubCardWithStores card={card3} elementsColors={elementsColors}/>
     </>
   );
 };

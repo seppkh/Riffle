@@ -39,7 +39,10 @@ const ShowContentWithStores = () => {
     soundEnabled: soundState,
   }); */
 
+  const showFlashcard = levelSettings[level].showFlashcard;
+
   console.log("gameState from ShowContentWithStores:", gameState);
+
 
   const content = useMemo(() => {
 

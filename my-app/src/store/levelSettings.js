@@ -9,7 +9,7 @@ const levelSettings = {
     "cardElementCount": 2,
     "matchingElementCount": 1,
     "showFlashcard": true,
-    "text": "In next five levels each correct card will have 1 matching symbol",
+    "text": "In next 5 levels each correct card will have 1 matching symbol",
     "img": './flashcardMascot.png'
   },
   2: {
@@ -37,8 +37,8 @@ const levelSettings = {
     "showFlashcard": false,
   },
   6: {
-    "mainCardElementCount": 6,
-    "cardElementCount": 6,
+    "mainCardElementCount": 4,
+    "cardElementCount": 4,
     "matchingElementCount": 2,
     "showFlashcard": true,
     "text": "In next five levels each correct card will have 2 matching symbols",
@@ -69,34 +69,34 @@ const levelSettings = {
     "showFlashcard": false,
   },
   11: {
-    "mainCardElementCount": 6,
-    "cardElementCount": 6,
+    "mainCardElementCount": 4,
+    "cardElementCount": 4,
     "matchingElementCount": 2,
     "showFlashcard": true,
-    "text": "Let's make it a bit more difficult and make colors more similar!",
+    "text": "In next five levels each correct card will have 2 matching symbols and colors will be more similar",
     "img": "./assets/flashcardMascot.png"
   },
   12: {
-    "mainCardElementCount": 6,
-    "cardElementCount": 6,
+    "mainCardElementCount": 4,
+    "cardElementCount": 4,
     "matchingElementCount": 2,
     "showFlashcard": false,
   },
   13: {
-    "mainCardElementCount": 6,
-    "cardElementCount": 6,
+    "mainCardElementCount": 4,
+    "cardElementCount": 4,
     "matchingElementCount": 2,
     "showFlashcard": false,
   },
   14: {
-    "mainCardElementCount": 6,
-    "cardElementCount": 6,
+    "mainCardElementCount": 4,
+    "cardElementCount": 4,
     "matchingElementCount": 2,
     "showFlashcard": false,
   },
   15: {
-    "mainCardElementCount": 6,
-    "cardElementCount": 6,
+    "mainCardElementCount": 4,
+    "cardElementCount": 4,
     "matchingElementCount": 2,
     "showFlashcard": false,
   },
@@ -105,10 +105,103 @@ const levelSettings = {
     "cardElementCount": 8,
     "matchingElementCount": 3,
     "showFlashcard": true,
-    "text": "From here on everthing's 1000x more difficult!!",
+    "text": "In next five levels each correct card will have 3 matching symbols and colors will be more similar",
     "img": "./assets/flashcardMascot.png"
   },
-
+  17: {
+    "mainCardElementCount": 8,
+    "cardElementCount": 8,
+    "matchingElementCount": 3,
+    "showFlashcard": false,
+  },
+  18: {
+    "mainCardElementCount": 8,
+    "cardElementCount": 8,
+    "matchingElementCount": 3,
+    "showFlashcard": false,
+  },
+  19: {
+    "mainCardElementCount": 8,
+    "cardElementCount": 8,
+    "matchingElementCount": 3,
+    "showFlashcard": false,
+  },
+  20: {
+    "mainCardElementCount": 8,
+    "cardElementCount": 8,
+    "matchingElementCount": 3,
+    "showFlashcard": false,
+  },
+  21: {
+    "mainCardElementCount": 4,
+    "cardElementCount": 4,
+    "matchingElementCount": 3,
+    "showFlashcard": true,
+    "text": "In next TEN levels each correct card will have 3 matching symbols and colors will be EVEN MORE similar",
+    "img": "./assets/flashcardMascot.png"
+  },
+  22: {
+    "mainCardElementCount": 4,
+    "cardElementCount": 4,
+    "matchingElementCount": 3,
+    "showFlashcard": false,
+  },
+  23: {
+    "mainCardElementCount": 6,
+    "cardElementCount": 4,
+    "matchingElementCount": 3,
+    "showFlashcard": false,
+  },
+  24: {
+    "mainCardElementCount": 6,
+    "cardElementCount": 4,
+    "matchingElementCount": 3,
+    "showFlashcard": false,
+  },
+  25: {
+    "mainCardElementCount": 6,
+    "cardElementCount": 6,
+    "matchingElementCount": 3,
+    "showFlashcard": false,
+  },
+  26: {
+    "mainCardElementCount": 6,
+    "cardElementCount": 6,
+    "matchingElementCount": 3,
+    "showFlashcard": false,
+  },
+  27: {
+    "mainCardElementCount": 6,
+    "cardElementCount": 6,
+    "matchingElementCount": 3,
+    "showFlashcard": false,
+  },
+  28: {
+    "mainCardElementCount": 8,
+    "cardElementCount": 8,
+    "matchingElementCount": 3,
+    "showFlashcard": false,
+  },
+  29: {
+    "mainCardElementCount": 8,
+    "cardElementCount": 8,
+    "matchingElementCount": 3,
+    "showFlashcard": false,
+  },
+  30: {
+    "mainCardElementCount": 8,
+    "cardElementCount": 8,
+    "matchingElementCount": 3,
+    "showFlashcard": false,
+  },
+  31: {
+    "mainCardElementCount": 8,
+    "cardElementCount": 8,
+    "matchingElementCount": 3,
+    "showFlashcard": true,
+    "text": "No more levels created after next one",
+    "img": "./assets/flashcardMascot.png"
+  },
 };
 
 export default levelSettings;
