@@ -19,7 +19,11 @@ const menuOptions = [
 const Menu = ({ onMenuItemSelect = () => {} }) => {
   const [activeLabel, setActiveLabel] = useState(-1);
   const navigate = useNavigate();
-  const gameState = useStoreSlices((state) => state.gameState);
+
+  const {
+    gameState,
+    setGameStateToNotStarted,
+  } = useStoreSlices();
 
   const handleLabelClick = useCallback(
     (label) => {
@@ -29,12 +33,13 @@ const Menu = ({ onMenuItemSelect = () => {} }) => {
     [activeLabel]
   );
 
-  console.log("gameState:", gameState);
+  console.log("gameState1 from Menu:", gameState);
 
   return (
     <ul className={styles.Menu}>
       <MenuItem
         onClick={() => { 
+          setGameStateToNotStarted();
           navigate('/game')
         }}
         label={'Play Game'}

@@ -9,6 +9,7 @@ import SplashScreenLayout from './layouts/SplashScreenLayout';
 
 function App() {
   return (
+    <>
     <Router>
       <Routes>
         <Route path='/' element={<LandingScreen />} />
@@ -18,6 +19,7 @@ function App() {
         <Route path='/card' element={<Card />} />
       </Routes>
     </Router>
+  </>
   );
 }
 

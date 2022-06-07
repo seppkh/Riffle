@@ -1,6 +1,6 @@
 import styles from './Card.module.css';
 import { useMemo } from 'react';
-import CardElement from './CardElement';
+import { CardElement } from './CardElement';
 import clsx from 'clsx';
 import useStoreSlices from '../store/rootSliceStore';
 
@@ -9,8 +9,8 @@ const getRandomIndexOfArray = (input) => {
   return randomIndex;
 };
 
-const Card = ({ elements, isMain, onClick }) => {
-  console.log(elements);
+const Card = ({ elements, isMain, onClick, elementsColors }) => {
+  // console.log(elements);
 
   const locationPoints = useStoreSlices((state) => state.locationPoints);
 
@@ -29,11 +29,12 @@ const Card = ({ elements, isMain, onClick }) => {
     return output;
   }, [elements]);
 
+
   const renderElement = (element) => {
     const elementLocation = elementLocations.get(element);
     return (
       <>
-      <CardElement key={element} element={element} location={elementLocation} />
+      <CardElement key={element} element={element} location={elementLocation} elementsColors={elementsColors} />
       </>
     );
   };

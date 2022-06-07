@@ -1,7 +1,8 @@
+import { iconsLength } from "../components/Icons";
 import shuffle from "./shuffleSubCardOrder";
 
 // create list of available numbers:
-let numbersArr = Array.from(Array(15).keys());
+let numbersArr = Array.from(Array(iconsLength).keys());
 
 // create as set of 4 cards for the gameplay:
 let elementSets = {
