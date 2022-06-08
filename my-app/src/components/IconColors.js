@@ -1,14 +1,15 @@
 
 const iconColorMediumShades = [
-  'red',
-  'blue',
-  'green',
-  'orange',
-  'purple',
+  '#db2131', // red
+  '#0070ff', // blue
+  '#66b032', // green
+  '#ff8243', // orange
+  '#ff69b4', // pink
+  '#6f2da8', // purple
 ];
 
 const iconColorReds = [
-  '#FA8072', '#cf1020', '#8B0000', // reds
+  '#FA8072', '#db2131', '#8B0000', // reds
 ];
 const iconColorBlues = [
   '#add8e6', '#0070ff', '#00008b', // blues
