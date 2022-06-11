@@ -117,7 +117,11 @@ const ShowContentWithStores = () => {
   
       let endingMessage = '';
       let suffix = 'points';
-  
+      let reason = '';
+
+      if (lives === 0) reason = "you ran out of lives!";
+      if (timeLeft <= 0) reason = "you ran out of time!";
+
       if (score === 1) suffix = 'point';
   
       if (score <= 5) endingMessage = "A little disappointing if I'm honest...";
@@ -128,14 +132,14 @@ const ShowContentWithStores = () => {
       return (
         <>
           <img src={logoEnded} alt='endedImg' height='150px' />
-          <h2>Game over – you ran out of time!</h2>
+          <h2>Game over – {reason}</h2>
           <p>
             Your final score is {score} {suffix}
           </p>
           <h5>{endingMessage}</h5>
           <br />
   
-          {showHighScores()};
+          {showHighScores()}
   
           <p>Surely you can beat your own score...</p>
           <button
