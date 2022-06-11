@@ -12,6 +12,7 @@ const gameStates = {
 const createGameSlice = (set, get) => ({
   level: 0,
   score: 0,
+  lives: 3,
   timeLeft: 30,
   timeLeftBonus: 3,
   gameState: gameStates.menu,
@@ -21,7 +22,8 @@ const createGameSlice = (set, get) => ({
     level: 0, 
     score: 0,
     timeLeft: 30, 
-    timeLeftBonus: 3 
+    timeLeftBonus: 3,
+    lives: 3
   }),
   tick: () => set(state => {
     if (state.timeLeft === 0) return;
@@ -70,6 +72,9 @@ const createGameSlice = (set, get) => ({
   setGameStateToRunning: () => set(() => {
     return { gameState: gameStates.running }
   }),
+  setGameStateToEnded: () => set(() => {
+    return { gameState: gameStates.ended }
+  }),
   togglePause: () => set(state => { 
     if (state.gameState === gameStates.paused) {
       if (state.timeLeft === 0) {
@@ -92,12 +97,18 @@ const createGameSlice = (set, get) => ({
   resetTimeleft: () => set(() => ({ 
     timeLeft: 30
   })),
-  resetTimeLeftBonus: () => set(state => {
-    return { timeLeftBonus: 3 }
-  }),
+  resetTimeLeftBonus: () => set(() => ({
+    timeLeftBonus: 3,
+  })),
   increaseScoreBonus: () => set(state => ({ 
     score: state.score + 3,
     timeLeft: state.timeLeft + 5 
+  })),
+  decreaseLives: () => set(state => ({ 
+    lives: state.lives - 1,
+  })),
+  resetLives: () => set(() => ({
+    lives: 3,
   })),
   
 })
