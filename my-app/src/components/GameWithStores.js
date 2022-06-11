@@ -3,6 +3,9 @@ import useStoreSlices from "../store/rootSliceStore";
 import ShowContentWithStores from "./ShowContentWithStores";
 import { useNavigate } from "react-router-dom";
 import { useMemo } from "react";
+import Timer from "./Timer";
+import Counters from "./Counters";
+import TimerBonus from "./TimerBonus";
 
 
 const GameWithStores = () => {
@@ -13,32 +16,76 @@ const GameWithStores = () => {
     level,
     levelSettings,
     toggleFlashcard,
-    toggleSound
+    toggleSound,
+    timeLeft,
+    setTimeLeft,
+    tick,
+    timeChange,
+    resetCounters,
+    unAssignCards,
+    setGameStateToMenu,
+    setFlashcard,
+    resetTimeChange,
+    setGameStateToEnded,
+    timeLeftBonus,
+    resetTimeLeftBonus,
+    nullTimeLeftBonus
   } = useStoreSlices();
 
-  const showFlashcard = levelSettings[level].showFlashcard;
 
   console.log("gameState1 from GameWithStores:", gameState);
 
   console.log("gameState1.5 from GameWithStores:", gameState);
 
+  console.log("timeLeft from GameWithStores:", timeLeft);
 
-  const content = useMemo((level) => {
+  console.log("level from GameWithStores:", level);
 
-    if (level === 1) {
-      if (showFlashcard && gameState !== "running") {
-        toggleFlashcard();
-      }
-    }
+
+  const content = useMemo(() => {
+    setFlashcard(levelSettings[level].showFlashcard);
   
-    if (showFlashcard && gameState !== "flashcard") {
-        toggleFlashcard();
-    }
-  
-    return <ShowContentWithStores />
+    return <ShowContentWithStores  />
 
   }, [level]);
 
+
+  const contentTimer = useMemo(() => {
+    if (gameState === 'running')
+    return <Timer 
+            timeLeft={timeLeft}
+            setTimeLeft={setTimeLeft}
+            gameState={gameState} 
+            timeChange={timeChange} 
+            resetTimeChange={resetTimeChange}
+            setGameStateToEnded={setGameStateToEnded}
+            timeLeftBonus={timeLeftBonus}
+            resetTimeLeftBonus={resetTimeLeftBonus}
+            level={level}
+           />
+
+  }, [gameState, timeChange, setTimeLeft ]);
+
+
+  const contentTimerBonus = useMemo(() => {
+    if (gameState === 'running')
+    return <TimerBonus 
+            gameState={gameState}            
+            timeLeftBonus={timeLeftBonus}
+            resetTimeLeftBonus={resetTimeLeftBonus}
+            nullTimeLeftBonus={nullTimeLeftBonus}
+            level={level}
+           />
+
+  }, [gameState, level ]);
+
+
+
+  const contentCounters = useMemo(() => {
+    if (gameState === 'running')
+    return <Counters />
+
+  }, [gameState]);
   
 /*
   const loadContent = useCallback(
@@ -54,6 +101,9 @@ const GameWithStores = () => {
         <button
           onClick={() => {
             navigate("/");
+            resetCounters();
+            setGameStateToMenu();
+            unAssignCards();
           }}
         >
           Exit
@@ -61,9 +111,22 @@ const GameWithStores = () => {
         <button onClick={toggleSound}>Mute/Unmute</button>
       </div>
 
+      <div className="Timer">
+        {contentTimer}
+      </div>
+
+      <div className="TimerBonus">
+        {contentTimerBonus}
+      </div>
+
+      <div className="Counters">
+        {contentCounters}
+      </div>
+
       <div className="Game">
         {content}
       </div>
+
     </>
   );
 };

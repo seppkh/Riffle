@@ -1,5 +1,4 @@
 import useStoreSlices from '../store/rootSliceStore';
-import CountersWithStores from './CountersWithStores';
 import CardLayout from './CardLayout';
 import logoFlashcard from '../assets/flashcardMascot.png';
 import logoEnded from '../assets/endedMascot.png';
@@ -22,13 +21,20 @@ const ShowContentWithStores = () => {
     resetCounters,
     togglePause,
     setGameStateToNotStarted,
+    setGameStateToRunning,
     assignCards,
     unAssignCards,
     level,
     levelSettings,
     toggleFlashcard,
     toggleSound,
-    soundState
+    soundState,
+    timeLeft,
+    setGameStateToFlashcard,
+    showFlashcard,
+    setFlashcard,
+    setTimeLeft,
+    resetTimeleft
   } = useStoreSlices(); 
 
       /*
@@ -39,12 +45,36 @@ const ShowContentWithStores = () => {
     soundEnabled: soundState,
   }); */
 
-  const showFlashcard = levelSettings[level].showFlashcard;
-
   console.log("gameState from ShowContentWithStores:", gameState);
-
+  console.log("showFlashcard from ShowContentWithStores:", showFlashcard);
+  console.log("level from ShowContentWithStores:", level);
+  
 
   const content = useMemo(() => {
+
+    if (showFlashcard) {
+
+      if (level === 1) {
+        setFlashcard(false);
+        setGameStateToFlashcard();
+      }
+      else {
+        setFlashcard(false);
+
+      }
+
+      /*
+      if (
+      level !== 1
+      && level !== 0 &&
+      gameState !== "flashcard" ) {
+        setGameStateToFlashcard();
+        showFlashcard = false;
+    }
+      */
+
+    };
+
 
     if (gameState === 'menu') {    
       return (
@@ -124,7 +154,6 @@ const ShowContentWithStores = () => {
               unAssignCards();
               toggleSound();
               toggleSound();
-  
             }}
           >
             Play again
@@ -147,7 +176,7 @@ const ShowContentWithStores = () => {
           <h2>{flashcardText}</h2>
           <button
             onClick={() => {
-              toggleFlashcard();
+              setGameStateToRunning();
             }}
           >
             Continue
@@ -157,11 +186,17 @@ const ShowContentWithStores = () => {
     } 
   
     if (gameState === 'running') {
+
+      if (showFlashcard) {
+          setFlashcard(true);
+          resetTimeleft();
+          setGameStateToFlashcard();
+        }
+
       return (
         <>
         <div className='gameBoard'>
-          <CountersWithStores />
-  
+
           <CardLayout />
           <button onClick={togglePause}>Pause</button>
         </div>
@@ -170,7 +205,7 @@ const ShowContentWithStores = () => {
       );
     }
     
-  }, [gameState])
+  }, [gameState, level])
 
 
   return (

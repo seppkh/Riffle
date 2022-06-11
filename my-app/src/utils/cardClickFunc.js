@@ -13,7 +13,10 @@ const OnCardClickHandler = (clicked_card, useStoreSlices,
     gameState,
     timeLeftBonus,
     resetTimeLeftBonus,
-    increaseScoreBonus } = useStoreSlices;
+    increaseScoreBonus,
+    increaseTime,
+    resetTimeChange,
+    nullTimeLeftBonus } = useStoreSlices;
 
   // disable clicking on card if game not started or level not yet 1
   
@@ -37,20 +40,25 @@ const OnCardClickHandler = (clicked_card, useStoreSlices,
 
   if (clicked_card.isActive === true && clicked_card.isMatch === true) {
 
-    if (timeLeftBonus > 0) {
+    /*if (timeLeftBonus > 0) {
       increaseScoreBonus()
       // playBonus();
       
     } else {
-      increaseScore()
+      increaseScore();
+      increaseTime();
       // playRight();
-    };
+    }; */
+
+    increaseScore();
+    increaseTime();
 
     return (
       console.log("Correct card!"),
       activateCards(),
       increaseLevel(),
       assignCards(),
+      nullTimeLeftBonus(),
       resetTimeLeftBonus()
     );
 
