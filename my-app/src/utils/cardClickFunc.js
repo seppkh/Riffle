@@ -13,7 +13,8 @@ const OnCardClickHandler = (clicked_card, useStoreSlices,
     gameState,
     timeLeftBonus,
     resetTimeLeftBonus,
-    increaseScoreBonus } = useStoreSlices;
+    increaseScoreBonus,
+    decreaseLives } = useStoreSlices;
 
   // disable clicking on card if game not started or level not yet 1
   
@@ -30,6 +31,7 @@ const OnCardClickHandler = (clicked_card, useStoreSlices,
 
     console.log("Wrong guess - deactivating card");
     decreaseTime();
+    decreaseLives();
     deactivateCard(clicked_card);
 
     return;

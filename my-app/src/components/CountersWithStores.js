@@ -16,7 +16,8 @@ const CountersWithStores = () => {
     timeLeft,
     timeLeftBonus,
     tick,
-    tickBonus
+    tickBonus,
+    lives
   } = useStoreSlices();
 
   const matchingElementCount = levelSettings[level].matchingElementCount;
@@ -80,6 +81,7 @@ const CountersWithStores = () => {
       <p>3X bonus: {timeLeftBonus}</p>
       <p>score: {score}</p>
       <p>matching elements: {matchingElementCount}</p>
+      <p>lives: {lives}</p>
 
     </div>
   );

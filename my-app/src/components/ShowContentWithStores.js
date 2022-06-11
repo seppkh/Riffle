@@ -34,7 +34,10 @@ const ShowContentWithStores = () => {
     resetTimeleft,
     setGameStateToRunning,
     timeLeft,
-    timeLeftBonus
+    timeLeftBonus,
+    lives,
+    setGameStateToEnded,
+    resetLives
   } = useStoreSlices(); 
 
       /*
@@ -59,6 +62,10 @@ const ShowContentWithStores = () => {
         setFlashcard(false);
       }
     };
+
+    if (lives <= 0) {
+      setGameStateToEnded();
+    }
 
     if (gameState === 'menu') {    
       return (
