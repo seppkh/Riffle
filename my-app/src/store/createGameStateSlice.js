@@ -12,14 +12,15 @@ const gameStates = {
 const createGameSlice = (set, get) => ({
   level: 0,
   score: 0,
-  timeLeft: 180,
+  timeLeft: 30,
   timeLeftBonus: 3,
   gameState: gameStates.menu,
+  showFlashcard: false,
   increaseLevel: () => set(state => ({ level: state.level + 1 })),
   resetCounters: () => set({ 
     level: 0, 
     score: 0,
-    timeLeft: 180, 
+    timeLeft: 30, 
     timeLeftBonus: 3 
   }),
   tick: () => set(state => {
@@ -54,11 +55,20 @@ const createGameSlice = (set, get) => ({
       level: 1,
     }
   }),
+  setFlashcard: (input) => set(() => ({ 
+    showFlashcard: input 
+  })),
   setGameStateToNotStarted: () => set(() => {
     return { gameState: gameStates.notStarted }
   }),
   setGameStateToMenu: () => set(() => {
     return { gameState: gameStates.menu }
+  }),
+  setGameStateToFlashcard: () => set(() => {
+    return { gameState: gameStates.flashcard }
+  }),
+  setGameStateToRunning: () => set(() => {
+    return { gameState: gameStates.running }
   }),
   togglePause: () => set(state => { 
     if (state.gameState === gameStates.paused) {
@@ -73,20 +83,15 @@ const createGameSlice = (set, get) => ({
     }
     return { gameState: gameStates.paused }
   }),
-  toggleFlashcard: () => set(state => { 
-    if (state.gameState === gameStates.flashcard) {
-      return {
-        timeLeft: 180,
-        gameState: gameStates.running
-      }
-    }
-    return { gameState: gameStates.flashcard }
-  }),
+  
   tickBonus: () => set(state => {
     if (state.timeLeft <= 0) return;
     if (state.timeLeftBonus <= 0.1) return { timeLeftBonus: 0};
-    return { timeLeftBonus: (state.timeLeftBonus -0.0250).toFixed(2) }
+    return { timeLeftBonus: (state.timeLeftBonus - 0.05).toFixed(2) }
   }),
+  resetTimeleft: () => set(() => ({ 
+    timeLeft: 30
+  })),
   resetTimeLeftBonus: () => set(state => {
     return { timeLeftBonus: 3 }
   }),

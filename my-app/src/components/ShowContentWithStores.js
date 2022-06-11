@@ -1,5 +1,4 @@
 import useStoreSlices from '../store/rootSliceStore';
-import CountersWithStores from './CountersWithStores';
 import CardLayout from './CardLayout';
 import logoFlashcard from '../assets/flashcardMascot.png';
 import logoEnded from '../assets/endedMascot.png';
@@ -28,7 +27,14 @@ const ShowContentWithStores = () => {
     levelSettings,
     toggleFlashcard,
     toggleSound,
-    soundState
+    soundState,
+    showFlashcard,
+    setFlashcard,
+    setGameStateToFlashcard,
+    resetTimeleft,
+    setGameStateToRunning,
+    timeLeft,
+    timeLeftBonus
   } = useStoreSlices(); 
 
       /*
@@ -39,12 +45,20 @@ const ShowContentWithStores = () => {
     soundEnabled: soundState,
   }); */
 
-  const showFlashcard = levelSettings[level].showFlashcard;
-
-  console.log("gameState from ShowContentWithStores:", gameState);
-
 
   const content = useMemo(() => {
+    // console.log("gameState from ShowContentWithStores:", gameState);
+
+    if (showFlashcard) {
+
+      if (level === 1) {
+        setFlashcard(false);
+        setGameStateToFlashcard();
+      }
+      else {
+        setFlashcard(false);
+      }
+    };
 
     if (gameState === 'menu') {    
       return (
@@ -136,9 +150,7 @@ const ShowContentWithStores = () => {
     if (gameState === 'flashcard') {
       /* if (level !== 1)
         playFlashcard();
-  
       */
-  
       let flashcardText = levelSettings[level].text;
   
       return (
@@ -147,7 +159,8 @@ const ShowContentWithStores = () => {
           <h2>{flashcardText}</h2>
           <button
             onClick={() => {
-              toggleFlashcard();
+              setGameStateToRunning();
+              resetTimeleft();
             }}
           >
             Continue
@@ -157,11 +170,16 @@ const ShowContentWithStores = () => {
     } 
   
     if (gameState === 'running') {
+      if (showFlashcard) {
+        setFlashcard(true);
+        resetTimeleft();
+        setGameStateToFlashcard();
+      }
+
       return (
         <>
         <div className='gameBoard'>
-          <CountersWithStores />
-  
+            
           <CardLayout />
           <button onClick={togglePause}>Pause</button>
         </div>
@@ -170,7 +188,7 @@ const ShowContentWithStores = () => {
       );
     }
     
-  }, [gameState])
+  }, [gameState, level, timeLeft, timeLeftBonus])
 
 
   return (

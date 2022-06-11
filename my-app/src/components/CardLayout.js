@@ -11,24 +11,20 @@ import setColorForEachElement from '../utils/setColorForEachElementFunc';
 const ShowCardsWithStores = () => {
 
   const {
-    gameState,
     mainCard,
     level
   } = useStoreSlices();
 
-  console.log("gameState from CardLayout:", gameState);
+  // console.log("gameState from CardLayout:", gameState);
 
   const colorSet = selectColorSetsFunc(level);
-  
   const elementsColors = setColorForEachElement(iconsLength, colorSet)
-
-
   // console.log("colorSet from CardLayout.js:", colorSet)
   // console.log("elementsColors from CardLayout.js:", elementsColors)
 
 
   const contentMainCard = useMemo(() => {
-    
+
     return <Card isMain elements={mainCard.elements} elementsColors={elementsColors} />
   }, [level]);
 
