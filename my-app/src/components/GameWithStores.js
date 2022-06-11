@@ -3,6 +3,7 @@ import useStoreSlices from "../store/rootSliceStore";
 import ShowContentWithStores from "./ShowContentWithStores";
 import { useNavigate } from "react-router-dom";
 import { useMemo } from "react";
+import CountersWithStores from "./CountersWithStores";
 
 
 const GameWithStores = () => {
@@ -12,41 +13,31 @@ const GameWithStores = () => {
     gameState,
     level,
     levelSettings,
-    toggleFlashcard,
-    toggleSound
+    toggleSound,
+    setFlashcard,
+    timeLeftBonus,
+    timeLeft
   } = useStoreSlices();
 
-  const showFlashcard = levelSettings[level].showFlashcard;
-
-  console.log("gameState1 from GameWithStores:", gameState);
-
-  console.log("gameState1.5 from GameWithStores:", gameState);
-
-
-  const content = useMemo((level) => {
-
-    if (level === 1) {
-      if (showFlashcard && gameState !== "running") {
-        toggleFlashcard();
-      }
-    }
+  console.log("gameState from GameWithStores:", gameState);
   
-    if (showFlashcard && gameState !== "flashcard") {
-        toggleFlashcard();
-    }
-  
+  const content = useMemo(() => {
+
+    setFlashcard(levelSettings[level].showFlashcard);
+
     return <ShowContentWithStores />
 
   }, [level]);
 
-  
-/*
-  const loadContent = useCallback(
-    (state) => {
-      return <ShowContentWithStores state={state}/>
-    },
-    [gameState]
-  ) */
+
+  const contentCounters = useMemo(() => {
+    // console.log("gameState1.5 from GameWithStores:", gameState);
+
+    if (gameState === 'running')
+    return <CountersWithStores />
+
+  }, [gameState, timeLeft, timeLeftBonus]);
+
 
   return (
     <>
@@ -59,6 +50,10 @@ const GameWithStores = () => {
           Exit
         </button>
         <button onClick={toggleSound}>Mute/Unmute</button>
+      </div>
+
+      <div className="Counters">
+        {contentCounters}
       </div>
 
       <div className="Game">

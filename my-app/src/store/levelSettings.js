@@ -3,6 +3,7 @@ const levelSettings = {
     "mainCardElementCount": 0,
     "cardElementCount": 0,
     "matchingElementCount": 0,
+    "showFlashcard": false,
   },
   1: {
     "mainCardElementCount": 2,

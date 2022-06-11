@@ -19,38 +19,58 @@ const CountersWithStores = () => {
     tickBonus
   } = useStoreSlices();
 
+  const matchingElementCount = levelSettings[level].matchingElementCount;
+
   const MINUTE_MS = 1000;
-  const MINUTE_MS_BONUS = 25;
+  const MINUTE_MS_BONUS = 50;
 
   /*
   const [playTimerEnding] = useSound(lastSecondsBeep, {
     soundEnabled: soundState,
   }); */
 
+
+  // console.log("gameState from CountersWithStores:", gameState);
+
   
-  const matchingElementCount = levelSettings[level].matchingElementCount;
-
-  console.log("gameState from CountersWithStores:", gameState);
-
-  /*
   useEffect(() => {
     if (gameState !== "running") return;
 
-    const timeInterval = setInterval(() => {
-      tick();
-    }, MINUTE_MS);
-    const bonusTimeInterval = setInterval(() => {
-      tickBonus();
-    }, MINUTE_MS_BONUS);
+    if (timeLeft <= 0) return;
 
-    if (timeLeft <= 5) playTimerEnding();
+    if (timeLeft > 0) {
+      const timeInterval = setInterval(() => {
+        tick();
+      }, MINUTE_MS);
 
-    return () => {
-      clearInterval(timeInterval);
-      clearInterval(bonusTimeInterval);
-    };
-  }, [gameState, timeLeft]);
-  */
+      console.log("timeLeft from CounterWithStores:", timeLeft);
+    
+      return () => {
+        clearInterval(timeInterval);
+      };
+    }
+  }, [timeLeft]);
+
+
+  useEffect(() => {
+    if (gameState !== "running") return;
+
+    if (timeLeftBonus <= 0) return;
+
+    if (timeLeftBonus > 0) {
+      const bonusTimeInterval = setInterval(() => {
+        tickBonus();
+      }, MINUTE_MS_BONUS);
+
+      console.log("timeLeftBonus from CounterWithStores:", timeLeftBonus);
+      
+      return () => {
+        clearInterval(bonusTimeInterval);
+      };
+    }
+
+  }, [gameState, timeLeftBonus]);
+  
 
 
   return (
