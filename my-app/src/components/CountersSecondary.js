@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 import useSound from 'use-sound';
 import useStoreSlices from '../store/rootSliceStore';
-import './Counters.css';
+import './CountersSecondary.css';
 import lastSecondsBeep from '../assets/sounds/lastSecondsBeep.mp3';
 import levelSettings from '../store/levelSettings';
 
@@ -65,7 +65,7 @@ const CountersSecondary = () => {
   }, [gameState, timeLeftBonus]);
 
   return (
-    <div className='counters-all'>
+    <div className='counters-secondary'>
       <p className='level'>level: {level}</p>
       <p className='elements'>matching elements: {matchingElementCount}</p>
       <p className='time'>time: {timeLeft}</p>

@@ -9,9 +9,6 @@ const menuOptions = [
     label: 'Instructions',
   },
   {
-    label: 'Options',
-  },
-  {
     label: 'Credits',
   },
 ];

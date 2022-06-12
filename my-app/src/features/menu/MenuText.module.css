@@ -1,0 +1,12 @@
+.instructions,
+.credits,
+.intro {
+  max-height: 400px;
+}
+
+.credits,
+.intro {
+  display: flex;
+  align-items: center;
+  font-size: 1.5em;
+}
