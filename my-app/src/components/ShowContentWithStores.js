@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import useStoreSlices from '../store/rootSliceStore';
 import CardLayout from './CardLayout';
 import logoFlashcard from '../assets/flashcardMascot.png';
@@ -10,11 +11,12 @@ import gameBackground from '../assets/sounds/gameBackground.mp3';
 import gameOver from '../assets/sounds/gameOver.mp3';
 import flashCard from '../assets/sounds/flashCard.mp3';
 import { useMemo } from 'react';
+import { useEffect } from 'react';
 
 
 const ShowContentWithStores = () => {
-
- const {
+  const navigate = useNavigate();
+  const {
     gameState,
     score,
     startGame,
@@ -37,7 +39,6 @@ const ShowContentWithStores = () => {
     timeLeftBonus,
     lives,
     setGameStateToEnded,
-    resetLives
   } = useStoreSlices(); 
 
       /*
@@ -47,6 +48,12 @@ const ShowContentWithStores = () => {
     interrupt: false,
     soundEnabled: soundState,
   }); */
+
+  useEffect(() => {
+    if (gameState === 'menu') {    
+      navigate('/')
+    }
+  }, []);
 
 
   const content = useMemo(() => {
@@ -66,15 +73,6 @@ const ShowContentWithStores = () => {
     if (lives <= 0) {
       setGameStateToEnded();
     }
-
-    if (gameState === 'menu') {    
-      return (
-        <>
-        <p>Jõudsid lehele localhost:3000/game ilma menüüs käimata.</p> 
-        <p>Mine <a href="http://localhost:3000/">http://localhost:3000/</a> ja alusta mängu sealt.</p>
-         </>
-      );
-    } 
   
     if (gameState === 'notStarted') {
       //playBackground();
