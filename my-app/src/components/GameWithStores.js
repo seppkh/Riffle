@@ -46,7 +46,7 @@ const GameWithStores = () => {
     <>
       <div className='stickybuttons-all'>
         <Button
-          onClick={(handleClick) => {
+          onClick={() => {
             navigate('/');
             resetCounters();
           }}

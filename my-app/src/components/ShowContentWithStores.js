@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import useStoreSlices from '../store/rootSliceStore';
 import CardLayout from './CardLayout';
-import logoFlashcard from '../assets/flashcardMascot.png';
+import logoFlashcard from '../assets/gifs/R_wink.gif';
 import logoEnded from '../assets/endedMascot.png';
 
 import { checkHighScore, showHighScores } from '../utils/saveScoresFunc';
@@ -12,6 +12,7 @@ import gameOver from '../assets/sounds/gameOver.mp3';
 import flashCard from '../assets/sounds/flashCard.mp3';
 import { useMemo } from 'react';
 import { useEffect } from 'react';
+import Button from './Button';
 
 const ShowContentWithStores = () => {
   const navigate = useNavigate();
@@ -159,16 +160,15 @@ const ShowContentWithStores = () => {
 
       return (
         <>
-          <img src={logoFlashcard} alt='flashcardImg' height='150px' />
+          <img src={logoFlashcard} alt='flashcardImg' height='250px' />
           <h2>{flashcardText}</h2>
-          <button
+          <Button
             onClick={() => {
               setGameStateToRunning();
               resetTimeleft();
             }}
-          >
-            Continue
-          </button>
+            label='Continue'
+          ></Button>
         </>
       );
     }
