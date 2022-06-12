@@ -1,0 +1,15 @@
+.btntoolbar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.leftside {
+  display: flex;
+  flex: 1;
+  justify-content: flex-start;
+}
+.rightside {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+}

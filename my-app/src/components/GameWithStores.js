@@ -6,6 +6,7 @@ import { useMemo } from 'react';
 import CountersSecondary from './CountersSecondary';
 import CountersPrimary from './CountersPrimary';
 import Button from './Button';
+import styles from './GameWithStores.module.css';
 
 const GameWithStores = () => {
   const navigate = useNavigate();
@@ -44,15 +45,19 @@ const GameWithStores = () => {
 
   return (
     <>
-      <div className='stickybuttons-all'>
-        <Button
-          onClick={() => {
-            navigate('/');
-            resetCounters();
-          }}
-          label='Exit'
-        ></Button>
-        <button onClick={toggleSound}>Mute/Unmute</button>
+      <div className={styles.btntoolbar}>
+        <div className={styles.leftside}>
+          <Button
+            onClick={() => {
+              navigate('/');
+              resetCounters();
+            }}
+            label='Exit'
+          />
+        </div>
+        <div className={styles.rightside}>
+          <Button onClick={toggleSound} label='Mute/Unmute' />
+        </div>
       </div>
 
       <div className='CountersPrimary'>{contentCountersPrimary}</div>

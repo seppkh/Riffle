@@ -2,11 +2,14 @@
 .credits,
 .intro {
   max-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: inherit;
 }
 
 .credits,
 .intro {
-  display: flex;
-  align-items: center;
   font-size: 1.5em;
+  flex-direction: column;
 }

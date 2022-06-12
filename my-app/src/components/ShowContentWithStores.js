@@ -2,7 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import useStoreSlices from '../store/rootSliceStore';
 import CardLayout from './CardLayout';
 import logoFlashcard from '../assets/gifs/R_wink.gif';
-import logoEnded from '../assets/endedMascot.png';
+import logoEnded from '../assets/gifs/unhappy_yellow.gif';
 
 import { checkHighScore, showHighScores } from '../utils/saveScoresFunc';
 
@@ -79,15 +79,14 @@ const ShowContentWithStores = () => {
           <p>Setting up your gameplay...</p>
           <h2>Click the button to start your game</h2>
           <br />
-          <button
+          <Button
             onClick={() => {
               resetCounters();
               startGame();
               assignCards();
             }}
-          >
-            Start game
-          </button>
+            label='Start game'
+          />
         </>
       );
     }
@@ -100,7 +99,7 @@ const ShowContentWithStores = () => {
           <br />
           <h2>Click the button to continue your game</h2>
           <br />
-          <button onClick={togglePause}>Unpause</button>
+          <Button onClick={togglePause} label='Pause' />
         </>
       );
     }
@@ -126,7 +125,7 @@ const ShowContentWithStores = () => {
 
       return (
         <>
-          <img src={logoEnded} alt='endedImg' height='150px' />
+          <img src={logoEnded} alt='endedImg' height='250px' />
           <h2>Game over – {reason}</h2>
           <p>
             Your final score is {score} {suffix}
@@ -137,7 +136,7 @@ const ShowContentWithStores = () => {
           {showHighScores()}
 
           <p>Surely you can beat your own score...</p>
-          <button
+          <Button
             onClick={() => {
               resetCounters();
               setGameStateToNotStarted();
@@ -145,9 +144,8 @@ const ShowContentWithStores = () => {
               toggleSound();
               toggleSound();
             }}
-          >
-            Play again
-          </button>
+            label='Play again'
+          />
         </>
       );
     }
@@ -181,12 +179,10 @@ const ShowContentWithStores = () => {
       }
 
       return (
-        <>
-          <div className='gameBoard'>
-            <CardLayout />
-            <button onClick={togglePause}>Pause</button>
-          </div>
-        </>
+        <div className='gameBoard'>
+          <CardLayout />
+          <Button onClick={togglePause} label='Pause' />
+        </div>
       );
     }
   }, [gameState, level, timeLeft, timeLeftBonus]);
