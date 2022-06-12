@@ -4,7 +4,7 @@ import CardLayout from './CardLayout';
 import logoFlashcard from '../assets/flashcardMascot.png';
 import logoEnded from '../assets/endedMascot.png';
 
-import { checkHighScore, showHighScores } from "../utils/saveScoresFunc";
+import { checkHighScore, showHighScores } from '../utils/saveScoresFunc';
 
 import useSound from 'use-sound';
 import gameBackground from '../assets/sounds/gameBackground.mp3';
@@ -12,7 +12,6 @@ import gameOver from '../assets/sounds/gameOver.mp3';
 import flashCard from '../assets/sounds/flashCard.mp3';
 import { useMemo } from 'react';
 import { useEffect } from 'react';
-
 
 const ShowContentWithStores = () => {
   const navigate = useNavigate();
@@ -39,9 +38,9 @@ const ShowContentWithStores = () => {
     timeLeftBonus,
     lives,
     setGameStateToEnded,
-  } = useStoreSlices(); 
+  } = useStoreSlices();
 
-      /*
+  /*
   const [playGameOver] = useSound(gameOver, { soundEnabled: soundState });
   const [playFlashcard] = useSound(flashCard, { soundEnabled: soundState });
   const [playBackground, { stop }] = useSound(gameBackground, {
@@ -50,33 +49,30 @@ const ShowContentWithStores = () => {
   }); */
 
   useEffect(() => {
-    if (gameState === 'menu') {    
-      navigate('/')
+    if (gameState === 'menu') {
+      navigate('/');
     }
   }, []);
-
 
   const content = useMemo(() => {
     // console.log("gameState from ShowContentWithStores:", gameState);
 
     if (showFlashcard) {
-
       if (level === 1) {
         setFlashcard(false);
         // setGameStateToFlashcard();
-      }
-      else {
+      } else {
         setFlashcard(false);
       }
-    };
+    }
 
     if (lives <= 0) {
       setGameStateToEnded();
     }
-  
+
     if (gameState === 'notStarted') {
       //playBackground();
-  
+
       return (
         <>
           <p>Setting up your gameplay...</p>
@@ -94,7 +90,7 @@ const ShowContentWithStores = () => {
         </>
       );
     }
-  
+
     if (gameState === 'paused') {
       return (
         <>
@@ -107,26 +103,26 @@ const ShowContentWithStores = () => {
         </>
       );
     }
-  
+
     if (gameState === 'ended') {
       // playGameOver();
-    
+
       // checkHighScore(score, scoreEntered, toggleScoreEntered);
-  
+
       let endingMessage = '';
       let suffix = 'points';
       let reason = '';
 
-      if (lives === 0) reason = "you ran out of lives!";
-      if (timeLeft <= 0) reason = "you ran out of time!";
+      if (lives === 0) reason = 'you ran out of lives!';
+      if (timeLeft <= 0) reason = 'you ran out of time!';
 
       if (score === 1) suffix = 'point';
-  
+
       if (score <= 5) endingMessage = "A little disappointing if I'm honest...";
       if (score > 5 && score <= 10) endingMessage = 'Nicely done!';
       if (score > 10 && score <= 20) endingMessage = 'You rocked it!';
       if (score > 20) endingMessage = "Wow! You're a natural pro at this game!";
-  
+
       return (
         <>
           <img src={logoEnded} alt='endedImg' height='150px' />
@@ -136,9 +132,9 @@ const ShowContentWithStores = () => {
           </p>
           <h5>{endingMessage}</h5>
           <br />
-  
+
           {showHighScores()}
-  
+
           <p>Surely you can beat your own score...</p>
           <button
             onClick={() => {
@@ -147,7 +143,6 @@ const ShowContentWithStores = () => {
               unAssignCards();
               toggleSound();
               toggleSound();
-  
             }}
           >
             Play again
@@ -155,13 +150,13 @@ const ShowContentWithStores = () => {
         </>
       );
     }
-  
+
     if (gameState === 'flashcard') {
       /* if (level !== 1)
         playFlashcard();
       */
       let flashcardText = levelSettings[level].text;
-  
+
       return (
         <>
           <img src={logoFlashcard} alt='flashcardImg' height='150px' />
@@ -176,8 +171,8 @@ const ShowContentWithStores = () => {
           </button>
         </>
       );
-    } 
-  
+    }
+
     if (gameState === 'running') {
       if (showFlashcard) {
         setFlashcard(true);
@@ -187,25 +182,16 @@ const ShowContentWithStores = () => {
 
       return (
         <>
-        <div className='gameBoard'>
-            
-          <CardLayout />
-          <button onClick={togglePause}>Pause</button>
-        </div>
+          <div className='gameBoard'>
+            <CardLayout />
+            <button onClick={togglePause}>Pause</button>
+          </div>
         </>
-  
       );
     }
-    
-  }, [gameState, level, timeLeft, timeLeftBonus])
+  }, [gameState, level, timeLeft, timeLeftBonus]);
 
-
-  return (
-    <>
-    {content}
-    </>
-  );
-  
+  return <>{content}</>;
 };
 
 export default ShowContentWithStores;

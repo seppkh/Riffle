@@ -1,11 +1,11 @@
-import React from "react";
-import useStoreSlices from "../store/rootSliceStore";
-import ShowContentWithStores from "./ShowContentWithStores";
-import { useNavigate } from "react-router-dom";
-import { useMemo } from "react";
-import CountersSecondary from "./CountersSecondary";
-import CountersPrimary from "./CountersPrimary";
-
+import React from 'react';
+import useStoreSlices from '../store/rootSliceStore';
+import ShowContentWithStores from './ShowContentWithStores';
+import { useNavigate } from 'react-router-dom';
+import { useMemo } from 'react';
+import CountersSecondary from './CountersSecondary';
+import CountersPrimary from './CountersPrimary';
+import Button from './Button';
 
 const GameWithStores = () => {
   const navigate = useNavigate();
@@ -18,63 +18,48 @@ const GameWithStores = () => {
     setFlashcard,
     timeLeftBonus,
     timeLeft,
-    resetCounters
+    resetCounters,
   } = useStoreSlices();
 
-  console.log("gameState from GameWithStores:", gameState);
+  console.log('gameState from GameWithStores:', gameState);
 
   const content = useMemo(() => {
-
     setFlashcard(levelSettings[level].showFlashcard);
 
-    return <ShowContentWithStores />
-
+    return <ShowContentWithStores />;
   }, [level]);
 
-
   const contentCountersPrimary = useMemo(() => {
-
-    if (gameState === 'running' || 
-      gameState === 'flashcard' || 
-      gameState === 'notStarted')
-    return <CountersPrimary />
-
+    if (
+      gameState === 'running' ||
+      gameState === 'flashcard' ||
+      gameState === 'notStarted'
+    )
+      return <CountersPrimary />;
   }, [gameState]);
 
-
   const contentCountersSecondary = useMemo(() => {
-
-    if (gameState === 'running')
-    return <CountersSecondary />
-
+    if (gameState === 'running') return <CountersSecondary />;
   }, [gameState, timeLeft, timeLeftBonus]);
-
 
   return (
     <>
-      <div className="stickybuttons-all">
-        <button
-          onClick={() => {
-            navigate("/");
+      <div className='stickybuttons-all'>
+        <Button
+          onClick={(handleClick) => {
+            navigate('/');
             resetCounters();
           }}
-        >
-          Exit
-        </button>
+          label='Exit'
+        ></Button>
         <button onClick={toggleSound}>Mute/Unmute</button>
       </div>
 
-      <div className="CountersPrimary">
-        {contentCountersPrimary}
-      </div>
+      <div className='CountersPrimary'>{contentCountersPrimary}</div>
 
-      <div className="CountersSecondary">
-        {contentCountersSecondary}
-      </div>
+      <div className='CountersSecondary'>{contentCountersSecondary}</div>
 
-      <div className="Game">
-        {content}
-      </div>
+      <div className='Game'>{content}</div>
     </>
   );
 };

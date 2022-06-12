@@ -1,9 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Mukta&family=Work+Sans:wght@300;500&display=swap');
 :root {
   --color-bg: white;
-  --color-text: rgb(31, 30, 30);
+  --color-text: rgb(18, 18, 18);
   --color-title: #bbcea8;
   --color-subdued: #bdd5ea;
-  --color-subdued-rgb: 227, 216, 126;
+  --color-subdued-rgb: rgb(90, 88, 88);
   --color-bright: #bdd5ea;
   --color-decoration: #748067;
 }
@@ -11,9 +12,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Work Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--color-bg);
