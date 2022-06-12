@@ -6,18 +6,16 @@ import lastSecondsBeep from '../assets/sounds/lastSecondsBeep.mp3';
 import levelSettings from '../store/levelSettings';
 
 
-const CountersWithStores = () => {
+const CountersSecondary = () => {
 
   const {
     gameState,
-    score,
     level,
     soundState,
     timeLeft,
     timeLeftBonus,
     tick,
     tickBonus,
-    lives
   } = useStoreSlices();
 
   const matchingElementCount = levelSettings[level].matchingElementCount;
@@ -29,7 +27,6 @@ const CountersWithStores = () => {
   const [playTimerEnding] = useSound(lastSecondsBeep, {
     soundEnabled: soundState,
   }); */
-
 
   // console.log("gameState from CountersWithStores:", gameState);
 
@@ -75,16 +72,14 @@ const CountersWithStores = () => {
 
 
   return (
-    <div className='counters-all'>
+    <div className='counters-all secondary'>
       <p>level: {level}</p>
+      <p>matching elements: {matchingElementCount}</p>
       <p>time: {timeLeft}</p>
       <p>3X bonus: {timeLeftBonus}</p>
-      <p>score: {score}</p>
-      <p>matching elements: {matchingElementCount}</p>
-      <p>lives: {lives}</p>
 
     </div>
   );
 };
 
-export default CountersWithStores;
+export default CountersSecondary;

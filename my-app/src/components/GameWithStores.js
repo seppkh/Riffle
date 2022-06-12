@@ -3,7 +3,8 @@ import useStoreSlices from "../store/rootSliceStore";
 import ShowContentWithStores from "./ShowContentWithStores";
 import { useNavigate } from "react-router-dom";
 import { useMemo } from "react";
-import CountersWithStores from "./CountersWithStores";
+import CountersSecondary from "./CountersSecondary";
+import CountersPrimary from "./CountersPrimary";
 
 
 const GameWithStores = () => {
@@ -16,11 +17,12 @@ const GameWithStores = () => {
     toggleSound,
     setFlashcard,
     timeLeftBonus,
-    timeLeft
+    timeLeft,
+    resetCounters
   } = useStoreSlices();
 
   console.log("gameState from GameWithStores:", gameState);
-  
+
   const content = useMemo(() => {
 
     setFlashcard(levelSettings[level].showFlashcard);
@@ -30,11 +32,20 @@ const GameWithStores = () => {
   }, [level]);
 
 
-  const contentCounters = useMemo(() => {
-    // console.log("gameState1.5 from GameWithStores:", gameState);
+  const contentCountersPrimary = useMemo(() => {
+
+    if (gameState === 'running' || 
+      gameState === 'flashcard' || 
+      gameState === 'notStarted')
+    return <CountersPrimary />
+
+  }, [gameState]);
+
+
+  const contentCountersSecondary = useMemo(() => {
 
     if (gameState === 'running')
-    return <CountersWithStores />
+    return <CountersSecondary />
 
   }, [gameState, timeLeft, timeLeftBonus]);
 
@@ -45,6 +56,7 @@ const GameWithStores = () => {
         <button
           onClick={() => {
             navigate("/");
+            resetCounters();
           }}
         >
           Exit
@@ -52,8 +64,12 @@ const GameWithStores = () => {
         <button onClick={toggleSound}>Mute/Unmute</button>
       </div>
 
-      <div className="Counters">
-        {contentCounters}
+      <div className="CountersPrimary">
+        {contentCountersPrimary}
+      </div>
+
+      <div className="CountersSecondary">
+        {contentCountersSecondary}
       </div>
 
       <div className="Game">

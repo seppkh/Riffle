@@ -56,7 +56,7 @@ const ShowContentWithStores = () => {
 
       if (level === 1) {
         setFlashcard(false);
-        setGameStateToFlashcard();
+        // setGameStateToFlashcard();
       }
       else {
         setFlashcard(false);
