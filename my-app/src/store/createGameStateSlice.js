@@ -107,7 +107,7 @@ const createGameSlice = (set, get) => ({
     }),
   resetTimeleft: () =>
     set(() => ({
-      timeLeft: 3000,
+      timeLeft: 30,
     })),
   resetTimeLeftBonus: () =>
     set(() => ({

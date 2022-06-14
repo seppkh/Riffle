@@ -49,8 +49,25 @@
   outline: 0;
 }
 
-@media (min-width: 768px) {
+@media only screen and (min-width: 768px) {
   .Button {
-    padding: 0 40px;
+    font-size: 12px;
+    max-width: 60%;
+  }
+}
+
+/* Big screen devices (889px and above) */
+@media only screen and (min-width: 889px) {
+  .Button {
+    font-size: 14px;
+    max-width: 80%;
+  }
+}
+
+/* Extra big screen devices (1200px and above) */
+@media only screen and (min-width: 1200px) {
+  .Button {
+    font-size: 16px;
+    max-width: 100%;
   }
 }

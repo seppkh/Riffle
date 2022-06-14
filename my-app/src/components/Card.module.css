@@ -7,7 +7,8 @@
     'a b c'
     'd e f'
     'g h i';
-  background-color: #afafae;
+  background-color: #d4d4d4;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 50%;
   cursor: pointer;
 }
@@ -15,4 +16,47 @@
 .isLarge {
   grid-template-columns: repeat(3, 100px);
   grid-template-rows: repeat(3, 100px);
+  cursor: default;
+}
+
+/* Medium screen devices (768px and above) */
+@media only screen and (min-width: 768px) {
+  .isLarge {
+    grid-template-columns: repeat(3, 40px);
+    grid-template-rows: repeat(3, 40px);
+    cursor: default;
+  }
+
+  .Card {
+    grid-template-columns: repeat(3, 20px);
+    grid-template-rows: repeat(3, 20px);
+  }
+}
+
+/* Big screen devices (889px and above) */
+@media only screen and (min-width: 889px) {
+  .isLarge {
+    grid-template-columns: repeat(3, 60px);
+    grid-template-rows: repeat(3, 60px);
+    cursor: default;
+  }
+
+  .Card {
+    grid-template-columns: repeat(3, 40px);
+    grid-template-rows: repeat(3, 40px);
+  }
+}
+
+/* Extra big screen devices (1200px and above) */
+@media only screen and (min-width: 1200px) {
+  .isLarge {
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    cursor: default;
+  }
+
+  .Card {
+    grid-template-columns: repeat(3, 80px);
+    grid-template-rows: repeat(3, 80px);
+  }
 }

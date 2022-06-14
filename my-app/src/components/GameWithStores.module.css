@@ -36,13 +36,29 @@
 
 .countersPrimary,
 .countersSecondary {
-  font-size: 1.5em;
   font-weight: bold;
   text-shadow: 0px 0px 12px rgb(212, 211, 211);
 }
 
-.countersPrimary {
+@media only screen and (min-width: 768px) {
+  .countersPrimary,
+  .countersSecondary {
+    font-size: 0.4em;
+  }
 }
 
-.countersSecondary {
+/* Big screen devices (889px and above) */
+@media only screen and (min-width: 889px) {
+  .countersPrimary,
+  .countersSecondary {
+    font-size: 0.8em;
+  }
+}
+
+/* Extra big screen devices (1200px and above) */
+@media only screen and (min-width: 1200px) {
+  .countersPrimary,
+  .countersSecondary {
+    font-size: 1.2em;
+  }
 }
