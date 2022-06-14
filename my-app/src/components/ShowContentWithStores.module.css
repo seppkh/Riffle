@@ -1,0 +1,16 @@
+.splashScreen {
+  padding-top: 200px;
+  text-align: center;
+}
+
+.gameBoard {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.splashBtn {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 80px;
+}
