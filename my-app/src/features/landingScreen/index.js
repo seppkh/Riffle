@@ -8,7 +8,6 @@ import useStoreSlices from '../../store/rootSliceStore';
 import { Outlet } from 'react-router-dom';
 
 const LandingScreen = (props) => {
-  const [setSelectedMenuOption] = useState(null);
   const setGameStateToMenu = useStoreSlices(
     (state) => state.setGameStateToMenu
   );
@@ -22,7 +21,7 @@ const LandingScreen = (props) => {
       left={
         <>
           <Logo />
-          <Menu onMenuItemSelect={setSelectedMenuOption} />
+          <Menu />
         </>
       }
       right={
