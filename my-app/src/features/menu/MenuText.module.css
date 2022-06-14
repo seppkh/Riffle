@@ -16,6 +16,7 @@
 .instructions {
   max-height: 400px;
   overflow-y: scroll;
+  text-align: left;
 }
 
 .instructions::-webkit-scrollbar {

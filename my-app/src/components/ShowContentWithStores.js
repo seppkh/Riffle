@@ -2,7 +2,9 @@ import { useNavigate } from 'react-router-dom';
 import useStoreSlices from '../store/rootSliceStore';
 import CardLayout from './CardLayout';
 import logoFlashcard from '../assets/gifs/R_wink.gif';
-import logoEnded from '../assets/gifs/unhappy_yellow.gif';
+import logoGameStart from '../assets/gifs/happy_purple.gif';
+import logoGamePaused from '../assets/gifs/R_two_eyes.gif';
+import logoEnded from '../assets/letters/heart.svg';
 import styles from './ShowContentWithStores.module.css';
 
 import { checkHighScore, showHighScores } from '../utils/saveScoresFunc';
@@ -76,6 +78,7 @@ const ShowContentWithStores = () => {
 
       return (
         <div className={styles.splashScreen}>
+          <img src={logoGameStart} alt='flashcardImg' height='250px' />
           <p>Setting up your gameplay...</p>
           <h2>Click the button to start your game</h2>
           <br />
@@ -96,6 +99,7 @@ const ShowContentWithStores = () => {
     if (gameState === 'paused') {
       return (
         <div className={styles.splashScreen}>
+          <img src={logoGamePaused} alt='flashcardImg' height='250px' />
           <h2>Game is paused</h2>
           <p>Needed a break already, yeh?</p>
           <br />
@@ -129,15 +133,16 @@ const ShowContentWithStores = () => {
 
       return (
         <div className={styles.splashScreen}>
-          <img src={logoEnded} alt='endedImg' height='250px' />
-          <h2>Game over – {reason}</h2>
-          <p>
-            Your final score is {score} {suffix}
-          </p>
-          <h5>{endingMessage}</h5>
-          <br />
+          <div className={styles.gameEndText}>
+            <img src={logoEnded} alt='endedImg' height='250px' />
+            <h2>Game over – {reason}</h2>
+            <p>
+              Your final score is {score} {suffix}
+            </p>
+            <p>{endingMessage}</p>
 
-          {showHighScores()}
+            {showHighScores()}
+          </div>
 
           <p>Surely you can beat your own score...</p>
           <div className={styles.splashBtn}>

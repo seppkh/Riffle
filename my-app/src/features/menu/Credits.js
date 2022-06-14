@@ -5,10 +5,10 @@ export const Credits = () => (
   <div className={styles.credits}>
     <p>
       <h3>Game made by:</h3>
-      <h5>Kristi Pruul - Project manager</h5>
-      <h5>Renida Lumiste - Design</h5>
-      <h5>Krister Sepp - Back-end development/tester</h5>
-      <h5>Valmar Parts - Front-end development/tester</h5>
+      <p>Kristi Pruul - Project manager</p>
+      <p>Renida Lumiste - Design</p>
+      <p>Krister Sepp - Back-end development/tester</p>
+      <p>Valmar Parts - Front-end development/tester</p>
     </p>
   </div>
 );

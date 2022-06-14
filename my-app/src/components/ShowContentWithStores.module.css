@@ -1,6 +1,7 @@
 .splashScreen {
   padding-top: 200px;
   text-align: center;
+  font-size: 1em;
 }
 
 .gameBoard {
@@ -13,4 +14,8 @@
   display: flex;
   justify-content: flex-end;
   margin-top: 80px;
+}
+
+.gameEndText p {
+  font-size: 1.5em;
 }
