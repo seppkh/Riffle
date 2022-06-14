@@ -1,5 +1,4 @@
 import useStoreSlices from '../store/rootSliceStore';
-import './CountersPrimary.css';
 
 const CountersPrimary = () => {
   const { score, lives } = useStoreSlices();

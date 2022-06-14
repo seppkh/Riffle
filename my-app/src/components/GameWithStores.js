@@ -44,7 +44,8 @@ const GameWithStores = () => {
   }, [gameState, timeLeft, timeLeftBonus]);
 
   return (
-    <>
+    <div className={styles.gameScreen}>
+      <div className={styles.game}>{content}</div>
       <div className={styles.btntoolbar}>
         <div className={styles.leftside}>
           <Button
@@ -59,13 +60,13 @@ const GameWithStores = () => {
           <Button onClick={toggleSound} label='Mute/Unmute' />
         </div>
       </div>
-
-      <div className='CountersPrimary'>{contentCountersPrimary}</div>
-
-      <div className='CountersSecondary'>{contentCountersSecondary}</div>
-
-      <div className='Game'>{content}</div>
-    </>
+      <div className={styles.gameStats}>
+        <div className={styles.countersPrimary}>{contentCountersPrimary}</div>
+        <div className={styles.countersSecondary}>
+          {contentCountersSecondary}
+        </div>
+      </div>
+    </div>
   );
 };
 

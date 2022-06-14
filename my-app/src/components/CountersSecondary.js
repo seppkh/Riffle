@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import useSound from 'use-sound';
 import useStoreSlices from '../store/rootSliceStore';
-import './CountersSecondary.css';
 import lastSecondsBeep from '../assets/sounds/lastSecondsBeep.mp3';
 import levelSettings from '../store/levelSettings';
 

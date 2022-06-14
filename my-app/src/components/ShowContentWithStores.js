@@ -3,6 +3,7 @@ import useStoreSlices from '../store/rootSliceStore';
 import CardLayout from './CardLayout';
 import logoFlashcard from '../assets/gifs/R_wink.gif';
 import logoEnded from '../assets/gifs/unhappy_yellow.gif';
+import styles from './ShowContentWithStores.module.css';
 
 import { checkHighScore, showHighScores } from '../utils/saveScoresFunc';
 
@@ -75,32 +76,36 @@ const ShowContentWithStores = () => {
       //playBackground();
 
       return (
-        <>
+        <div className={styles.splashScreen}>
           <p>Setting up your gameplay...</p>
           <h2>Click the button to start your game</h2>
           <br />
-          <Button
-            onClick={() => {
-              resetCounters();
-              startGame();
-              assignCards();
-            }}
-            label='Start game'
-          />
-        </>
+          <div className={styles.splashBtn}>
+            <Button
+              onClick={() => {
+                resetCounters();
+                startGame();
+                assignCards();
+              }}
+              label='Start game'
+            />
+          </div>
+        </div>
       );
     }
 
     if (gameState === 'paused') {
       return (
-        <>
+        <div className={styles.splashScreen}>
           <h2>Game is paused</h2>
           <p>Needed a break already, yeh?</p>
           <br />
           <h2>Click the button to continue your game</h2>
           <br />
-          <Button onClick={togglePause} label='Pause' />
-        </>
+          <div className={styles.splashBtn}>
+            <Button onClick={togglePause} label='Continue' />
+          </div>
+        </div>
       );
     }
 
@@ -124,7 +129,7 @@ const ShowContentWithStores = () => {
       if (score > 20) endingMessage = "Wow! You're a natural pro at this game!";
 
       return (
-        <>
+        <div className={styles.splashScreen}>
           <img src={logoEnded} alt='endedImg' height='250px' />
           <h2>Game over – {reason}</h2>
           <p>
@@ -136,17 +141,19 @@ const ShowContentWithStores = () => {
           {showHighScores()}
 
           <p>Surely you can beat your own score...</p>
-          <Button
-            onClick={() => {
-              resetCounters();
-              setGameStateToNotStarted();
-              unAssignCards();
-              toggleSound();
-              toggleSound();
-            }}
-            label='Play again'
-          />
-        </>
+          <div className={styles.splashBtn}>
+            <Button
+              onClick={() => {
+                resetCounters();
+                setGameStateToNotStarted();
+                unAssignCards();
+                toggleSound();
+                toggleSound();
+              }}
+              label='Play again'
+            />
+          </div>
+        </div>
       );
     }
 
@@ -157,17 +164,19 @@ const ShowContentWithStores = () => {
       let flashcardText = levelSettings[level].text;
 
       return (
-        <>
+        <div className={styles.splashScreen}>
           <img src={logoFlashcard} alt='flashcardImg' height='250px' />
           <h2>{flashcardText}</h2>
-          <Button
-            onClick={() => {
-              setGameStateToRunning();
-              resetTimeleft();
-            }}
-            label='Continue'
-          ></Button>
-        </>
+          <div className={styles.splashBtn}>
+            <Button
+              onClick={() => {
+                setGameStateToRunning();
+                resetTimeleft();
+              }}
+              label='Continue'
+            />
+          </div>
+        </div>
       );
     }
 
@@ -179,7 +188,7 @@ const ShowContentWithStores = () => {
       }
 
       return (
-        <div className='gameBoard'>
+        <div className={styles.gameBoard}>
           <CardLayout />
           <Button onClick={togglePause} label='Pause' />
         </div>
