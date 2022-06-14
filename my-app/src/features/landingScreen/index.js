@@ -9,11 +9,14 @@ import useStoreSlices from "../../store/rootSliceStore";
 
 const LandingScreen = (props) => {
   const [selectedMenuOption, setSelectedMenuOption] = useState(null);
-  const setGameStateToMenu = useStoreSlices((state) => state.setGameStateToMenu);
+  const {
+    setGameStateToMenu,
+  } = useStoreSlices();
+
 
   useEffect(() => {
     setGameStateToMenu();
-  }, []);
+  }, [setGameStateToMenu]);
   
   return (
     <SplitLayout

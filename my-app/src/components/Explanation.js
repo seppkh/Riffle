@@ -1,4 +1,3 @@
-import instructions from "../store/Instructions";
 import styles from "./Explanation.module.css";
 
 const Explanation = ({ children }) => {

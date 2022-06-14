@@ -94,7 +94,7 @@ const createGameSlice = (set, get) => ({
     if (state.timeLeftBonus <= 0.1) return { timeLeftBonus: 0};
     return { timeLeftBonus: (state.timeLeftBonus - 0.05).toFixed(2) }
   }),
-  resetTimeleft: () => set(() => ({ 
+  resetTimeLeft: () => set(() => ({ 
     timeLeft: 30
   })),
   resetTimeLeftBonus: () => set(() => ({

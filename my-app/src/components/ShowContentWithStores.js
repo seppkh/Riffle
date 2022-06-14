@@ -5,13 +5,8 @@ import logoFlashcard from '../assets/flashcardMascot.png';
 import logoEnded from '../assets/endedMascot.png';
 
 import { checkHighScore, showHighScores } from "../utils/saveScoresFunc";
-
-import useSound from 'use-sound';
-import gameBackground from '../assets/sounds/gameBackground.mp3';
-import gameOver from '../assets/sounds/gameOver.mp3';
-import flashCard from '../assets/sounds/flashCard.mp3';
-import { useMemo } from 'react';
 import { useEffect } from 'react';
+import { useMemo } from 'react';
 
 
 const ShowContentWithStores = () => {
@@ -27,13 +22,12 @@ const ShowContentWithStores = () => {
     unAssignCards,
     level,
     levelSettings,
-    toggleFlashcard,
     toggleSound,
     soundState,
     showFlashcard,
     setFlashcard,
     setGameStateToFlashcard,
-    resetTimeleft,
+    resetTimeLeft,
     setGameStateToRunning,
     timeLeft,
     timeLeftBonus,
@@ -41,25 +35,19 @@ const ShowContentWithStores = () => {
     setGameStateToEnded,
   } = useStoreSlices(); 
 
-      /*
-  const [playGameOver] = useSound(gameOver, { soundEnabled: soundState });
-  const [playFlashcard] = useSound(flashCard, { soundEnabled: soundState });
-  const [playBackground, { stop }] = useSound(gameBackground, {
-    interrupt: false,
-    soundEnabled: soundState,
-  }); */
 
   useEffect(() => {
-    if (gameState === 'menu') {    
+    if (gameState === 'menu') {
       navigate('/')
     }
   }, []);
 
 
   const content = useMemo(() => {
-    // console.log("gameState from ShowContentWithStores:", gameState);
+    console.log("gameState from ShowContentWithStores:", gameState);
 
     if (showFlashcard) {
+      // playBackground();
 
       if (level === 1) {
         setFlashcard(false);
@@ -73,10 +61,9 @@ const ShowContentWithStores = () => {
     if (lives <= 0) {
       setGameStateToEnded();
     }
-  
+
     if (gameState === 'notStarted') {
-      //playBackground();
-  
+
       return (
         <>
           <p>Setting up your gameplay...</p>
@@ -94,6 +81,48 @@ const ShowContentWithStores = () => {
         </>
       );
     }
+
+    if (gameState === 'flashcard') {
+      /* if (level !== 1)
+        playFlashcard();
+      */
+
+
+      let flashcardText = levelSettings[level].text;
+  
+      return (
+        <>
+          <img src={logoFlashcard} alt='flashcardImg' height='150px' />
+          <h2>{flashcardText}</h2>
+          <button
+            onClick={() => {
+              setGameStateToRunning();
+              resetTimeLeft();
+            }}  >
+            Continue
+          </button>
+        </>
+      );
+    } 
+  
+    if (gameState === 'running') {
+      if (showFlashcard) {
+        setFlashcard(true);
+        resetTimeLeft();
+        setGameStateToFlashcard();
+      }
+
+      return (
+        <>
+        <div className='gameBoard'>
+            
+          <CardLayout />
+          <button onClick={togglePause}>Pause</button>
+        </div>
+        </>
+  
+      );
+    }
   
     if (gameState === 'paused') {
       return (
@@ -109,7 +138,6 @@ const ShowContentWithStores = () => {
     }
   
     if (gameState === 'ended') {
-      // playGameOver();
     
       // checkHighScore(score, scoreEntered, toggleScoreEntered);
   
@@ -153,47 +181,6 @@ const ShowContentWithStores = () => {
             Play again
           </button>
         </>
-      );
-    }
-  
-    if (gameState === 'flashcard') {
-      /* if (level !== 1)
-        playFlashcard();
-      */
-      let flashcardText = levelSettings[level].text;
-  
-      return (
-        <>
-          <img src={logoFlashcard} alt='flashcardImg' height='150px' />
-          <h2>{flashcardText}</h2>
-          <button
-            onClick={() => {
-              setGameStateToRunning();
-              resetTimeleft();
-            }}
-          >
-            Continue
-          </button>
-        </>
-      );
-    } 
-  
-    if (gameState === 'running') {
-      if (showFlashcard) {
-        setFlashcard(true);
-        resetTimeleft();
-        setGameStateToFlashcard();
-      }
-
-      return (
-        <>
-        <div className='gameBoard'>
-            
-          <CardLayout />
-          <button onClick={togglePause}>Pause</button>
-        </div>
-        </>
-  
       );
     }
     

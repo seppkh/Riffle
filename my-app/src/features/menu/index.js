@@ -1,8 +1,13 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import MenuItem from './MenuItem';
 import styles from './Menu.module.css';
 import useStoreSlices from '../../store/rootSliceStore';
+
+import useSound from 'use-sound';
+import menuBackground from '../../assets/sounds/gameBackground.mp3';
+
+import { useMemo } from "react";
 
 const menuOptions = [
   {
@@ -16,6 +21,7 @@ const menuOptions = [
   },
 ];
 
+
 const Menu = ({ onMenuItemSelect = () => {} }) => {
   const [activeLabel, setActiveLabel] = useState(-1);
   const navigate = useNavigate();
@@ -23,7 +29,31 @@ const Menu = ({ onMenuItemSelect = () => {} }) => {
   const {
     gameState,
     setGameStateToNotStarted,
+    soundState
   } = useStoreSlices();
+
+
+// ------------------------------------
+// !!! Do not change this sound part here, it works !!!
+
+  const [playMenuBackground, { stop }] = useSound(menuBackground, {
+    interrupt: true,
+    soundEnabled: soundState,
+  }); 
+
+  useEffect(() => {
+    setTimeout(() => {
+      playMenuBackground();
+    }, 2);
+  }, [playMenuBackground]);
+  
+  useMemo(() => {
+    if (!soundState) return stop();
+    playMenuBackground();
+  }, [playMenuBackground, soundState]);
+
+// ------------------------------------
+
 
   const handleLabelClick = useCallback(
     (label) => {
@@ -40,7 +70,8 @@ const Menu = ({ onMenuItemSelect = () => {} }) => {
       <MenuItem
         onClick={() => { 
           setGameStateToNotStarted();
-          navigate('/game')
+          navigate('/game');
+          stop();
         }}
         label={'Play Game'}
       ></MenuItem>

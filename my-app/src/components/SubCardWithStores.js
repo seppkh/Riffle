@@ -16,10 +16,9 @@ const SubCardWithStores = ({ card, elementsColors }) => {
 
   const useStoreSlicesRead = useStoreSlices();
 
-  /*
   const [playRight] = useSound(guessRight, { soundEnabled: soundState });
   const [playWrong] = useSound(guessWrong, { soundEnabled: soundState });
-  const [playBonus] = useSound(bonusPoint, { soundEnabled: soundState }); */
+  const [playBonus] = useSound(bonusPoint, { soundEnabled: soundState });
 
   return (
     <>
@@ -27,9 +26,9 @@ const SubCardWithStores = ({ card, elementsColors }) => {
       onClick={() => OnCardClickHandler(
         card,
         useStoreSlicesRead,
-        // playRight,
-        // playWrong,
-        // playBonus
+        playRight,
+        playWrong,
+        playBonus
       )}
       elements={card.elements}
       elementsColors={elementsColors} />
