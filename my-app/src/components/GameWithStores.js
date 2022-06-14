@@ -7,6 +7,7 @@ import CountersSecondary from './CountersSecondary';
 import CountersPrimary from './CountersPrimary';
 import Button from './Button';
 import styles from './GameWithStores.module.css';
+import SoundButton from './SoundButton';
 
 const GameWithStores = () => {
   const navigate = useNavigate();
@@ -16,6 +17,7 @@ const GameWithStores = () => {
     level,
     levelSettings,
     toggleSound,
+    soundState,
     setFlashcard,
     timeLeftBonus,
     timeLeft,
@@ -57,7 +59,7 @@ const GameWithStores = () => {
           />
         </div>
         <div className={styles.rightside}>
-          <Button onClick={toggleSound} label='Mute/Unmute' />
+          <SoundButton onClick={toggleSound} soundOn={soundState} />
         </div>
       </div>
       <div className={styles.gameStats}>

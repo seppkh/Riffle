@@ -29,7 +29,6 @@ const ShowContentWithStores = () => {
     level,
     levelSettings,
     toggleFlashcard,
-    toggleSound,
     soundState,
     showFlashcard,
     setFlashcard,
@@ -147,8 +146,6 @@ const ShowContentWithStores = () => {
                 resetCounters();
                 setGameStateToNotStarted();
                 unAssignCards();
-                toggleSound();
-                toggleSound();
               }}
               label='Play again'
             />
