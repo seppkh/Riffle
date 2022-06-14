@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Mukta&family=Work+Sans:wght@300;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Averia+Sans+Libre&display=swap');
+
 :root {
   --color-bg: white;
   --color-text: rgb(18, 18, 18);
@@ -12,9 +13,8 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: 'Work Sans', sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Averia Sans Libre', cursive;
+  font-weight: 400;
   background-color: var(--color-bg);
   color: var(--color-text);
   background-image: url('./assets/background/background1_25.svg');
