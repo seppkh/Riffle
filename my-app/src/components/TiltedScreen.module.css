@@ -1,11 +1,12 @@
 .TiltedScreen {
   background-color: var(--color-bright);
   padding: 20% 10%;
-  min-height: 500px;
-  clip-path: polygon(0% 10%, 100% 0%, 100% 100%, 0 90%);
+  min-height: 400px;
+  border-radius: 30px;
   display: flex;
   width: 100%;
-  color: var(--color-bg);
+  color: var(--color-text);
+  border: 3px solid black;
 }
 
 .ScreenShadow {

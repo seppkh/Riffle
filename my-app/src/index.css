@@ -1,21 +1,20 @@
+@import url('https://fonts.googleapis.com/css2?family=Averia+Sans+Libre&display=swap');
+
 :root {
   --color-bg: white;
-  --color-text: rgb(31, 30, 30);
+  --color-text: rgb(18, 18, 18);
   --color-title: #bbcea8;
   --color-subdued: #bdd5ea;
-  --color-subdued-rgb: 227, 216, 126;
-  --color-bright: #bdd5ea;
-  --color-decoration: #748067;
+  --color-subdued-rgb: rgb(90, 88, 88);
+  --color-bright: #edede9;
+  --color-decoration: #d5bdaf;
 }
 
 body {
   margin: 0;
   padding: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-family: 'Averia Sans Libre', cursive;
+  font-weight: 400;
   background-color: var(--color-bg);
   color: var(--color-text);
   background-image: url('./assets/background/background1_25.svg');

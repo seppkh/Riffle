@@ -9,42 +9,35 @@ import selectColorSetsFunc from '../utils/selectColorSetsFunc';
 import setColorForEachElement from '../utils/setColorForEachElementFunc';
 
 const ShowCardsWithStores = () => {
-
-  const {
-    mainCard,
-    level
-  } = useStoreSlices();
+  const { mainCard, level } = useStoreSlices();
 
   // console.log("gameState from CardLayout:", gameState);
 
   const colorSet = selectColorSetsFunc(level);
-  const elementsColors = setColorForEachElement(iconsLength, colorSet)
+  const elementsColors = setColorForEachElement(iconsLength, colorSet);
   // console.log("colorSet from CardLayout.js:", colorSet)
   // console.log("elementsColors from CardLayout.js:", elementsColors)
 
-
   const contentMainCard = useMemo(() => {
-
-    return <Card isMain elements={mainCard.elements} elementsColors={elementsColors} />
+    return (
+      <Card
+        isMain
+        elements={mainCard.elements}
+        elementsColors={elementsColors}
+      />
+    );
   }, [level]);
 
   const contentBottomCards = useMemo(() => {
-
-    return <SubCardsWithStores elementsColors={elementsColors} />
+    return <SubCardsWithStores elementsColors={elementsColors} />;
   }, [level]);
 
   return (
-    <>
     <div className={styles.CardsWrapper}>
-      <div className={styles.MainCard}>
-        {contentMainCard}
-      </div>
+      <div className={styles.MainCard}>{contentMainCard}</div>
 
-      <div className={styles.BottomCards}>
-        {contentBottomCards}
-      </div>
+      <div className={styles.BottomCards}>{contentBottomCards}</div>
     </div>
-    </>
   );
 };
 

@@ -1,12 +1,11 @@
-import clsx from "clsx";
-import React, { useMemo } from "react";
-import styles from "./MenuItem.module.css";
-
+import clsx from 'clsx';
+import React, { useMemo } from 'react';
+import styles from './MenuItem.module.css';
 
 const MenuItem = ({ label, active, onClick }) => {
   const paddedLabel = useMemo(() => {
     if (active) {
-      return `(${label})`;
+      return `${label}`;
     }
     return label;
   }, [active, label]);
@@ -14,7 +13,7 @@ const MenuItem = ({ label, active, onClick }) => {
   return (
     <li
       className={clsx(styles.MenuItem, {
-        [styles.active]: active
+        [styles.active]: active,
       })}
       onClick={onClick}
     >

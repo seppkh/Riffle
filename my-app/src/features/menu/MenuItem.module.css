@@ -1,19 +1,17 @@
 .MenuItem {
   list-style: none;
   margin: 0.5em 0;
-  font-family: 'Courier New', Courier, monospace;
-  font-weight: 700;
+  font-weight: 400;
   cursor: pointer;
-  font-size: 2rem;
+  font-size: 2.3rem;
   color: var(--color-text);
-  text-shadow: 3px 3px #9d999955;
   transition: text-shadow 0.1s ease-in-out;
 }
 
 .MenuItem:hover {
-  text-shadow: 3px 3px rgba(var(--color-subdued-rgb), 0.3);
+  text-shadow: 3px 3px rgba(var(--color-subdued-rgb), 0.8);
 }
 
 .active {
-  text-shadow: 3px 3px #444444ee;
+  text-shadow: 3px 3px #a74444ee;
 }
