@@ -110,7 +110,9 @@ const ShowContentWithStores = () => {
       return (
         <div className={styles.gameBoard}>
           <CardLayout />
-          <Button onClick={togglePause} label='Pause' />
+          <div className={styles.splashBtn}>
+            <Button onClick={togglePause} label='Pause' />
+          </div>
         </div>
       );
     }
@@ -153,7 +155,7 @@ const ShowContentWithStores = () => {
           <div className={styles.gameEndText}>
             <img src={logoEnded} alt='endedImg' height='250px' />
             <h2>Game over – {reason}</h2>
-            <p>Your final score: </p>
+            <p>Your final score is: </p>
             <h1>{score}</h1>
             <p>{endingMessage}</p>
 

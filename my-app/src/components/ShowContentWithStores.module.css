@@ -12,6 +12,10 @@
 .splashBtn {
   display: flex;
   justify-content: flex-end;
+  position: absolute;
+  right:  4em;
+  bottom: 6em;
+
 }
 
 .gameEndText p {
