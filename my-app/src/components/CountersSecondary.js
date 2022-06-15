@@ -20,10 +20,9 @@ const CountersSecondary = () => {
   const MINUTE_MS = 1000;
   const MINUTE_MS_BONUS = 50;
 
-  /*
   const [playTimerEnding] = useSound(lastSecondsBeep, {
     soundEnabled: soundState,
-  }); */
+  });
 
   // console.log("gameState from CountersWithStores:", gameState);
 
@@ -37,6 +36,8 @@ const CountersSecondary = () => {
         tick();
       }, MINUTE_MS);
 
+      if (timeLeft <= 5) playTimerEnding();
+
       console.log('timeLeft from CounterWithStores:', timeLeft);
 
       return () => {
@@ -44,6 +45,7 @@ const CountersSecondary = () => {
       };
     }
   }, [timeLeft]);
+
 
   useEffect(() => {
     if (gameState !== 'running') return;
@@ -62,6 +64,7 @@ const CountersSecondary = () => {
       };
     }
   }, [gameState, timeLeftBonus]);
+
 
   return (
     <div className='counters-secondary'>
