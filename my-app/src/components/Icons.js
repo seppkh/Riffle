@@ -26,6 +26,7 @@ import { ReactComponent as IconTreelog } from '../assets/icons/treelog.svg';
 import { ReactComponent as IconUSB } from '../assets/icons/usb.svg';
 import { ReactComponent as IconVolleyball } from '../assets/icons/volleyball.svg';
 import { ReactComponent as IconWebcam } from '../assets/icons/webcam.svg';
+import useStoreSlices from '../store/rootSliceStore';
 
 const icons = [
   IconBalloon,
@@ -61,3 +62,12 @@ const icons = [
 const iconsLength = icons.length;
 
 export { icons, iconsLength };
+
+
+// Move icons and iconColors to separate files
+// import icons, iconsLength and iconColors to components
+// move selectColorSetsFunc() to separate file from CardElement.js
+
+
+// in CardLayout, finish setColorForEachElement()
+// move previous setColorForEachElement() to separate file
