@@ -8,6 +8,15 @@ import CountersPrimary from './CountersPrimary';
 import Button from './Button';
 import styles from './GameWithStores.module.css';
 import SoundButton from './SoundButton';
+import { useEffect } from "react";
+
+import useSound from 'use-sound';
+import gameBackgroundFast from '../assets/sounds/backgroundFast.mp3';
+// import gameBackgroundEnded from '../assets/sounds/gameBackground.mp3';
+
+import gameOver from '../assets/sounds/gameOver.mp3';
+import flashCard from '../assets/sounds/flashCard.mp3';
+
 
 const GameWithStores = () => {
   const navigate = useNavigate();
@@ -17,19 +26,53 @@ const GameWithStores = () => {
     level,
     levelSettings,
     toggleSound,
-    soundState,
     setFlashcard,
     timeLeftBonus,
     timeLeft,
     resetCounters,
+    soundState,
+    setBackgroundSoundToFalse,
+    backgroundSoundState,
+    toggleBackgroundSound
   } = useStoreSlices();
 
-  console.log('gameState from GameWithStores:', gameState);
+  console.log("gameState from GameWithStores:", gameState);
+  console.log("backgroundSoundState from GameWithStores:", backgroundSoundState);
+  console.log("soundState from GameWithStores:", soundState);
+
+
+// ------------------------------------
+// !!! Do not change this sound part here, it works !!!
+
+  const [playGameOver] = useSound(gameOver, { soundEnabled: soundState });
+  const [playFlashcard] = useSound(flashCard, { soundEnabled: soundState });
+  const [playBackground, { stop }] = useSound(gameBackgroundFast, {
+    interrupt: true,
+    soundEnabled: soundState,
+  });
+  /* const [playBackgroundEnded, { stopEnded }] = useSound(gameBackgroundEnded, {
+    interrupt: true,
+    soundEnabled: soundState,
+  }); */
+
+  useMemo(() => {
+    if (!soundState) return stop();
+    playBackground();
+  }, [playBackground, soundState]);
+
+// ------------------------------------
+// ------------------------------------
+
+
+useEffect(() => {
+    if (gameState === 'flashcard' && level !== 1) playFlashcard();
+    if (gameState === 'ended') playGameOver();
+  }, [gameState])
+
 
   const content = useMemo(() => {
     setFlashcard(levelSettings[level].showFlashcard);
-
-    return <ShowContentWithStores />;
+    return <ShowContentWithStores />
   }, [level]);
 
   const contentCountersPrimary = useMemo(() => {
@@ -54,12 +97,19 @@ const GameWithStores = () => {
             onClick={() => {
               navigate('/');
               resetCounters();
+              setBackgroundSoundToFalse();
+              stop();
             }}
             label='Exit'
           />
         </div>
         <div className={styles.rightside}>
-          <SoundButton onClick={toggleSound} soundOn={soundState} />
+          <SoundButton 
+            onClick={() => {
+            toggleSound(); 
+            toggleBackgroundSound();
+          }} 
+            soundOn={soundState} />
         </div>
       </div>
       <div className={styles.gameStats}>

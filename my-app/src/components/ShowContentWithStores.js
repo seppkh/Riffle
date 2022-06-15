@@ -9,10 +9,6 @@ import styles from './ShowContentWithStores.module.css';
 
 import { checkHighScore, showHighScores } from '../utils/saveScoresFunc';
 
-import useSound from 'use-sound';
-import gameBackground from '../assets/sounds/gameBackground.mp3';
-import gameOver from '../assets/sounds/gameOver.mp3';
-import flashCard from '../assets/sounds/flashCard.mp3';
 import { useMemo } from 'react';
 import { useEffect } from 'react';
 import Button from './Button';
@@ -30,12 +26,10 @@ const ShowContentWithStores = () => {
     unAssignCards,
     level,
     levelSettings,
-    toggleFlashcard,
-    soundState,
     showFlashcard,
     setFlashcard,
     setGameStateToFlashcard,
-    resetTimeleft,
+    resetTimeLeft,
     setGameStateToRunning,
     timeLeft,
     timeLeftBonus,
@@ -43,22 +37,15 @@ const ShowContentWithStores = () => {
     setGameStateToEnded,
   } = useStoreSlices();
 
-  /*
-  const [playGameOver] = useSound(gameOver, { soundEnabled: soundState });
-  const [playFlashcard] = useSound(flashCard, { soundEnabled: soundState });
-  const [playBackground, { stop }] = useSound(gameBackground, {
-    interrupt: false,
-    soundEnabled: soundState,
-  }); */
 
   useEffect(() => {
     if (gameState === 'menu') {
-      navigate('/');
+      navigate('/')
     }
   }, []);
 
   const content = useMemo(() => {
-    // console.log("gameState from ShowContentWithStores:", gameState);
+    console.log("gameState from ShowContentWithStores:", gameState);
 
     if (showFlashcard) {
       if (level === 1) {
@@ -74,7 +61,6 @@ const ShowContentWithStores = () => {
     }
 
     if (gameState === 'notStarted') {
-      //playBackground();
 
       return (
         <div className={styles.splashScreen}>
@@ -96,6 +82,46 @@ const ShowContentWithStores = () => {
       );
     }
 
+    if (gameState === 'flashcard') {
+      let flashcardText = levelSettings[level].text;
+
+      return (
+        <div className={styles.splashScreen}>
+          <img src={logoFlashcard} alt='flashcardImg' height='250px' />
+          <h2>{flashcardText}</h2>
+          <div className={styles.splashBtn}>
+            <Button
+              onClick={() => {
+                setGameStateToRunning();
+                resetTimeLeft();
+              }}
+              label='Continue'
+            />
+          </div>
+        </div>
+      );
+    } 
+  
+    
+    if (gameState === 'running') {
+      if (showFlashcard) {
+        setFlashcard(true);
+        resetTimeLeft();
+        setGameStateToFlashcard();
+      }
+
+      return (
+        <>
+        <div className='gameBoard'>
+            
+          <CardLayout />
+          <button onClick={togglePause}>Pause</button>
+        </div>
+        </>
+  
+      );
+    }
+  
     if (gameState === 'paused') {
       return (
         <div className={styles.splashScreen}>
@@ -113,8 +139,7 @@ const ShowContentWithStores = () => {
     }
 
     if (gameState === 'ended') {
-      // playGameOver();
-
+    
       // checkHighScore(score, scoreEntered, toggleScoreEntered);
 
       let endingMessage = '';
@@ -158,45 +183,9 @@ const ShowContentWithStores = () => {
         </div>
       );
     }
+    
+  }, [gameState, level, timeLeft, timeLeftBonus])
 
-    if (gameState === 'flashcard') {
-      /* if (level !== 1)
-        playFlashcard();
-      */
-      let flashcardText = levelSettings[level].text;
-
-      return (
-        <div className={styles.splashScreen}>
-          <img src={logoFlashcard} alt='flashcardImg' height='250px' />
-          <h2>{flashcardText}</h2>
-          <div className={styles.splashBtn}>
-            <Button
-              onClick={() => {
-                setGameStateToRunning();
-                resetTimeleft();
-              }}
-              label='Continue'
-            />
-          </div>
-        </div>
-      );
-    }
-
-    if (gameState === 'running') {
-      if (showFlashcard) {
-        setFlashcard(true);
-        resetTimeleft();
-        setGameStateToFlashcard();
-      }
-
-      return (
-        <div className={styles.gameBoard}>
-          <CardLayout />
-          <Button onClick={togglePause} label='Pause' />
-        </div>
-      );
-    }
-  }, [gameState, level, timeLeft, timeLeftBonus]);
 
   return <>{content}</>;
 };
