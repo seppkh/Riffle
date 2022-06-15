@@ -108,8 +108,10 @@ const ShowContentWithStores = () => {
       }
 
       return (
-        <div className={styles.gameBoard}>
-          <CardLayout />
+        <div>
+          <div className={styles.gameBoard}>
+            <CardLayout />
+          </div>
           <div className={styles.splashBtn}>
             <Button onClick={togglePause} label='Pause' />
           </div>
