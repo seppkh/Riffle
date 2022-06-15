@@ -19,11 +19,15 @@
   text-align: left;
 }
 
+.credits p {
+  margin: 15px 0;
+}
+
 .credits h3::after {
   content: '';
   display: block;
   width: 10%;
-  height: 6px;
+  height: 4px;
   border-radius: 6px;
   background: #f15bb5;
   position: absolute;
