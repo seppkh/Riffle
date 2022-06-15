@@ -1,9 +1,7 @@
 import { ReactComponent as IconBalloon } from '../assets/icons/balloon.svg';
 import { ReactComponent as IconBasketball } from '../assets/icons/basketball.svg';
-// import { ReactComponent as IconPc } from '../assets/icons/pc.svg';
 import { ReactComponent as IconBucket } from '../assets/icons/bucket.svg';
 import { ReactComponent as IconDishwasher } from '../assets/icons/dishwasher.svg';
-// import { ReactComponent as IconUsb } from '../assets/icons/usb.svg';
 import { ReactComponent as IconFootball } from '../assets/icons/football.svg';
 import { ReactComponent as IconFork } from '../assets/icons/fork.svg';
 import { ReactComponent as IconHeadphones } from '../assets/icons/headphones.svg';
@@ -28,15 +26,12 @@ import { ReactComponent as IconTreelog } from '../assets/icons/treelog.svg';
 import { ReactComponent as IconUSB } from '../assets/icons/usb.svg';
 import { ReactComponent as IconVolleyball } from '../assets/icons/volleyball.svg';
 import { ReactComponent as IconWebcam } from '../assets/icons/webcam.svg';
-import useStoreSlices from '../store/rootSliceStore';
 
 const icons = [
   IconBalloon,
   IconBasketball,
-  // IconPc,
   IconBucket,
   IconDishwasher,
-  // IconUsb,
   IconFootball,
   IconFork,
   IconHeadphones,
@@ -48,7 +43,6 @@ const icons = [
   IconMagic,
   IconMicrowave,
   IconMop,
-   /*
   IconMouse,
   IconOven,
   IconPaintbrush,
@@ -61,18 +55,9 @@ const icons = [
   IconTreelog,
   IconUSB,
   IconVolleyball,
-  IconWebcam, */
+  IconWebcam,
 ];
 
 const iconsLength = icons.length;
 
 export { icons, iconsLength };
-
-
-// Move icons and iconColors to separate files
-// import icons, iconsLength and iconColors to components
-// move selectColorSetsFunc() to separate file from CardElement.js
-
-
-// in CardLayout, finish setColorForEachElement()
-// move previous setColorForEachElement() to separate file
