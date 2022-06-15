@@ -41,25 +41,22 @@
   text-shadow: 0px 0px 12px rgb(212, 211, 211);
 }
 
-@media only screen and (min-width: 768px) {
-  .countersPrimary,
-  .countersSecondary {
-    font-size: 0.4em;
-  }
-}
-
-/* Big screen devices (889px and above) */
-@media only screen and (min-width: 889px) {
-  .countersPrimary,
-  .countersSecondary {
+@media only screen and (min-width: 768px) and (min-height: 480px) {
+  .gameStats {
     font-size: 0.8em;
   }
 }
 
+/* Big screen devices (889px and above) */
+@media only screen and (min-width: 889px) and (min-height: 600px) {
+  .gameStats {
+    font-size: 1em;
+  }
+}
+
 /* Extra big screen devices (1200px and above) */
-@media only screen and (min-width: 1200px) {
-  .countersPrimary,
-  .countersSecondary {
+@media only screen and (min-width: 1200px) and (min-height: 900px) {
+  .gameStats {
     font-size: 1.2em;
   }
 }
