@@ -6,3 +6,24 @@
   padding-top: 48px;
   box-sizing: border-box;
 }
+
+/* Medium screen devices (768px and above) */
+@media only screen and (min-width: 768px) and (min-height: 480px) {
+  .SplashScreen {
+    height: 60vh;
+  }
+}
+
+/* Big screen devices (889px and above) */
+@media only screen and (min-width: 889px) and (min-height: 780px) {
+  .SplashScreen {
+    height: 80vh;
+  }
+}
+
+/* Extra big screen devices (1200px and above) */
+@media only screen and (min-width: 1200px) and (min-height: 980px) {
+  .SplashScreen {
+    height: 100vh;
+  }
+}

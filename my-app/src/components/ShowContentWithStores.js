@@ -37,15 +37,14 @@ const ShowContentWithStores = () => {
     setGameStateToEnded,
   } = useStoreSlices();
 
-
   useEffect(() => {
     if (gameState === 'menu') {
-      navigate('/')
+      navigate('/');
     }
   }, []);
 
   const content = useMemo(() => {
-    console.log("gameState from ShowContentWithStores:", gameState);
+    console.log('gameState from ShowContentWithStores:', gameState);
 
     if (showFlashcard) {
       if (level === 1) {
@@ -61,7 +60,6 @@ const ShowContentWithStores = () => {
     }
 
     if (gameState === 'notStarted') {
-
       return (
         <div className={styles.splashScreen}>
           <img src={logoGameStart} alt='flashcardImg' height='250px' />
@@ -100,8 +98,8 @@ const ShowContentWithStores = () => {
           </div>
         </div>
       );
-    } 
-  
+    }
+
     if (gameState === 'running') {
       if (showFlashcard) {
         setFlashcard(true);
@@ -116,7 +114,7 @@ const ShowContentWithStores = () => {
         </div>
       );
     }
-  
+
     if (gameState === 'paused') {
       return (
         <div className={styles.splashScreen}>
@@ -134,7 +132,6 @@ const ShowContentWithStores = () => {
     }
 
     if (gameState === 'ended') {
-    
       // checkHighScore(score, scoreEntered, toggleScoreEntered);
 
       let endingMessage = '';
@@ -177,9 +174,7 @@ const ShowContentWithStores = () => {
         </div>
       );
     }
-    
-  }, [gameState, level, timeLeft, timeLeftBonus])
-
+  }, [gameState, level, timeLeft, timeLeftBonus]);
 
   return <>{content}</>;
 };

@@ -24,21 +24,7 @@
 }
 
 /* Medium screen devices (768px and above) */
-@media only screen and (min-width: 768px) {
-  .isLarge {
-    grid-template-columns: repeat(3, 40px);
-    grid-template-rows: repeat(3, 40px);
-  }
-
-  .Card {
-    grid-template-columns: repeat(3, 20px);
-    grid-template-rows: repeat(3, 20px);
-    padding: 20px;
-  }
-}
-
-/* Big screen devices (889px and above) */
-@media only screen and (min-width: 889px) {
+@media only screen and (min-width: 768px) and (min-height: 580px) {
   .isLarge {
     grid-template-columns: repeat(3, 60px);
     grid-template-rows: repeat(3, 60px);
@@ -47,12 +33,24 @@
   .Card {
     grid-template-columns: repeat(3, 40px);
     grid-template-rows: repeat(3, 40px);
-    padding: 40px;
+  }
+}
+
+/* Big screen devices (889px and above) */
+@media only screen and (min-width: 889px) and (min-height: 780px) {
+  .isLarge {
+    grid-template-columns: repeat(3, 80px);
+    grid-template-rows: repeat(3, 80px);
+  }
+
+  .Card {
+    grid-template-columns: repeat(3, 60px);
+    grid-template-rows: repeat(3, 60px);
   }
 }
 
 /* Extra big screen devices (1200px and above) */
-@media only screen and (min-width: 1200px) {
+@media only screen and (min-width: 1200px) and (min-height: 900px) {
   .isLarge {
     grid-template-columns: repeat(3, 100px);
     grid-template-rows: repeat(3, 100px);

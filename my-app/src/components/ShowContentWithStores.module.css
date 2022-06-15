@@ -1,5 +1,4 @@
 .splashScreen {
-  padding-top: 150px;
   text-align: center;
   font-size: 1em;
 }
@@ -13,7 +12,6 @@
 .splashBtn {
   display: flex;
   justify-content: flex-end;
-  margin-top: 80px;
 }
 
 .gameEndText p {
@@ -24,5 +22,25 @@ h1 {
   font-size: 3em;
   margin-top: -0.2em;
   margin-bottom: -0.1em;
+}
 
+/* Medium screen devices (768px and above) */
+@media only screen and (min-width: 768px) and (min-height: 480px) {
+  .splashScreen {
+    padding-top: 20px;
+  }
+}
+
+/* Big screen devices (889px and above) */
+@media only screen and (min-width: 889px) and (min-height: 600px) {
+  .splashScreen {
+    padding-top: 60px;
+  }
+}
+
+/* Extra big screen devices (1200px and above) */
+@media only screen and (min-width: 1200px) and (min-height: 980px) {
+  .splashScreen {
+    padding-top: 100px;
+  }
 }
