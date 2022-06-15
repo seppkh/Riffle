@@ -102,7 +102,6 @@ const ShowContentWithStores = () => {
       );
     } 
   
-    
     if (gameState === 'running') {
       if (showFlashcard) {
         setFlashcard(true);
@@ -111,14 +110,10 @@ const ShowContentWithStores = () => {
       }
 
       return (
-        <>
-        <div className='gameBoard'>
-            
+        <div className={styles.gameBoard}>
           <CardLayout />
-          <button onClick={togglePause}>Pause</button>
+          <Button onClick={togglePause} label='Pause' />
         </div>
-        </>
-  
       );
     }
   

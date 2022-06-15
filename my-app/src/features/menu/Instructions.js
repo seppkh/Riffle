@@ -9,7 +9,7 @@ export const Instructions = () => (
     three bottom cards.</strong><br/><br/>
     Each card has a number of elements. On the
     correct bottom card, a certain amount of elements are matching to elements
-    on the main top card. You have to click on the correct bottom card that has
+    on the main top card. You have to click on the correct bottom card that has
     those matching elements.<br/><br/>
     Keep playing and the number of matching elements
     will increase. Also, colors will become more similar over time.{' '}
