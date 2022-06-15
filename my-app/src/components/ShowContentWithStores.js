@@ -156,9 +156,8 @@ const ShowContentWithStores = () => {
           <div className={styles.gameEndText}>
             <img src={logoEnded} alt='endedImg' height='250px' />
             <h2>Game over – {reason}</h2>
-            <p>
-              Your final score is {score} {suffix}
-            </p>
+            <p>Your final score: </p>
+            <h1>{score}</h1>
             <p>{endingMessage}</p>
 
             {showHighScores()}
