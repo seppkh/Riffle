@@ -93,15 +93,17 @@ useEffect(() => {
       <div className={styles.game}>{content}</div>
       <div className={styles.btntoolbar}>
         <div className={styles.leftside}>
-          <Button
-            onClick={() => {
-              navigate('/');
-              resetCounters();
-              setBackgroundSoundToFalse();
-              stop();
-            }}
-            label='Exit'
-          />
+          <div className={styles.splashBtn}>
+            <Button
+              onClick={() => {
+                navigate('/');
+                resetCounters();
+                setBackgroundSoundToFalse();
+                stop();
+              }}
+              label='Exit'
+            />
+          </div>
         </div>
         <div className={styles.rightside}>
           <SoundButton 
