@@ -1,7 +1,7 @@
 .Button {
   align-items: center;
   font-family: 'Averia Sans Libre', cursive;
-  background-color: #edede9;
+  background-color: #ffffffc7;
   border: 2px solid #111;
   border-radius: 8px;
   box-sizing: border-box;
@@ -42,7 +42,7 @@
 }
 
 .Button:active {
-  background-color: #d6ccc2;
+  background-color: #d6d6d6c7;
   outline: 0;
 }
 

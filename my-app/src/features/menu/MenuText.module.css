@@ -31,6 +31,6 @@
 .instructions::-webkit-scrollbar-thumb {
   border: 5px solid transparent;
   border-radius: 100px;
-  background-color: #68686c;
+  background-color: #c8aee8c7;
   background-clip: content-box;
 }
