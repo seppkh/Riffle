@@ -9,7 +9,14 @@ const getRandomIndexOfArray = (input) => {
   return randomIndex;
 };
 
-const Card = ({ elements, isMain, onClick, elementsColors }) => {
+const Card = ({
+  elements,
+  isMain,
+  onClick,
+  elementsColors,
+  isActive,
+  isMatch,
+}) => {
   // console.log(elements);
 
   const locationPoints = useStoreSlices((state) => state.locationPoints);
@@ -29,28 +36,32 @@ const Card = ({ elements, isMain, onClick, elementsColors }) => {
     return output;
   }, [elements]);
 
-
   const renderElement = (element) => {
     const elementLocation = elementLocations.get(element);
     return (
       <>
-      <CardElement key={element} element={element} location={elementLocation} elementsColors={elementsColors} />
+        <CardElement
+          key={element}
+          element={element}
+          location={elementLocation}
+          elementsColors={elementsColors}
+        />
       </>
     );
   };
 
   return (
-    <>
     <div
       onClick={() => {
         onClick?.(); //call on click if onclick is defined
       }}
-      className={clsx(styles.Card, { [styles.isLarge]: isMain })}
+      className={clsx(styles.Card, {
+        [styles.isLarge]: isMain,
+        [styles.isInvalid]: !isActive && !isMatch && !isMain,
+      })}
     >
       {elements.map(renderElement)}
     </div>
-    </>
-
   );
 };
 

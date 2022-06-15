@@ -9,10 +9,7 @@ import guessWrong from '../assets/sounds/guessWrong.mp3';
 import bonusPoint from '../assets/sounds/bonusPoint.mp3';
 
 const SubCardWithStores = ({ card, elementsColors }) => {
-
-  const {
-    soundState,
-  } = useStoreSlices();
+  const { soundState } = useStoreSlices();
 
   const useStoreSlicesRead = useStoreSlices();
 
@@ -21,18 +18,21 @@ const SubCardWithStores = ({ card, elementsColors }) => {
   const [playBonus] = useSound(bonusPoint, { soundEnabled: soundState });
 
   return (
-    <>
-    <Card 
-      onClick={() => OnCardClickHandler(
-        card,
-        useStoreSlicesRead,
-        playRight,
-        playWrong,
-        playBonus
-      )}
+    <Card
+      isMatch={card.isMatch}
+      isActive={card.isActive}
+      onClick={() =>
+        OnCardClickHandler(
+          card,
+          useStoreSlicesRead,
+          playRight,
+          playWrong,
+          playBonus
+        )
+      }
       elements={card.elements}
-      elementsColors={elementsColors} />
-      </>
+      elementsColors={elementsColors}
+    />
   );
 };
 

@@ -19,17 +19,21 @@
   cursor: default;
 }
 
+.isInvalid {
+  background-color: #ff00009e;
+}
+
 /* Medium screen devices (768px and above) */
 @media only screen and (min-width: 768px) {
   .isLarge {
     grid-template-columns: repeat(3, 40px);
     grid-template-rows: repeat(3, 40px);
-    cursor: default;
   }
 
   .Card {
     grid-template-columns: repeat(3, 20px);
     grid-template-rows: repeat(3, 20px);
+    padding: 20px;
   }
 }
 
@@ -38,12 +42,12 @@
   .isLarge {
     grid-template-columns: repeat(3, 60px);
     grid-template-rows: repeat(3, 60px);
-    cursor: default;
   }
 
   .Card {
     grid-template-columns: repeat(3, 40px);
     grid-template-rows: repeat(3, 40px);
+    padding: 40px;
   }
 }
 
@@ -52,11 +56,11 @@
   .isLarge {
     grid-template-columns: repeat(3, 100px);
     grid-template-rows: repeat(3, 100px);
-    cursor: default;
   }
 
   .Card {
     grid-template-columns: repeat(3, 80px);
     grid-template-rows: repeat(3, 80px);
+    padding: 60px;
   }
 }
