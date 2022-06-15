@@ -1,13 +1,13 @@
 .Button {
   align-items: center;
-  background-color: #fee6e3;
+  font-family: 'Averia Sans Libre', cursive;
+  background-color: #edede9;
   border: 2px solid #111;
   border-radius: 8px;
   box-sizing: border-box;
   color: #111;
   cursor: pointer;
   display: flex;
-  font-family: Inter, sans-serif;
   font-size: 16px;
   height: 48px;
   justify-content: center;
@@ -42,7 +42,7 @@
 }
 
 .Button:active {
-  background-color: #ffdeda;
+  background-color: #d6ccc2;
   outline: 0;
 }
 
@@ -50,8 +50,25 @@
   outline: 0;
 }
 
-@media (min-width: 768px) {
+@media only screen and (min-width: 768px) {
   .Button {
-    padding: 0 40px;
+    font-size: 12px;
+    max-width: 60%;
+  }
+}
+
+/* Big screen devices (889px and above) */
+@media only screen and (min-width: 889px) {
+  .Button {
+    font-size: 14px;
+    max-width: 80%;
+  }
+}
+
+/* Extra big screen devices (1200px and above) */
+@media only screen and (min-width: 1200px) {
+  .Button {
+    font-size: 16px;
+    max-width: 100%;
   }
 }

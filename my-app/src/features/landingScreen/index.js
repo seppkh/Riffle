@@ -1,18 +1,16 @@
-import React, { useState } from "react";
-import Menu from "../menu";
-import { SplitLayout } from "../../components/Layout";
-import TiltedScreen from "../../components/TiltedScreen";
-import Logo from "../../components/Logo";
-import Explanation from "../../components/Explanation";
-import { useEffect } from "react";
-import useStoreSlices from "../../store/rootSliceStore";
+import React, { useState } from 'react';
+import Menu from '../menu';
+import { SplitLayout } from '../../components/Layout';
+import TiltedScreen from '../../components/TiltedScreen';
+import Logo from '../../components/Logo';
+import { useEffect } from 'react';
+import useStoreSlices from '../../store/rootSliceStore';
+import { Outlet } from 'react-router-dom';
 
 const LandingScreen = (props) => {
-  const [selectedMenuOption, setSelectedMenuOption] = useState(null);
   const {
     setGameStateToMenu,
   } = useStoreSlices();
-
 
   useEffect(() => {
     setGameStateToMenu();
@@ -23,14 +21,12 @@ const LandingScreen = (props) => {
       left={
         <>
           <Logo />
-          <Menu onMenuItemSelect={setSelectedMenuOption} />
+          <Menu />
         </>
       }
       right={
         <TiltedScreen>
-          <Explanation>
-            {selectedMenuOption ? selectedMenuOption : "Hi"}
-          </Explanation>
+          <Outlet />
         </TiltedScreen>
       }
     />

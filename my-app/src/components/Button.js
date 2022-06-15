@@ -1,8 +1,8 @@
 import styles from './Button.module.css';
 
-const Button = ({ label, handleClick }) => {
+const Button = ({ label, onClick }) => {
   return (
-    <button className={styles.Button} onClick={handleClick}>
+    <button className={styles.Button} onClick={onClick}>
       {label}
     </button>
   );

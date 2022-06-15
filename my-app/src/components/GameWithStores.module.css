@@ -1,0 +1,64 @@
+.gameScreen {
+  display: grid;
+  grid-template-rows: 48px 1fr;
+  grid-template-columns: 1fr 270px;
+  width: 1300px;
+  max-width: 100vw;
+}
+
+.btntoolbar {
+  display: flex;
+  justify-content: space-between;
+  grid-row: 1/2;
+  grid-column: 1/3;
+}
+
+.leftside {
+  display: flex;
+  flex: 1;
+  justify-content: flex-start;
+}
+.rightside {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+}
+
+.game {
+  grid-row: 1/3;
+  grid-column: 1/3;
+}
+
+.gameStats {
+  grid-column: 2/3;
+  grid-row: 2/3;
+}
+
+.countersPrimary,
+.countersSecondary {
+  font-weight: bold;
+  text-shadow: 0px 0px 12px rgb(212, 211, 211);
+}
+
+@media only screen and (min-width: 768px) {
+  .countersPrimary,
+  .countersSecondary {
+    font-size: 0.4em;
+  }
+}
+
+/* Big screen devices (889px and above) */
+@media only screen and (min-width: 889px) {
+  .countersPrimary,
+  .countersSecondary {
+    font-size: 0.8em;
+  }
+}
+
+/* Extra big screen devices (1200px and above) */
+@media only screen and (min-width: 1200px) {
+  .countersPrimary,
+  .countersSecondary {
+    font-size: 1.2em;
+  }
+}
