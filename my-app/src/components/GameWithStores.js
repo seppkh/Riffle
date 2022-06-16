@@ -17,6 +17,9 @@ import gameBackgroundFast from '../assets/sounds/backgroundFast.mp3';
 import gameOver from '../assets/sounds/gameOver.mp3';
 import flashCard from '../assets/sounds/flashCard.mp3';
 
+import gameOverV2 from '../assets/sounds/custom/gameOver.wav';
+import flashCardV2 from '../assets/sounds/custom/nextLevel3–flashcard.wav';
+
 
 const GameWithStores = () => {
   const navigate = useNavigate();
@@ -44,8 +47,8 @@ const GameWithStores = () => {
 // ------------------------------------
 // !!! Do not change this sound part here, it works !!!
 
-  const [playGameOver] = useSound(gameOver, { soundEnabled: soundState });
-  const [playFlashcard] = useSound(flashCard, { soundEnabled: soundState });
+  const [playGameOver] = useSound(gameOverV2, { soundEnabled: soundState, volume: 0.7 });
+  const [playFlashcard] = useSound(flashCardV2, { soundEnabled: soundState, volume: 0.4 });
   const [playBackground, { stop }] = useSound(gameBackgroundFast, {
     interrupt: true,
     soundEnabled: soundState,
@@ -65,7 +68,7 @@ const GameWithStores = () => {
 
 
 useEffect(() => {
-    if (gameState === 'flashcard' && level !== 1) playFlashcard();
+    if (gameState === 'flashcard') playFlashcard();
     if (gameState === 'ended') playGameOver();
   }, [gameState])
 

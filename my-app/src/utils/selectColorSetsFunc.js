@@ -43,8 +43,10 @@ function selectColorSetsFunc(level) {
     if (level >= 11 && level <= 20)
       colorSetCount = 4;
     if (level >= 21 && level <= 30)
+      colorSetCount = 3;
+    if (level >= 31 && level <= 40)
       colorSetCount = 2;
-    if (level >= 31)
+    if (level >= 41)
       colorSetCount = 1;
   
     result.push(...selectRandomColorSets(colorSetCount));
