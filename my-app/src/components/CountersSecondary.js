@@ -2,6 +2,7 @@ import { useEffect } from 'react';
 import useSound from 'use-sound';
 import useStoreSlices from '../store/rootSliceStore';
 import lastSecondsBeep from '../assets/sounds/lastSecondsBeep.mp3';
+import lastSecondsTick from '../assets/sounds/custom/kell2-1sec.wav';
 import levelSettings from '../store/levelSettings';
 
 const CountersSecondary = () => {
@@ -20,9 +21,7 @@ const CountersSecondary = () => {
   const MINUTE_MS = 1000;
   const MINUTE_MS_BONUS = 50;
 
-  const [playTimerEnding] = useSound(lastSecondsBeep, {
-    soundEnabled: soundState,
-  });
+  const [playTimerEnding] = useSound(lastSecondsTick, { soundEnabled: soundState, volume: 0.7 });
 
   // console.log("gameState from CountersWithStores:", gameState);
 

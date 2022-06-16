@@ -81,23 +81,45 @@ const ShowContentWithStores = () => {
     }
 
     if (gameState === 'flashcard') {
-      let flashcardText = levelSettings[level].text;
 
-      return (
-        <div className={styles.splashScreen}>
-          <img src={logoFlashcard} alt='flashcardImg' height='250px' />
-          <h2>{flashcardText}</h2>
-          <div className={styles.splashBtn}>
-            <Button
-              onClick={() => {
-                setGameStateToRunning();
-                resetTimeLeft();
-              }}
-              label='Continue'
-            />
+      if (level !== 56) {
+        let flashcardText = levelSettings[level].text;
+
+        return (
+          <div className={styles.splashScreen}>
+            <img src={logoFlashcard} alt='flashcardImg' height='250px' />
+            <h2>{flashcardText}</h2>
+            <div className={styles.splashBtn}>
+              <Button
+                onClick={() => {
+                  setGameStateToRunning();
+                  // resetTimeLeft();
+                }}
+                label='Continue'
+              />
+            </div>
           </div>
-        </div>
-      );
+        );
+      }
+      else {
+        let flashcardText = levelSettings[level].text;
+
+        return (
+          <div className={styles.splashScreen}>
+            <img src={logoFlashcard} alt='flashcardImg' height='250px' />
+            <h2>{flashcardText}</h2>
+            <div className={styles.splashBtn}>
+              <Button
+                onClick={() => {
+                  setGameStateToEnded();
+                  // resetTimeLeft();
+                }}
+                label='End game'
+              />
+            </div>
+          </div>
+        );
+      }
     }
 
     if (gameState === 'running') {
@@ -142,15 +164,19 @@ const ShowContentWithStores = () => {
       let suffix = 'points';
       let reason = '';
 
+      if (level === 56) reason = 'you beat all levels!';
       if (lives === 0) reason = 'you ran out of lives!';
       if (timeLeft <= 0) reason = 'you ran out of time!';
 
       if (score === 1) suffix = 'point';
 
       if (score <= 5) endingMessage = "A little disappointing if I'm honest...";
-      if (score > 5 && score <= 10) endingMessage = 'Nicely done!';
-      if (score > 10 && score <= 20) endingMessage = 'You rocked it!';
-      if (score > 20) endingMessage = "Wow! You're a natural pro at this game!";
+      if (score <= 15) endingMessage = "It's more than nothing, less than something...";
+      if (score <= 25) endingMessage = "That's quite good, but with another try you can surely do much better!";
+      if (score <= 35) endingMessage = "Nicely done! You're quite good at this game!";
+      if (score <= 45) endingMessage = "Excellent! Nothing misses your eagle vision!";
+      if (score <= 55) endingMessage = "Superstar! You rocked it!";
+      if (score > 55) endingMessage = "Wow!! You're a natural pro at this game!";
 
       return (
         <div className={styles.splashScreen}>
@@ -179,6 +205,7 @@ const ShowContentWithStores = () => {
       );
     }
   }, [gameState, level, timeLeft, timeLeftBonus]);
+
 
   return <>{content}</>;
 };

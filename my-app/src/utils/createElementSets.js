@@ -44,6 +44,9 @@ function getRandom(arr, n) {
 // creates a new array with y matching numbers with mainCard and n random numbers are not in mainCard
 function includeSomeThenGetRandom(numbersArr, n, mainArr, y) {
 
+  console.log("n:", n)
+  console.log("y:", y)
+
   if (y > n)
       throw new RangeError("includeSomeThenGetRandom: more elements being matched than in main array");
   let result = new Array(n);
