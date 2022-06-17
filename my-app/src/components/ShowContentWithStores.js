@@ -44,7 +44,7 @@ const ShowContentWithStores = () => {
   }, []);
 
   const content = useMemo(() => {
-    console.log('gameState from ShowContentWithStores:', gameState);
+    // console.log('gameState from ShowContentWithStores:', gameState);
 
     if (showFlashcard) {
       if (level === 1) {
@@ -60,6 +60,8 @@ const ShowContentWithStores = () => {
     }
 
     if (gameState === 'notStarted') {
+      console.log("Setting up gameplay");
+
       return (
         <div className={styles.splashScreen}>
           <img src={logoGameStart} alt='flashcardImg' height='250px' />
@@ -93,7 +95,7 @@ const ShowContentWithStores = () => {
               <Button
                 onClick={() => {
                   setGameStateToRunning();
-                  // resetTimeLeft();
+                  resetTimeLeft();
                 }}
                 label='Continue'
               />
@@ -160,6 +162,8 @@ const ShowContentWithStores = () => {
     if (gameState === 'ended') {
       // checkHighScore(score, scoreEntered, toggleScoreEntered);
 
+      console.log("Game over – final score:", score);
+
       let endingMessage = '';
       let suffix = 'points';
       let reason = '';
@@ -170,13 +174,32 @@ const ShowContentWithStores = () => {
 
       if (score === 1) suffix = 'point';
 
-      if (score <= 5) endingMessage = "A little disappointing if I'm honest...";
-      if (score <= 15) endingMessage = "It's more than nothing, less than something...";
-      if (score <= 25) endingMessage = "That's quite good, but with another try you can surely do much better!";
-      if (score <= 35) endingMessage = "Nicely done! You're quite good at this game!";
-      if (score <= 45) endingMessage = "Excellent! Nothing misses your eagle vision!";
-      if (score <= 55) endingMessage = "Superstar! You rocked it!";
-      if (score > 55) endingMessage = "Wow!! You're a natural pro at this game!";
+      switch (true) {
+        case (score <= 5):
+          endingMessage = "A little disappointing if I'm honest...";
+          break;
+        case (score <= 15):
+          endingMessage = "More than nothing, less than something...";            
+          break;
+        case (score <= 25):
+          endingMessage = "Quite okay, but with another try you can surely do much better!";
+          break;
+        case (score <= 35):
+          endingMessage = "Nicely done! You're quite good at this game!";
+          break;
+        case (score <= 45):
+          endingMessage = "Excellent! Nothing misses your eagle vision!";
+          break;
+        case (score <= 55):
+          endingMessage = "Superstar! You rocked it!";
+          break;
+        case (score > 56):
+          endingMessage = "Wow!! You're a natural pro at this game!";
+          break;
+        default:
+          endingMessage = "";
+          break;
+      }
 
       return (
         <div className={styles.splashScreen}>

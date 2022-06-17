@@ -35,6 +35,7 @@ const Menu = () => {
   const [playMenuBackground, { stop }] = useSound(menuBackground, {
     interrupt: true,
     soundEnabled: soundState,
+    loop: true
   }); 
 
   useEffect(() => {
@@ -51,7 +52,7 @@ const Menu = () => {
 // ------------------------------------
 
 
-  console.log("gameState1 from Menu:", gameState);
+  // console.log("gameState1 from Menu:", gameState);
 
   return (
     <ul className={styles.Menu}>
