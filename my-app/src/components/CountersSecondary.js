@@ -37,7 +37,7 @@ const CountersSecondary = () => {
 
       if (timeLeft <= 5) playTimerEnding();
 
-      console.log('timeLeft from CounterWithStores:', timeLeft);
+      // console.log('timeLeft from CounterWithStores:', timeLeft);
 
       return () => {
         clearInterval(timeInterval);
@@ -56,7 +56,7 @@ const CountersSecondary = () => {
         tickBonus();
       }, MINUTE_MS_BONUS);
 
-      console.log('timeLeftBonus from CounterWithStores:', timeLeftBonus);
+      // console.log('timeLeftBonus from CounterWithStores:', timeLeftBonus);
 
       return () => {
         clearInterval(bonusTimeInterval);

@@ -72,7 +72,7 @@ const levelSettings = {
     "cardElementCount": 3,
     "matchingElementCount": 2,
     "showFlashcard": true,
-    "text": "You're quite good! From here on, each correct card will have 2 matching symbols",
+    "text": "You're quite good! From here on, each correct card will now have 2 matching symbols",
     "img": "./assets/flashcardMascot.png"
   },
   12: {
@@ -289,7 +289,8 @@ const levelSettings = {
     "matchingElementCount": 3,
     "showFlashcard": true,
     "text": "Here's a good challenge for ya! Each correct card will now have 4 matching elements. Watch out for EVEN more similar colors",
-    "img": "./assets/flashcardMascot.png"  },
+    "img": "./assets/flashcardMascot.png"  
+  },
   47: {
     "mainCardElementCount": 8,
     "cardElementCount": 7,

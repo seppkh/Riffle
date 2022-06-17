@@ -43,10 +43,6 @@ function getRandom(arr, n) {
 
 // creates a new array with y matching numbers with mainCard and n random numbers are not in mainCard
 function includeSomeThenGetRandom(numbersArr, n, mainArr, y) {
-
-  console.log("n:", n)
-  console.log("y:", y)
-
   if (y > n)
       throw new RangeError("includeSomeThenGetRandom: more elements being matched than in main array");
   let result = new Array(n);
@@ -64,10 +60,10 @@ function includeSomeThenGetRandom(numbersArr, n, mainArr, y) {
 };
 
 // function to get a random number to decrease matching elements on incorrect cards
-function getRandomInt(max) {
-  let min = 1;
-  max = Math.floor(max);
-  return Math.floor(Math.random() * (max - min) + min); //The maximum is exclusive and the minimum is inclusive
+function getRandomInt(min, max) {
+
+  // returns number between 1 and maxMatching
+  return min + Math.floor(Math.random() * (max - min + 1));
 }
 
 // create and save values for each card :
@@ -81,12 +77,12 @@ function createSets(mainCardElementCount, subCardElementCount, maxMatching) {
     isActive: true
   };
   let card2 = {
-    elements: includeSomeThenGetRandom(numbersArr, subCardElementCount, mainCard.elements, maxMatching - getRandomInt(maxMatching)),
+    elements: includeSomeThenGetRandom(numbersArr, subCardElementCount, mainCard.elements, maxMatching - getRandomInt(1, maxMatching)),
     isMatch: false,
     isActive: true
   };
   let card3 = {
-    elements: includeSomeThenGetRandom(numbersArr, subCardElementCount, mainCard.elements, maxMatching - getRandomInt(maxMatching)),
+    elements: includeSomeThenGetRandom(numbersArr, subCardElementCount, mainCard.elements, maxMatching - getRandomInt(1, maxMatching)),
     isMatch: false,
     isActive: true
   };

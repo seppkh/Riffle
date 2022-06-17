@@ -19,13 +19,13 @@ function getRandom(arr, n) {
 function selectRandomColorSets(colorSetAmount) {
   let selectedColors = [];
 
-  console.log("allSets:", allSets)
+  // console.log("allSets:", allSets)
 
   const selectedRandomColorSets = getRandom(allSets, colorSetAmount);
-  console.log("selectedRandomColorSets:", selectedRandomColorSets)
+  // console.log("selectedRandomColorSets:", selectedRandomColorSets)
 
   selectedRandomColorSets.forEach(element => selectedColors.push(...element));
-  console.log("selectedColors:", selectedColors)
+  // console.log("selectedColors:", selectedColors)
 
   return selectedColors;
 }

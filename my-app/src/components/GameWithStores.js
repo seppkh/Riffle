@@ -35,13 +35,12 @@ const GameWithStores = () => {
     resetCounters,
     soundState,
     setBackgroundSoundToFalse,
-    backgroundSoundState,
     toggleBackgroundSound
   } = useStoreSlices();
 
-  console.log("gameState from GameWithStores:", gameState);
-  console.log("backgroundSoundState from GameWithStores:", backgroundSoundState);
-  console.log("soundState from GameWithStores:", soundState);
+  // console.log("gameState from GameWithStores:", gameState);
+  // console.log("backgroundSoundState from GameWithStores:", backgroundSoundState);
+  // console.log("soundState from GameWithStores:", soundState);
 
 
 // ------------------------------------
@@ -52,12 +51,9 @@ const GameWithStores = () => {
   const [playBackground, { stop }] = useSound(gameBackgroundFast, {
     interrupt: true,
     soundEnabled: soundState,
+    loop: true
   });
-  /* const [playBackgroundEnded, { stopEnded }] = useSound(gameBackgroundEnded, {
-    interrupt: true,
-    soundEnabled: soundState,
-  }); */
-
+  
   useMemo(() => {
     if (!soundState) return stop();
     playBackground();

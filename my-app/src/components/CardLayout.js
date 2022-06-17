@@ -13,8 +13,15 @@ const ShowCardsWithStores = () => {
 
   // console.log("gameState from CardLayout:", gameState);
 
-  const colorSet = selectColorSetsFunc(level);
-  const elementsColors = setColorForEachElement(iconsLength, colorSet);
+  const colorSet = useMemo(() => {
+    return selectColorSetsFunc(level);
+  }, [level]);
+
+  const elementsColors = useMemo(() => {
+    return setColorForEachElement(iconsLength, colorSet);
+  }, [level]);
+  
+
   // console.log("colorSet from CardLayout.js:", colorSet)
   // console.log("elementsColors from CardLayout.js:", elementsColors)
 

@@ -2,7 +2,7 @@ const OnCardClickHandler = (clicked_card, useStoreSlices,
   playRight, playWrong, playBonus
 ) => {
 
-  console.log("clicked_card", clicked_card);
+  // console.log("clicked_card", clicked_card);
 
   const { decreaseTime, 
     deactivateCard, 
@@ -30,6 +30,8 @@ const OnCardClickHandler = (clicked_card, useStoreSlices,
     playWrong();
 
     console.log("Wrong guess - deactivating card");
+    console.log("Time -3 sec");
+
     decreaseTime();
     decreaseLives();
     deactivateCard(clicked_card);
@@ -38,18 +40,22 @@ const OnCardClickHandler = (clicked_card, useStoreSlices,
   }
 
   if (clicked_card.isActive === true && clicked_card.isMatch === true) {
+    console.log("Correct card!");
+    console.log("Time +5 sec");
 
     if (timeLeftBonus > 0) {
       increaseScoreBonus()
       playBonus();
-      
+      console.log("Score +3");
+
     } else {
       increaseScore()
       playRight();
+      console.log("Score +1");
+
     };
 
     return (
-      console.log("Correct card!"),
       activateCards(),
       increaseLevel(),
       assignCards(),
