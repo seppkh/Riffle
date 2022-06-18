@@ -7,15 +7,16 @@ import { useEffect } from 'react';
 import useStoreSlices from '../../store/rootSliceStore';
 import { Outlet } from 'react-router-dom';
 
+
 const LandingScreen = (props) => {
   const {
-    setGameStateToMenu,
+    setGameStateToMenu
   } = useStoreSlices();
 
   useEffect(() => {
     setGameStateToMenu();
   }, [setGameStateToMenu]);
-  
+ 
   return (
     <SplitLayout
       left={

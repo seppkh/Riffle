@@ -8,6 +8,7 @@ import useSound from 'use-sound';
 import menuBackground from '../../assets/sounds/gameBackground.mp3';
 
 import { useMemo } from "react";
+import SoundButton from '../../components/SoundButton';
 
 const menuOptions = [
   {
@@ -25,7 +26,9 @@ const Menu = () => {
   const {
     gameState,
     setGameStateToNotStarted,
-    soundState
+    soundState,
+    toggleSound,
+    toggleBackgroundSound
   } = useStoreSlices();
 
 

@@ -17,3 +17,17 @@
   justify-content: center;
   align-items: center;
 }
+
+
+.btntoolbar {
+  display: flex;
+  justify-content: flex-end;
+  position: fixed;
+  top: 3vw;
+  right: 5vw;
+}
+
+.rightside {
+  display: flex;
+  justify-content: flex-end;
+}

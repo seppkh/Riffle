@@ -5,7 +5,7 @@ const soundStates = {
 }
 
 const createSoundsSlice = (set, get) => ({
-  soundState: soundStates.notMute,
+  soundState: soundStates.mute,
   soundPlaying: false,
   backgroundSoundState: true,
   toggleSound: () => set((state) => {
