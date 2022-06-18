@@ -25,7 +25,8 @@ const Menu = () => {
   const {
     gameState,
     setGameStateToNotStarted,
-    soundState
+    soundState,
+    sameSoundstate
   } = useStoreSlices();
 
 
@@ -67,12 +68,14 @@ const Menu = () => {
     <MenuItem
       onClick={() => {
         navigate('/instructions');
+        sameSoundstate();
       }}
       label={'Instructions'}
     ></MenuItem>
     <MenuItem
       onClick={() => {
         navigate('/credits');
+        sameSoundstate();
       }}
       label={'Credits'}
     ></MenuItem>
