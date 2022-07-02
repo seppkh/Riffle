@@ -7,70 +7,14 @@ import levelSettings from '../store/levelSettings';
 
 const CountersSecondary = () => {
   const {
-    gameState,
-    level,
-    soundState,
-    timeLeft,
-    timeLeftBonus,
-    tick,
-    tickBonus,
+    level
   } = useStoreSlices();
 
   const matchingElementCount = levelSettings[level].matchingElementCount;
 
-  const MINUTE_MS = 1000;
-  const MINUTE_MS_BONUS = 50;
-
-  const [playTimerEnding] = useSound(lastSecondsTick, { soundEnabled: soundState, volume: 0.7 });
-
-  // console.log("gameState from CountersWithStores:", gameState);
-
-  useEffect(() => {
-    if (gameState !== 'running') return;
-
-    if (timeLeft <= 0) return;
-
-    if (timeLeft > 0) {
-      const timeInterval = setInterval(() => {
-        tick();
-      }, MINUTE_MS);
-
-      if (timeLeft <= 5) playTimerEnding();
-
-      // console.log('timeLeft from CounterWithStores:', timeLeft);
-
-      return () => {
-        clearInterval(timeInterval);
-      };
-    }
-  }, [timeLeft]);
-
-
-  useEffect(() => {
-    if (gameState !== 'running') return;
-
-    if (timeLeftBonus <= 0) return;
-
-    if (timeLeftBonus > 0) {
-      const bonusTimeInterval = setInterval(() => {
-        tickBonus();
-      }, MINUTE_MS_BONUS);
-
-      // console.log('timeLeftBonus from CounterWithStores:', timeLeftBonus);
-
-      return () => {
-        clearInterval(bonusTimeInterval);
-      };
-    }
-  }, [gameState, timeLeftBonus]);
-
-
   return (
     <div className='counters-secondary'>
-      <p className='level'>level: {level}</p>
       <p className='elements'>matching elements: {matchingElementCount}</p>
-      <p className='time'>time: {timeLeft}</p>
-      <p className='bonus'>3X bonus: {timeLeftBonus}</p>
     </div>
   );
 };

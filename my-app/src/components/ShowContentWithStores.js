@@ -12,6 +12,7 @@ import { checkHighScore, showHighScores } from '../utils/saveScoresFunc';
 import { useMemo } from 'react';
 import { useEffect } from 'react';
 import Button from './Button';
+import CountersTertiary from './CountersTertiary';
 
 const ShowContentWithStores = () => {
   const navigate = useNavigate();
@@ -43,9 +44,14 @@ const ShowContentWithStores = () => {
     }
   }, []);
 
+  const contentCountersTertiary = useMemo(() => {
+    if (gameState === 'running') return <CountersTertiary />;
+  }, [gameState, timeLeft, timeLeftBonus]);
+
   const content = useMemo(() => {
     // console.log('gameState from ShowContentWithStores:', gameState);
 
+    /*
     if (showFlashcard) {
       if (level === 1) {
         setFlashcard(false);
@@ -54,6 +60,7 @@ const ShowContentWithStores = () => {
         setFlashcard(false);
       }
     }
+    */
 
     if (lives <= 0) {
       setGameStateToEnded();
@@ -64,11 +71,10 @@ const ShowContentWithStores = () => {
 
       return (
         <div className={styles.splashScreen}>
-          <img src={logoGameStart} alt='flashcardImg' height='250px' />
-          <p>Setting up your gameplay...</p>
-          <h2>Click the button to start your game</h2>
-          <br />
-          <div className={styles.splashBtn}>
+          <img src={logoGameStart} alt='flashcardImg'/>
+          <p><span>Setting up your gameplay...</span></p>
+          <h2><span>Click the button to start your game</span></h2>
+          <div className={styles.splashBtnMiddle}>
             <Button
               onClick={() => {
                 resetCounters();
@@ -82,6 +88,7 @@ const ShowContentWithStores = () => {
       );
     }
 
+    /*
     if (gameState === 'flashcard') {
 
       if (level !== 56) {
@@ -123,22 +130,32 @@ const ShowContentWithStores = () => {
         );
       }
     }
+    */
 
     if (gameState === 'running') {
+      /*
       if (showFlashcard) {
         setFlashcard(true);
         resetTimeLeft();
         setGameStateToFlashcard();
       }
+      */
 
       return (
         <div>
-          <div className={styles.gameBoard}>
-            <CardLayout />
+          <div className={styles.gameContent}>
+            <div className={styles.gameBoard}>
+              <CardLayout />
+            </div>
+            <div className={styles.gameStatsTertiary}>
+              <div className={styles.countersTertiary}>
+                {contentCountersTertiary}
+              </div>
+            </div>
           </div>
-          <div className={styles.splashBtn}>
-            <Button onClick={togglePause} label='Pause' />
-          </div>
+          <div className={styles.splashBtnRight}>
+              <Button onClick={togglePause} label='Pause' />
+            </div>
         </div>
       );
     }
@@ -146,13 +163,12 @@ const ShowContentWithStores = () => {
     if (gameState === 'paused') {
       return (
         <div className={styles.splashScreen}>
-          <img src={logoGamePaused} alt='flashcardImg' height='250px' />
-          <h2>Game is paused</h2>
-          <p>Needed a break already, yeh?</p>
-          <br />
-          <h2>Click the button to continue your game</h2>
-          <br />
-          <div className={styles.splashBtn}>
+          <div className={styles.content}>
+            <img src={logoGamePaused} alt='flashcardImg' className='flashcardImg' />
+            <p><span>Needed a pause already, yeh?</span></p>
+            <h2><span>Click the button to continue your game</span></h2>
+          </div>
+          <div className={styles.splashBtnMiddle}>
             <Button onClick={togglePause} label='Continue' />
           </div>
         </div>
@@ -168,9 +184,9 @@ const ShowContentWithStores = () => {
       let suffix = 'points';
       let reason = '';
 
-      if (level === 56) reason = 'you beat all levels!';
-      if (lives === 0) reason = 'you ran out of lives!';
-      if (timeLeft <= 0) reason = 'you ran out of time!';
+      if (level === 56) reason = 'you beat all levels...';
+      if (lives === 0) reason = 'you ran out of lives...';
+      if (timeLeft <= 0) reason = 'you ran out of time...';
 
       if (score === 1) suffix = 'point';
 
@@ -182,19 +198,19 @@ const ShowContentWithStores = () => {
           endingMessage = "More than nothing, less than something...";            
           break;
         case (score <= 25):
-          endingMessage = "Quite okay, but with another try you can surely do much better!";
+          endingMessage = "Quite okay!";
           break;
         case (score <= 35):
-          endingMessage = "Nicely done! You're quite good at this game!";
+          endingMessage = "Nicely done! You're good at this game!";
           break;
         case (score <= 45):
-          endingMessage = "Excellent! Nothing misses your eagle vision!";
+          endingMessage = "Excellent! You notice all the small details!";
           break;
         case (score <= 55):
           endingMessage = "Superstar! You rocked it!";
           break;
         case (score > 56):
-          endingMessage = "Wow!! You're a natural pro at this game!";
+          endingMessage = "Wow!! You're a natural pro!";
           break;
         default:
           endingMessage = "";
@@ -205,16 +221,15 @@ const ShowContentWithStores = () => {
         <div className={styles.splashScreen}>
           <div className={styles.gameEndText}>
             <img src={logoEnded} alt='endedImg' height='250px' />
-            <h2>Game over – {reason}</h2>
-            <p>Your final score is: </p>
-            <h1>{score}</h1>
-            <p>{endingMessage}</p>
+            <h2><span>Game over – {reason}</span></h2>
+            <p><span>Your final score is: <strong>{score}</strong></span></p>
+            <p><span>{endingMessage}</span></p>
 
             {showHighScores()}
           </div>
 
-          <p>Surely you can beat your own score...</p>
-          <div className={styles.splashBtn}>
+          <h4><span>Surely you can beat your own score...</span></h4>
+          <div className={styles.splashBtnMiddle}>
             <Button
               onClick={() => {
                 resetCounters();

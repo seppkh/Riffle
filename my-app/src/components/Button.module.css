@@ -52,23 +52,23 @@
 
 @media only screen and (min-width: 768px) {
   .Button {
-    font-size: 12px;
-    max-width: 60%;
+    font-size: 1em;
+    max-width: 80%;
   }
 }
 
 /* Big screen devices (889px and above) */
 @media only screen and (min-width: 889px) {
   .Button {
-    font-size: 14px;
-    max-width: 80%;
+    font-size: 1.1em;
+    max-width: 90%;
   }
 }
 
 /* Extra big screen devices (1200px and above) */
 @media only screen and (min-width: 1200px) {
   .Button {
-    font-size: 16px;
+    font-size: 1.2em;
     max-width: 100%;
   }
 }
