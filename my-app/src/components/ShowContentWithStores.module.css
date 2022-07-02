@@ -1,57 +1,140 @@
 .splashScreen {
   text-align: center;
   font-size: 1em;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.gameContent {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .gameBoard {
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  /*
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  */
-
+  justify-content: center;
 }
-
-.splashBtn {
+.gameStatsTertiary {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: center;
+  font-weight: bold;
+  text-shadow: 0px 0px 12px rgb(212, 211, 211);
+}
+.countersTertiary {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  gap: 20px; 
+}
+.splashBtnRight {
+  position: relative;
   display: flex;
   justify-content: flex-end;
-  position: absolute;
-  right:  4vw;
-  bottom: 6vw;
-
+  transform: translate(0, -50px); 
+  right: 2%;
 }
 
-.gameEndText p {
-  font-size: 1.5em;
+.content {
+  bottom: 50%;
+  left: 50%;
+}
+.splashBtnMiddle {
+  display: flex;
+  justify-content: center;
+  margin-top: 4vw;
+  margin-right: 1.5%; /* to arrange button visually center */
+}
+.splashScreen img {
+  height: 200px;
 }
 
-h1 {
-  font-size: 3em;
-  margin-top: -0.2em;
-  margin-bottom: -0.1em;
+h1, h2, h4, p span {
+  padding: 10px 15px;
+  border-radius: 20px;
+  background: rgb(255, 255, 255, 0.6); 
+  box-shadow: 0px 0px 20px 20px rgba(255, 255, 255, 0.6);
+}
+p strong {
+  font-size: 1.8em;
+  padding-left: 10px;
 }
 
 /* Medium screen devices (768px and above) */
 @media only screen and (min-width: 768px) and (min-height: 480px) {
-  .splashScreen {
-    padding-top: 20px;
+ 
+  .gameEndText p {
+    font-size: 1.2em;
+  }
+  .splashScreen h1 {
+    font-size: 1.8em;
+    margin-top: -0.2em;
+    margin-bottom: -0.1em;
+  }
+  .splashScreen h2 {
+    font-size: 1.5em;
+    margin-bottom: -0.1em;
+  }
+  .splashScreen p {
+    font-size: 1.2em;
+    padding-top: 0.1em;
+    padding-bottom: 0.4em;
+  }
+  .splashScreen img {
+    height: 200px;
   }
 }
 
 /* Big screen devices (889px and above) */
 @media only screen and (min-width: 889px) and (min-height: 600px) {
-  .splashScreen {
-    padding-top: 60px;
+ 
+  .gameEndText p {
+    font-size: 1.4em;
+  }
+  .splashScreen h1 {
+    font-size: 1.9em;
+    margin-top: -0.2em;
+    margin-bottom: -0.1em;
+  }
+  .splashScreen h2 {
+    font-size: 1.7em;
+    margin-bottom: -0.1em;
+  }
+  .splashScreen p {
+    font-size: 1.4em;
+    padding-top: 0.1em;
+    padding-bottom: 0.4em;
+  }
+  .splashScreen img {
+    height: 250px;
   }
 }
 
 /* Extra big screen devices (1200px and above) */
 @media only screen and (min-width: 1200px) and (min-height: 980px) {
-  .splashScreen {
-    padding-top: 100px;
+
+  .gameEndText p {
+    font-size: 1.8em;
+  }
+  .splashScreen h1 {
+    font-size: 2.4em;
+    margin-top: -0.2em;
+    margin-bottom: -0.1em;
+  }
+  .splashScreen h2 {
+    font-size: 2.2em;
+    margin-bottom: -0.1em;
+  }
+  .splashScreen p {
+    font-size: 1.8em;
+    padding-top: 0.1em;
+    padding-bottom: 0.4em;
+  }
+  .splashScreen img {
+    height: 300px;
   }
 }

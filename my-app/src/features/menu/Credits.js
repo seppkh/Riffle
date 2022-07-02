@@ -4,7 +4,7 @@ import styles from './MenuText.module.css';
 export const Credits = () => (
   <div className={styles.credits}>
     <p>
-      <h3>Game made by:</h3>
+      <h2>Game made by:</h2>
       <p>Kristi Pruul - Project manager</p>
       <p>Renida Lumiste - Design</p>
       <p>Krister Sepp - Back-end development/tester</p>

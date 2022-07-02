@@ -19,6 +19,7 @@ import flashCard from '../assets/sounds/flashCard.mp3';
 
 import gameOverV2 from '../assets/sounds/custom/gameOver.wav';
 import flashCardV2 from '../assets/sounds/custom/nextLevel3–flashcard.wav';
+import CountersTertiary from './CountersTertiary';
 
 
 const GameWithStores = () => {
@@ -64,7 +65,7 @@ const GameWithStores = () => {
 
 
 useEffect(() => {
-    if (gameState === 'flashcard') playFlashcard();
+    // if (gameState === 'flashcard') playFlashcard();
     if (gameState === 'ended') playGameOver();
   }, [gameState])
 
@@ -78,7 +79,10 @@ useEffect(() => {
     if (
       gameState === 'running' ||
       gameState === 'flashcard' ||
-      gameState === 'notStarted'
+      gameState === 'notStarted' ||
+      gameState === 'paused' ||
+      gameState === 'ended'
+
     )
       return <CountersPrimary />;
   }, [gameState]);
@@ -104,20 +108,18 @@ useEffect(() => {
             />
           </div>
         </div>
-        <div className={styles.rightside}>
+        <div className={styles.gameStatsPrimary}>
+          {contentCountersPrimary}
           <SoundButton 
-            onClick={() => {
-            toggleSound(); 
-            toggleBackgroundSound();
-          }} 
-            soundOn={soundState} />
+          onClick={() => {
+          toggleSound(); 
+          toggleBackgroundSound();
+        }} 
+          soundOn={soundState} />
         </div>
       </div>
-      <div className={styles.gameStats}>
-        <div className={styles.countersPrimary}>{contentCountersPrimary}</div>
-        <div className={styles.countersSecondary}>
-          {contentCountersSecondary}
-        </div>
+      <div className={styles.gameStatsSecondary}>
+        {contentCountersSecondary}
       </div>
     </div>
   );

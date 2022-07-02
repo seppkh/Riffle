@@ -19,11 +19,7 @@
   text-align: left;
 }
 
-.credits p {
-  margin: 15px 0;
-}
-
-.credits h3::after {
+.credits h2::after {
   content: '';
   display: block;
   width: 10%;
@@ -47,4 +43,26 @@
   border-radius: 100px;
   background-color: #9b5de5;
   background-clip: content-box;
+}
+
+.credits h2 {
+  font-size: 1.4em;
+  margin-bottom: 0.8em;
+
+}
+
+.credits p {
+  font-size: 1em;
+  margin-top: 0.2em;
+  margin-bottom: -0.1em;
+  margin: 15px 0;
+
+}
+
+.intro p {
+  font-size: 1.2em;
+  margin-top: 0.2em;
+  margin-bottom: -0.1em;
+  margin: 15px 0;
+
 }

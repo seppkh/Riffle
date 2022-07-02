@@ -60,7 +60,9 @@ const Card = ({
         [styles.isInvalid]: !isActive && !isMatch && !isMain,
       })}
     >
-      {elements.map(renderElement)}
+      <div>
+        {elements.map(renderElement)}
+      </div>
     </div>
   );
 };
