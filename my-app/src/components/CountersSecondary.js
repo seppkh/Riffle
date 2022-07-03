@@ -1,9 +1,9 @@
-import { useEffect } from 'react';
-import useSound from 'use-sound';
 import useStoreSlices from '../store/rootSliceStore';
-import lastSecondsBeep from '../assets/sounds/lastSecondsBeep.mp3';
-import lastSecondsTick from '../assets/sounds/custom/kell2-1sec.wav';
 import levelSettings from '../store/levelSettings';
+import number1 from '../assets/numbers/1.svg';
+import number2 from '../assets/numbers/2.svg';
+import number3 from '../assets/numbers/3.svg';
+import number4 from '../assets/numbers/4.svg';
 
 const CountersSecondary = () => {
   const {
@@ -11,11 +11,33 @@ const CountersSecondary = () => {
   } = useStoreSlices();
 
   const matchingElementCount = levelSettings[level].matchingElementCount;
+  let imgSource = '';
+  let text = 'matching items';
+
+  switch(matchingElementCount) {
+    case 1:
+      imgSource = number1;
+      text = 'matching item'
+      break;
+    case 2:
+      imgSource = number2;
+      break;
+    case 3:
+      imgSource = number3;
+      break;
+    case 4:
+      imgSource = number4;
+      break;
+    default:
+      break;
+  } 
 
   return (
-    <div className='counters-secondary'>
-      <p className='elements'>matching elements: {matchingElementCount}</p>
-    </div>
+    <>
+      <img src={imgSource} alt='matchingElementsImg' />
+      <p className='elements'><span>{text}</span></p>
+
+    </>
   );
 };
 
