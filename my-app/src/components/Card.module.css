@@ -1,6 +1,8 @@
 .Card {
   display: grid;
   padding: 60px;
+  grid-template-columns: repeat(3, 30px);
+  grid-template-rows: repeat(3, 30px);
   grid-template-areas:
     'a b c'
     'd e f'
@@ -8,9 +10,6 @@
   background-color: #c8aee8c7;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
   border-radius: 50%;
-  cursor: pointer;
-  grid-template-columns: repeat(3, 30px);
-  grid-template-rows: repeat(3, 30px);
 }
 
 .isLarge {
