@@ -39,7 +39,7 @@
   font-weight: bold;
   text-shadow: 0px 0px 12px rgb(212, 211, 211);
   top: 5%;
-  right: 2vw;
+  right: 0%;
   transform: translate(0, -15%);
   width: 300px;
   gap: 30px; 
@@ -48,12 +48,29 @@
 .gameStatsSecondary {
   position: fixed;
   display: flex;
-  flex-direction: flex-end;
+  justify-content: center;
+  flex-direction: column;
   pointer-events: none;
   font-weight: bold;
   text-shadow: 0px 0px 12px rgb(212, 211, 211);
   left: 75%;
-  top: 180px;
+  top: 17%;
+  font-size: 1.2em;
+  color: #f15bb5;
+}
+.gameStatsSecondary p {
+  transform: translate(0, -100%);
+  opacity: 90%;
+
+}
+.gameStatsSecondary p span {
+  padding: 5px 10px;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.6); 
+  box-shadow: 0px 0px 10px 10px rgba(255, 255, 255, 0.6);
+}
+.gameStatsSecondary img {
+  height: 130px;
 }
 
 @media only screen and (min-width: 768px) and (min-height: 480px) {
@@ -62,22 +79,40 @@
     width: 320px;
     gap: 20px; 
   }
+  .gameStatsSecondary {
+    font-size: 1.2em;
+  }
+  .gameStatsSecondary img {
+    height: 130px;
+  }
 }
 
 /* Big screen devices (889px and above) */
-@media only screen and (min-width: 889px) and (min-height: 600px) {
+@media only screen and (min-width: 889px) and (min-height: 800px) {
   .gameStatsPrimary {
     font-size: 1.3em;
-    width: 320px;
+    width: 380px;
     gap: 30px; 
+  }
+  .gameStatsSecondary {
+    font-size: 1.5em;
+  }
+  .gameStatsSecondary img {
+    height: 170px;
   }
 }
 
 /* Extra big screen devices (1200px and above) */
-@media only screen and (min-width: 1200px) and (min-height: 900px) {
+@media only screen and (min-width: 1200px) and (min-height: 950px) {
   .gameStatsPrimary {
     font-size: 1.6em;
     width: 430px;
     gap: 50px; 
+  }
+  .gameStatsSecondary {
+    font-size: 1.8em;
+  }
+  .gameStatsSecondary img {
+    height: 200px;
   }
 }
